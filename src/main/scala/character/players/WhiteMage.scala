@@ -1,7 +1,9 @@
 package character.players
 import character.players.MagicPlayer
 import character.players.Player
-import weapon.Weapon
+import character.players.traits.BowUser
+import character.players.traits.StaffUser
+import character.players.traits.WandUser
 
 
 /** Represents a WhiteMage.
@@ -16,6 +18,8 @@ import weapon.Weapon
   *   The defense of the character
   * @param weight
   *   The weight of the character
+ * @param weapon
+ *    The weapon of the character
   * @param mana
   *   The magic pointsof the character
   *
@@ -30,12 +34,18 @@ class WhiteMage(
     defense: Int,
     weight: Int,
     var magicPoints: Int
-) extends Player(name, life, defense, weight) with MagicPlayer {
+) extends Player(name, life, defense, weight) with MagicPlayer with BowUser with StaffUser with WandUser{
 
-  /**
-   * Equips a weapon to the White Mage character.
-   *
-   * @param weapon The weapon to be equipped.
-   */
-  override def equipWeapon(weapon: Weapon): Unit = ???
+  override def equals(other: Any): Boolean = {
+    if (other.isInstanceOf[WhiteMage]) {
+      val whiteMage1 = other.asInstanceOf[WhiteMage]
+      name == whiteMage1.name && life == whiteMage1.life && defense == whiteMage1.defense && weight == whiteMage1.weight && magicPoints == whiteMage1.magicPoints
+    } else {
+      false
+    }
+  }
+
+  override def toString: String = {
+    s"Warrior($name, $life, $defense, $weight, $magicPoints)"
+  }
 }

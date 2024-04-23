@@ -45,4 +45,37 @@ class Party (){
     return result
   }
 
+  /** Compares this party with another party for equality.
+   *
+   * Two parties are considered equal if they have the same number of members
+   * and all members in both parties are equal.
+   *
+   * @param other The object to compare with this party.
+   * @return `true` if the parties are equal, `false` otherwise.
+   */
+  override def equals(other: Any): Boolean = {
+    if (other.isInstanceOf[Party]) {
+      val party1 = other.asInstanceOf[Party]
+      // Check if both parties have the same number of members
+      if (members.length != party1.members.length) {
+        false
+      } else {
+        // Check if all members in both parties are equal
+        this.members.zip(party1.members).forall { case (m1, m2) => m1 == m2 }
+      }
+    } else {
+      false
+    }
+  }
+
+  /** Returns a string representation of the party.
+   *
+   * The string representation contains the list of members of the party.
+   *
+   * @return A string representation of the party.
+   */
+  override def toString: String = {
+    s"Party(${members.mkString(", ")})"
+  }
+
 }

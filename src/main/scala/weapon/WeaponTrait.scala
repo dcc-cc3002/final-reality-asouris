@@ -1,4 +1,6 @@
 package weapon
+import character.players.Player
+import character.players.traits.WeaponUser
 
 /** Represents a weapon
   * @param name
@@ -13,7 +15,7 @@ package weapon
   * @author
   *   asouris
   */
-trait Weapon{
+trait WeaponTrait{
   
   /** The name of the weapon. */
   val name: String
@@ -25,5 +27,14 @@ trait Weapon{
   val weight: Int
 
   /** The current owner of the weapon*/
-  var owner: Character
+  var owner: Option[WeaponUser]
+  
+  /** Sets the owner of the weapon.
+   *
+   * @param character The player who will be set as the owner.
+   * @return An Option of type AbstWeapon representing the owner of the weapon, if any.
+   */
+  def setOwner(character : Player) : Option[AbstWeapon] = None
+
+
 }

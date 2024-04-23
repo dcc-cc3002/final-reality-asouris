@@ -1,5 +1,5 @@
 package weapon
-
+import character.players.traits.AxeUser
 /** Represents an Axe, a type of weapon.
  *
  * An Axe is a weapon with a name, attack power, weight, and an optional owner.
@@ -13,6 +13,24 @@ package weapon
  * @author asouris
  */
 
-class Axe(val name: String, val attack: Int, val weight: Int, var owner: Character) extends Weapon{
+class Axe(override val name: String, override val attack: Int, override val weight: Int)
+  extends AbstWeapon(name, attack, weight){
 
+  def setOwner(player : AxeUser) : Option[AbstWeapon] = {
+    super.setValidOwner(player)
+    Some(this)
+  }
+
+  override def equals (other: Any): Boolean = {
+    if(other.isInstanceOf[Axe]){
+      val axe1 = other.asInstanceOf[Axe]
+      name == axe1.name && attack == axe1.attack && weight == axe1.weight
+    } else{
+      false
+    }
+  }
+
+  override def toString : String = {
+    s"Axe($name, $attack, $weight)"
+  }
 }

@@ -1,12 +1,12 @@
 package character.players
 
-import character.players.Fighter
+import character.players.Warrior
 import character.players.Ninja
 
 class PlayerTest extends munit.FunSuite {
 
   test("A Player should be defeated when its life points reach zero") {
-    val player = new Fighter("Sapo", 10, 5, 2) // Creating a player with 10 life points
+    val player = new Warrior("Sapo", 10, 5, 2) // Creating a player with 10 life points
     assert(!player.isDefeated) // Player should not be defeated initially
 
     // Inflict damage until the player's life points reach zero

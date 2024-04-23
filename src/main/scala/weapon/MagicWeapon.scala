@@ -9,8 +9,9 @@ package weapon
  *
  * @author asouris
  */
-trait MagicWeapon extends Weapon {
+trait MagicWeapon extends AbstWeapon {
   
   /** The magical attack power of the MagicWeapon. */
   var magicAttack: Int
+  
 }

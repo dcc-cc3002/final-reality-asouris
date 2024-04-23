@@ -1,7 +1,10 @@
 package character.players
+
 import character.players.Player
 import character.players.MagicPlayer
-import weapon.Weapon
+import character.players.traits.SwordUser
+import character.players.traits.WandUser
+import character.players.traits.StaffUser
 
 /** Represents a BlackMage.
   *
@@ -29,12 +32,19 @@ class BlackMage(
     defense: Int,
     weight: Int,
     var magicPoints: Int
-) extends Player(name, life, defense, weight) with MagicPlayer{
+) extends Player(name, life, defense, weight) with MagicPlayer with SwordUser with WandUser with StaffUser{
 
-  /**
-   * Equips a weapon to the Black Mage character.
-   *
-   * @param weapon The weapon to be equipped.
-   */
-  override def equipWeapon(weapon: Weapon): Unit = ???
+  override def equals(other: Any): Boolean = {
+    if (other.isInstanceOf[BlackMage]) {
+      val blackMage1 = other.asInstanceOf[BlackMage]
+      name == blackMage1.name && life == blackMage1.life && defense == blackMage1.defense && weight == blackMage1.weight && magicPoints == blackMage1.magicPoints
+    } else {
+      false
+    }
+  }
+
+  override def toString: String = {
+    s"BlackMage($name, $life, $defense, $weight, $magicPoints)"
+  }
+
 }

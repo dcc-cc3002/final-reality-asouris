@@ -19,7 +19,8 @@ package character
   * @author
   *   asouris
   */
-class Enemy(val name: String, var life: Int, var attack: Int, var defense: Int, var weight: Int) extends Character {
+class Enemy(val name: String, var life: Int, var attack: Int, var defense: Int, var weight: Int) 
+  extends Character {
 
   /** Checks if the enemy is defeated.
    *
@@ -29,6 +30,19 @@ class Enemy(val name: String, var life: Int, var attack: Int, var defense: Int, 
    * @return `true` if the enemy is defeated, `false` otherwise.
    */
   override def isDefeated: Boolean = life <= 0
+
+  override def equals(other: Any): Boolean = {
+    if (other.isInstanceOf[Enemy]) {
+      val enemy1 = other.asInstanceOf[Enemy]
+      name == enemy1.name && life == enemy1.life && defense == enemy1.defense && weight == enemy1.weight
+    } else {
+      false
+    }
+  }
+
+  override def toString: String = {
+    s"Enemy($name, $life, $defense, $weight)"
+  }
   
   
 }

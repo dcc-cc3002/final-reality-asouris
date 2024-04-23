@@ -1,4 +1,6 @@
 package weapon
+import character.players.Player
+import character.players.traits.BowUser
 
 /** Represents a Bow, a type of weapon.
  *
@@ -12,7 +14,25 @@ package weapon
  * 
  * @author asouris
  */
-class Bow(val name: String, val attack: Int, val weight: Int, var owner: Character) extends Weapon{
+class Bow(override val name: String, override val attack: Int, override val weight: Int)
+  extends AbstWeapon(name, attack, weight){
 
+  def setOwner(player: BowUser): Option[AbstWeapon] = {
+    super.setValidOwner(player)
+    Some(this)
+  }
+
+  override def equals(other: Any): Boolean = {
+    if (other.isInstanceOf[Bow]) {
+      val bow1 = other.asInstanceOf[Bow]
+      name == bow1.name && attack == bow1.attack && weight == bow1.weight
+    } else {
+      false
+    }
+  }
+
+  override def toString: String = {
+    s"Bow($name, $attack, $weight)"
+  }
 }
 

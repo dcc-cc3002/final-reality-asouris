@@ -1,4 +1,6 @@
 package weapon
+import character.players.Player
+import character.players.traits.WandUser
 
 /** Represents a Wand, a type of weapon.
  *
@@ -14,7 +16,26 @@ package weapon
  *
  * @author asouris
  */
-class Wand(val name: String, val attack: Int, val weight: Int, var owner: Character, var magicAttack: Int) extends Weapon with MagicWeapon {
+class Wand(override val name: String, override val attack: Int, override val weight: Int, var magicAttack: Int)
+  extends AbstWeapon(name, attack, weight) with MagicWeapon  {
+  
+  def setOwner(player: WandUser): Option[AbstWeapon] = {
+    super.setValidOwner(player)
+    Some(this)
+  }
+
+  override def equals(other: Any): Boolean = {
+    if (other.isInstanceOf[Wand]) {
+      val wand1 = other.asInstanceOf[Wand]
+      name == wand1.name && attack == wand1.attack && weight == wand1.weight
+    } else {
+      false
+    }
+  }
+
+  override def toString: String = {
+    s"Wand($name, $attack, $weight)"
+  }
 
 }
 

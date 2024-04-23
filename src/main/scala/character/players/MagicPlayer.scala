@@ -15,4 +15,5 @@ package character.players
 trait MagicPlayer {
   /** Magical points of the character. */
   var magicPoints: Int
+  
 }

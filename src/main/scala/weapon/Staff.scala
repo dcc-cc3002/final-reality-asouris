@@ -1,4 +1,6 @@
 package weapon
+import character.players.Player
+import character.players.traits.StaffUser
 
 /** Represents a Staff, a type of weapon.
  *
@@ -14,6 +16,24 @@ package weapon
  *                    
  * @author asouris
  */
-class Staff(val name: String, val attack: Int, val weight: Int, var owner: Character, var magicAttack: Int) extends Weapon with MagicWeapon {
+class Staff(override val name: String, override val attack: Int, override val weight: Int, var magicAttack: Int)
+  extends AbstWeapon(name, attack, weight) with MagicWeapon {
 
+  def setOwner(player: StaffUser): Option[AbstWeapon] = {
+    super.setValidOwner(player)
+    Some(this)
+  }
+
+  override def equals(other: Any): Boolean = {
+    if (other.isInstanceOf[Staff]) {
+      val staff1 = other.asInstanceOf[Staff]
+      name == staff1.name && attack == staff1.attack && weight == staff1.weight
+    } else {
+      false
+    }
+  }
+
+  override def toString: String = {
+    s"Staff($name, $attack, $weight)"
+  }
 }
