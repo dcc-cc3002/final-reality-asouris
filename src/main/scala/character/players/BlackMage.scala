@@ -1,10 +1,9 @@
 package character.players
 
 import character.players.Player
-import character.players.MagicPlayer
-import character.players.traits.SwordUser
-import character.players.traits.WandUser
-import character.players.traits.StaffUser
+import weapon.traits.EquippableByBlackMage
+import weapon.Weapon
+import exceptions.WeaponException
 
 /** Represents a BlackMage.
   *
@@ -31,8 +30,8 @@ class BlackMage(
     life: Int,
     defense: Int,
     weight: Int,
-    var magicPoints: Int
-) extends Player(name, life, defense, weight) with MagicPlayer with SwordUser with WandUser with StaffUser{
+    magicPoints: Int
+) extends AbstractMagicPlayer(name, life, defense, weight, magicPoints) {
 
   override def equals(other: Any): Boolean = {
     if (other.isInstanceOf[BlackMage]) {
@@ -45,6 +44,11 @@ class BlackMage(
 
   override def toString: String = {
     s"BlackMage($name, $life, $defense, $weight, $magicPoints)"
+  }
+
+  def equip(newWeapon: EquippableByBlackMage): Unit = {
+    //si llegó hasta aqui es valido el equipar
+    super.validEquip(Some(newWeapon.toWeapon))
   }
 
 }

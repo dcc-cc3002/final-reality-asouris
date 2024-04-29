@@ -1,6 +1,9 @@
 package weapon
-import character.players.Player
-import character.players.traits.BowUser
+
+import weapon.traits.EquippableByWarrior
+import weapon.traits.EquippableByNinja
+import weapon.traits.EquippableByWhiteMage
+
 
 /** Represents a Bow, a type of weapon.
  *
@@ -14,13 +17,8 @@ import character.players.traits.BowUser
  * 
  * @author asouris
  */
-class Bow(override val name: String, override val attack: Int, override val weight: Int)
-  extends AbstWeapon(name, attack, weight){
-
-  def setOwner(player: BowUser): Option[AbstWeapon] = {
-    super.setValidOwner(player)
-    Some(this)
-  }
+class Bow(name: String, attack: Int, weight: Int)
+  extends AbstractWeapon(name, attack, weight) with EquippableByWarrior with EquippableByNinja with EquippableByWhiteMage{
 
   override def equals(other: Any): Boolean = {
     if (other.isInstanceOf[Bow]) {

@@ -70,7 +70,7 @@ class TurnScheduler {
     def order(character: Player) : Double = {
       characters.get(character) match {
         case Some(value) =>
-          character.weapon match {
+          character.equippedWeapon match {
             case Some(weapon) => value - (character.weight + weapon.weight * 0.5)
             case None => 0//add exception
           }
@@ -81,7 +81,7 @@ class TurnScheduler {
 
     characters.transform((key, value) => {
       if (!isReady(key)) {
-        key.weapon match {
+        key.equippedWeapon match {
           case Some(weapon) => {
             var actionBar = key.weight + weapon.weight * 0.5
             if(value + amount >= actionBar){readyForTurn.enqueue(key)}
@@ -109,7 +109,7 @@ class TurnScheduler {
   def isReady(character: Player): Boolean = {
     characters.get(character) match {
       case Some(value) =>
-        character.weapon match {
+        character.equippedWeapon match {
           case Some(weapon) => value >= character.weight + weapon.weight * 0.5
           case None => false //exception
         }

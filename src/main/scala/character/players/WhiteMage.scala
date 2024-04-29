@@ -1,9 +1,6 @@
 package character.players
-import character.players.MagicPlayer
 import character.players.Player
-import character.players.traits.BowUser
-import character.players.traits.StaffUser
-import character.players.traits.WandUser
+import weapon.traits.EquippableByWhiteMage
 
 
 /** Represents a WhiteMage.
@@ -33,8 +30,8 @@ class WhiteMage(
     life: Int,
     defense: Int,
     weight: Int,
-    var magicPoints: Int
-) extends Player(name, life, defense, weight) with MagicPlayer with BowUser with StaffUser with WandUser{
+    magicPoints: Int
+) extends AbstractMagicPlayer(name, life, defense, weight, magicPoints){
 
   override def equals(other: Any): Boolean = {
     if (other.isInstanceOf[WhiteMage]) {
@@ -46,6 +43,11 @@ class WhiteMage(
   }
 
   override def toString: String = {
-    s"Warrior($name, $life, $defense, $weight, $magicPoints)"
+    s"WhiteMage($name, $life, $defense, $weight, $magicPoints)"
+  }
+
+  def equip(newWeapon: EquippableByWhiteMage): Unit = {
+    //si llegó hasta aqui es valido el equipar
+    super.validEquip(Some(newWeapon.toWeapon))
   }
 }

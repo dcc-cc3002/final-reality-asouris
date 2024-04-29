@@ -1,8 +1,6 @@
 package character.players
 
-import character.players.traits.SwordUser
-import character.players.traits.AxeUser
-import character.players.traits.BowUser
+import weapon.traits.EquippableByWarrior
 
 /** Represents a Warrior.
   *
@@ -29,7 +27,7 @@ class Warrior(
     life: Int,
     defense: Int,
     weight: Int
-) extends Player(name, life, defense, weight) with SwordUser with AxeUser with BowUser{
+) extends AbstractPlayer(name, life, defense, weight){
 
   override def equals(other: Any): Boolean = {
     if (other.isInstanceOf[Warrior]) {
@@ -42,5 +40,10 @@ class Warrior(
 
   override def toString: String = {
     s"Warrior($name, $life, $defense, $weight)"
+  }
+
+  def equip(newWeapon: EquippableByWarrior): Unit = {
+    //si llegó hasta aqui es valido el equipar
+    super.validEquip(Some(newWeapon.toWeapon))
   }
 }

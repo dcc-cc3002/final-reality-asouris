@@ -1,6 +1,6 @@
 package weapon
-import character.players.Player
-import character.players.traits.StaffUser
+import weapon.traits.EquippableByBlackMage
+import weapon.traits.EquippableByWhiteMage
 
 /** Represents a Staff, a type of weapon.
  *
@@ -16,13 +16,9 @@ import character.players.traits.StaffUser
  *                    
  * @author asouris
  */
-class Staff(override val name: String, override val attack: Int, override val weight: Int, var magicAttack: Int)
-  extends AbstWeapon(name, attack, weight) with MagicWeapon {
+class Staff(name: String, attack: Int, weight: Int, magicAttack: Int)
+  extends AbstractMagicWeapon(name, attack, weight, magicAttack) with EquippableByWhiteMage with EquippableByBlackMage {
 
-  def setOwner(player: StaffUser): Option[AbstWeapon] = {
-    super.setValidOwner(player)
-    Some(this)
-  }
 
   override def equals(other: Any): Boolean = {
     if (other.isInstanceOf[Staff]) {

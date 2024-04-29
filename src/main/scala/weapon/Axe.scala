@@ -1,5 +1,7 @@
 package weapon
-import character.players.traits.AxeUser
+import weapon.traits.EquippableByWarrior
+import weapon.traits.EquippableByPaladin
+
 /** Represents an Axe, a type of weapon.
  *
  * An Axe is a weapon with a name, attack power, weight, and an optional owner.
@@ -13,14 +15,9 @@ import character.players.traits.AxeUser
  * @author asouris
  */
 
-class Axe(override val name: String, override val attack: Int, override val weight: Int)
-  extends AbstWeapon(name, attack, weight){
-
-  def setOwner(player : AxeUser) : Option[AbstWeapon] = {
-    super.setValidOwner(player)
-    Some(this)
-  }
-
+class Axe(name: String, attack: Int, weight: Int)
+  extends AbstractWeapon(name, attack, weight) with EquippableByWarrior with EquippableByPaladin{
+  
   override def equals (other: Any): Boolean = {
     if(other.isInstanceOf[Axe]){
       val axe1 = other.asInstanceOf[Axe]

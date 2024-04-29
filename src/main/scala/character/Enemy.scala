@@ -19,8 +19,8 @@ package character
   * @author
   *   asouris
   */
-class Enemy(val name: String, var life: Int, var attack: Int, var defense: Int, var weight: Int) 
-  extends Character {
+class Enemy(name: String, life: Int, var attack: Int, defense: Int, weight: Int) 
+  extends AbstractCharacter(name, life, defense, weight) {
 
   /** Checks if the enemy is defeated.
    *
@@ -41,7 +41,7 @@ class Enemy(val name: String, var life: Int, var attack: Int, var defense: Int, 
   }
 
   override def toString: String = {
-    s"Enemy($name, $life, $defense, $weight)"
+    s"Enemy($name, $life, $attack, $defense, $weight)"
   }
   
   
