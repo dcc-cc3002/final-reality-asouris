@@ -1,5 +1,4 @@
 package weapon
-import weapon.Axe
 
 class AxeTest extends munit.FunSuite{
   var Axe1: Axe = _

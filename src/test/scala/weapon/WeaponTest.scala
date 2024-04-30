@@ -1,10 +1,10 @@
 package weapon
 
-import character.players.Player
+
 import character.players.Warrior
 import character.players.BlackMage
-import weapon.Wand
-import weapon.Axe
+import exceptions.OwnerException
+
 
 
 class WeaponTest extends munit.FunSuite{
@@ -26,17 +26,21 @@ class WeaponTest extends munit.FunSuite{
 
   test("hasOwner should return true if the weapon has an owner, false if not"){
     assert(!wand.hasOwner)
-    mage.equipWeapon(wand)
+    mage.equip(wand)
     assert(wand.hasOwner)
   }
 
-  test("setOwner should return None if the weapon cannot be equipped to that character class"){
-    assert(axe.setOwner(mage) == None)
-    assert(wand.setOwner(warrior) == None)
+  test("setOwner should set the owner of the weapon if there inst any") {
+    assert(sword.owner.isEmpty)
+    sword.setOwner(warrior)
+    assert(sword.owner == Some(warrior))
   }
 
-  test("setOwner should return the weapon if it could be equipped to the character"){
-    assert(axe.setOwner(warrior) == Some(axe))
-    assert(wand.setOwner(mage) == Some(wand))
+  test("setOwner should throw an exception when trying to set an owner to a weapon with owner"){
+    sword.setOwner(warrior)
+    intercept[OwnerException]{
+      sword.setOwner(mage)
+    }
   }
+
 }
