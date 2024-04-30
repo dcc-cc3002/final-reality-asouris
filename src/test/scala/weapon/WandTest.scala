@@ -1,0 +1,5 @@
+package weapon
+
+class WandTest {
+
+}

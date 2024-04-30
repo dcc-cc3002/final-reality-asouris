@@ -32,6 +32,6 @@ trait Weapon{
   
   def setOwner(player: Player) : Unit
   
-  //just in case lets analize it later 
+  
   def toWeapon : Weapon = this
 }
