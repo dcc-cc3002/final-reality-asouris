@@ -1,27 +1,42 @@
 package character.players
 
-import character.players.Warrior
-import character.players.Ninja
+import exceptions.WeaponException
+import weapon.{Axe, Sword, Wand}
 
 class PlayerTest extends munit.FunSuite {
 
-  test("A Player should be defeated when its life points reach zero") {
-    val player = new Warrior("Sapo", 10, 5, 2) // Creating a player with 10 life points
-    assert(!player.isDefeated) // Player should not be defeated initially
+  var sword: Sword = _
+  var axe: Axe = _
+  var wand: Wand = _
+  var warrior: Warrior = _
+  var mage: BlackMage = _
 
-    // Inflict damage until the player's life points reach zero
-    (1 to 10).foreach(_ => player.life -= 1)
+  override def beforeEach(context: BeforeEach): Unit = {
+    sword = new Sword("destroyer", 5, 10)
+    axe = new Axe("supreme", 4, 15)
+    wand = new Wand("ElProgcomp", 10, 10, 20)
 
-    assert(player.isDefeated) // Player should be defeated when life points reach zero
+    warrior = new Warrior("warrior", 20, 10, 15)
+    mage = new BlackMage("mage", 10, 4, 15, 6)
+
   }
 
-  test("A Player should not be defeated when its life points are positive") {
-    val player = new Ninja("Sepo", 20, 8, 3) // Creating a player with 20 life points
-    assert(!player.isDefeated) // Player should not be defeated initially
+  test("equip throws an exception if a weapon cannot be equip the the character"){
+    intercept[WeaponException]{
+      warrior.equip(wand)
+    }
+    intercept[WeaponException]{
+      mage.equip(axe)
+    }
+  }
 
-    // Inflict damage but ensure life points remain positive
-    (1 to 10).foreach(_ => player.life -= 1)
+  test("equip sets equippedWeapon in the character and sets the owner of the weapon if it could be equipped"){
+    warrior.equip(axe)
+    assert(warrior.equippedWeapon == Some(axe))
+    assert(axe.owner == Some(warrior))
 
-    assert(!player.isDefeated) // Player should not be defeated when life points are positive
+    mage.equip(wand)
+    assert(mage.equippedWeapon == Some(wand))
+    assert(wand.owner == Some(mage))
   }
 }
