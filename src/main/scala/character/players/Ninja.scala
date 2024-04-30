@@ -42,7 +42,6 @@ class Ninja(
   }
 
   def equip(newWeapon: EquippableByNinja): Unit = {
-    //si llegó hasta aqui es valido el equipar
     super.validEquip(Some(newWeapon.toWeapon))
   }
 

@@ -1,5 +1,5 @@
 package exceptions
 
-class NoneException {
+class NoneException(details: String) extends Exception (details){
 
 }

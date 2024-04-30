@@ -1,6 +1,6 @@
 package character.players
 import weapon.Weapon
-import exceptions.WeaponException
+import exceptions.NoneException
 import character.AbstractCharacter
 
 
@@ -12,7 +12,6 @@ import character.AbstractCharacter
  * @param life The current life of the player.
  * @param defense The defense stat of the player.
  * @param weight The weight of the player.
- * @param weapon The weapon that the player if is carrying one
  *
  * @constructor Creates a new player character with the specified properties.
  *
@@ -23,20 +22,20 @@ abstract class AbstractPlayer(name: String, life: Int, defense: Int, weight: Int
 
     var equippedWeapon : Option[Weapon] = None
     
-    def getWeapon(): Weapon = {
+    def getWeapon: Weapon = {
         equippedWeapon match{
             case Some(weapon) => weapon
-            case None => throw WeaponException("miau")
+            case None => throw NoneException("Weapon is None")
         }
     }
 
-    def validEquip(weapon: Option[Weapon]): Unit = {
+    protected def validEquip(weapon: Option[Weapon]): Unit = {
         weapon match {
-            case Some(newWeapon) => {
+            case Some(newWeapon) => 
                 equippedWeapon = Some(newWeapon)
                 newWeapon.setOwner(this)
-            }
-            case None => throw WeaponException("miau")
+            
+            case None => throw NoneException("Weapon is None")
         }
         
         
