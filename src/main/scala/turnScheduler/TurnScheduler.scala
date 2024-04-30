@@ -5,6 +5,9 @@ import scala.collection.mutable.Queue
 import scala.collection.mutable.PriorityQueue
 import scala.collection.mutable.Map
 import character.players.Player
+import exceptions.NoneException
+
+import scala.collection.mutable
 
 /** A class to manage the turn scheduling of players.
  * This class maintains a map of players and their current value for their actionBar
@@ -14,9 +17,9 @@ import character.players.Player
 class TurnScheduler {
 
   /** A map of players and their current value for their actionBar*/
-  val characters = Map[Player, Int]()
+  val characters: mutable.Map[Player, Int] = mutable.Map[Player, Int]()
   /** A map of players and their respective turn orders. */
-  var nextTurns = new Queue[Player]
+  private val nextTurns = new mutable.Queue[Player]
 
   /**
    * Adds a new character to the turn scheduler.
@@ -33,7 +36,7 @@ class TurnScheduler {
    * @param character The player to remove from the scheduler.
    */
   def removeCharacter(character : Player) : Unit = {
-    characters -= (character)
+    characters -= character
   }
 
   /**
@@ -52,10 +55,8 @@ class TurnScheduler {
 
   /**
    * Resets the action bar of all characters.
-   *
-   * @param character The player whose action bar needs to be reset.
    */
-  def resetActionBar : Unit = {
+  def resetActionBar() : Unit = {
     nextTurns.clear()
     characters.transform((key, value) => 0)
   }
@@ -72,22 +73,22 @@ class TurnScheduler {
         case Some(value) =>
           character.equippedWeapon match {
             case Some(weapon) => value - (character.weight + weapon.weight * 0.5)
-            case None => 0//add exception
+            case None => throw NoneException("Weapon is None")
           }
-        case None => 0 // add exception
+        case None => throw NoneException("Value is None")
       }
     }
-    val readyForTurn = PriorityQueue[Player]()(Ordering.by(order))
+    val readyForTurn = mutable.PriorityQueue[Player]()(Ordering.by(order))
 
     characters.transform((key, value) => {
       if (!isReady(key)) {
         key.equippedWeapon match {
-          case Some(weapon) => {
-            var actionBar = key.weight + weapon.weight * 0.5
+          case Some(weapon) => 
+            val actionBar = key.weight + weapon.weight * 0.5
             if(value + amount >= actionBar){readyForTurn.enqueue(key)}
             value + amount
-          }
-          case None => 0//exception
+          
+          case None => throw NoneException("Weapon is None")
         }
       }
       else {
@@ -95,7 +96,7 @@ class TurnScheduler {
       }
     })
 
-    while(!readyForTurn.isEmpty){
+    while(readyForTurn.nonEmpty){
       nextTurns.enqueue(readyForTurn.dequeue)
     }
   }
@@ -111,9 +112,9 @@ class TurnScheduler {
       case Some(value) =>
         character.equippedWeapon match {
           case Some(weapon) => value >= character.weight + weapon.weight * 0.5
-          case None => false //exception
+          case None => throw NoneException("Weapon is None")
         }
-      case None => false // exception
+      case None => throw NoneException("Value is None")
     }
   }
 
@@ -124,7 +125,7 @@ class TurnScheduler {
    */
   def getReady : ArrayBuffer[Player] = {
     val ready: ArrayBuffer[Player] = new ArrayBuffer[Player]()
-    while(!nextTurns.isEmpty) {
+    while(nextTurns.nonEmpty) {
       ready.addOne(nextTurns.dequeue)
     }
     ready
@@ -136,11 +137,11 @@ class TurnScheduler {
    * @return An Option containing the next character if available, otherwise None.
    */
   def nextCharacter : Option[Player] = {
-    if(!nextTurns.isEmpty){
+    if(nextTurns.nonEmpty){
       Some(nextTurns.front)
     }
     else{
-      None
+      throw NoneException("Queue is Empty")
     }
   }
 
