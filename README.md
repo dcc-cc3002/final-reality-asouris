@@ -22,6 +22,8 @@ Additionally, in this part it was attempted to implement a system for equipping 
 
 Lastly, there were tests added for almost all functionalities and a big percentage of documentation was also added.
 ### Assigment 1: Final
+First, any mistakes from the past assignments were corrected. And also, all the testing for every functionality was done.
+
 
 This project is licensed under the
 [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
