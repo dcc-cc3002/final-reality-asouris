@@ -29,7 +29,10 @@ class Enemy(name: String, life: Int, var attack: Int, defense: Int, weight: Int)
    *
    * @return `true` if the enemy is defeated, `false` otherwise.
    */
-  override def isDefeated: Boolean = life <= 0
+    
+  override def attackCharacter(character: Character): Unit = {
+    character.receiveAttack(attack)
+  }
 
   override def equals(other: Any): Boolean = {
     if (other.isInstanceOf[Enemy]) {

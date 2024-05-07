@@ -2,6 +2,7 @@ package character.players
 import weapon.Weapon
 import exceptions.NoneException
 import character.AbstractCharacter
+import character.Character
 
 
 /** Represents a Player
@@ -37,8 +38,13 @@ abstract class AbstractPlayer(name: String, life: Int, defense: Int, weight: Int
             
             case None => throw NoneException("Weapon is None")
         }
-        
-        
+    }
+
+    override def attackCharacter(character: Character): Unit = {
+        equippedWeapon match {
+            case Some(weapon) => character.receiveAttack(weapon.attack)
+            case None => throw NoneException("Player with no weapon cannot attack")
+        }
     }
 
 

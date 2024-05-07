@@ -31,5 +31,7 @@ trait Character(){
      * @return `true` if the character is defeated, `false` otherwise.
      */
     def isDefeated: Boolean
+    def attackCharacter(character : Character) : Unit
+    def receiveAttack(attack : Int): Unit
 
 }

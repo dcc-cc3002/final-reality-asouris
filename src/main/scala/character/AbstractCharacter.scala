@@ -7,6 +7,7 @@ abstract class AbstractCharacter(val name: String, var life: Int, var defense: I
   def getLife : Int = life
   def getDefense : Int = defense
   def getWeight : Int = weight
+
   
   override def toString : String = {
     s"Character($name, $life, $defense, $weight)"
@@ -21,4 +22,13 @@ abstract class AbstractCharacter(val name: String, var life: Int, var defense: I
    */
   def isDefeated: Boolean = life <= 0
 
+  override def receiveAttack(attackReceived: Int): Unit = {
+    if(attackReceived > defense){
+      life = life - (attackReceived - defense)
+      if (life < 0) {
+        life = 0
+      }
+    }
+    
+  }
 }
