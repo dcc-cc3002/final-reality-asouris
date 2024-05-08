@@ -32,11 +32,11 @@ class PlayerTest extends munit.FunSuite {
 
   test("equip sets equippedWeapon in the character and sets the owner of the weapon if it could be equipped"){
     warrior.equip(axe)
-    assert(warrior.equippedWeapon == Some(axe))
-    assert(axe.owner == Some(warrior))
+    assert(warrior.getWeapon == Some(axe))
+    assert(axe.getOwner.contains(warrior))
 
     mage.equip(wand)
-    assert(mage.equippedWeapon == Some(wand))
-    assert(wand.owner == Some(mage))
+    assert(mage.getWeapon == Some(wand))
+    assert(wand.getOwner.contains(mage))
   }
 }

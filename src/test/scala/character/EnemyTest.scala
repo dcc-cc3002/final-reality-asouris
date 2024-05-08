@@ -27,12 +27,12 @@ class EnemyTest extends munit.FunSuite {
     var enemy0 = Enemy("enemy0", 10, 12, 5, 40)
     var enemy1 = Enemy("enemy1", 15, 4, 2, 20)
 
-    assert(enemy1.life == 15)
+    assert(enemy1.getLife == 15)
     enemy0.attackCharacter(enemy1)
-    assert(enemy1.life == 5)
+    assert(enemy1.getLife == 5)
 
-    assert(enemy0.life == 10)
+    assert(enemy0.getLife == 10)
     enemy1.attackCharacter(enemy0)
-    assert(enemy0.life == 10)
+    assert(enemy0.getLife == 10)
   }
 }

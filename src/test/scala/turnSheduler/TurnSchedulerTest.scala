@@ -25,14 +25,14 @@ class TurnSchedulerTest extends munit.FunSuite {
     scheduler.addCharacter(warrior1)
     scheduler.addCharacter(warrior2)
 
-    assert(scheduler.characters.size == 2)
-    assert(scheduler.characters.contains(warrior1))
-    assert(scheduler.characters.contains(warrior2))
+    assert(scheduler.getCharacters.size == 2)
+    assert(scheduler.getCharacters.contains(warrior1))
+    assert(scheduler.getCharacters.contains(warrior2))
 
     scheduler.removeCharacter(warrior1)
-    assert(scheduler.characters.size == 1)
-    assert(!scheduler.characters.contains(warrior1))
-    assert(scheduler.characters.contains(warrior2))
+    assert(scheduler.getCharacters.size == 1)
+    assert(!scheduler.getCharacters.contains(warrior1))
+    assert(scheduler.getCharacters.contains(warrior2))
   }
 
   test("Getting maximum value"){
@@ -80,7 +80,7 @@ class TurnSchedulerTest extends munit.FunSuite {
 
     scheduler.addCharacter(warrior1)
     scheduler.increaseActionBar(50)
-    scheduler.characters.get(warrior1) match {
+    scheduler.getCharacters.get(warrior1) match {
       case Some(value) => assert(value == 50)
       case None => throw NoneException("Value is none")
     }

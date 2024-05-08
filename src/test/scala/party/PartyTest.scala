@@ -1,7 +1,6 @@
 package party
 
-import character.players.Warrior
-import character.players.Ninja
+import character.players.{Ninja, Warrior}
 
 
 class PartyTest extends munit.FunSuite {
@@ -15,8 +14,14 @@ class PartyTest extends munit.FunSuite {
 
   test("A Party should be defeated when all members are defeated") {
     val party = new Party()
-    party.addCharacter(new Warrior("Sapo", 0, 5, 2))
-    party.addCharacter(new Ninja("Sepo", 0, 8, 3))
+    var warrior = Warrior("Sapo", 1, 5, 2)
+    var ninja = Ninja("Sepo", 1, 8, 3)
+    party.addCharacter(warrior)
+    party.addCharacter(ninja)
+
+    warrior.setLife(0)
+    ninja.setLife(0)
+
     assert(party.isDefeated) // Party should be defeated when all members are defeated
   }
 
