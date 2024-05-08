@@ -17,11 +17,11 @@ import scala.collection.mutable
 class TurnScheduler {
 
   /** A map of players and their current value for their actionBar*/
-  private val characters: mutable.Map[Player, Int] = mutable.Map[Player, Int]()
+  private val characters: mutable.Map[Player, Double] = mutable.Map[Player, Double]()
   /** A map of players and their respective turn orders. */
   private val nextTurns = new mutable.Queue[Player]
-  
-  def getCharacters : mutable.Map[Player, Int] = characters
+
+  def getCharacters : mutable.Map[Player, Double] = characters
 
   /**
    * Adds a new character to the turn scheduler.
@@ -46,7 +46,7 @@ class TurnScheduler {
    *
    * @return An Option containing the maximum action bar value if characters exist, otherwise None.
    */
-  def getMaximum : Option[Int] = {
+  def getMaximum : Option[Double] = {
     if (characters.isEmpty){
       None
     }
@@ -73,25 +73,35 @@ class TurnScheduler {
     def order(character: Player) : Double = {
       characters.get(character) match {
         case Some(value) =>
+          print(value, amount, character.getWeight, character.getWeapon.getWeight, "\n")
+          print(character, (value+amount) - (character.getWeight + character.getWeapon.getWeight * 0.5), "\n")
           value - (character.getWeight + character.getWeapon.getWeight * 0.5)
         case None => throw NoneException("Value is None")
       }
     }
+    // 0- 20 = -20
+    // 0- 6 = -6 este va primero
     val readyForTurn = mutable.PriorityQueue[Player]()(Ordering.by(order))
 
     characters.transform((key, value) => {
       if (!isReady(key)) {
         val actionBar = key.getWeight + key.getWeapon.getWeight * 0.5
-        if(value + amount >= actionBar){readyForTurn.enqueue(key)}
-        value + amount
+        if(value + amount >= actionBar){
+          readyForTurn.enqueue(key)
+          value
+        }
+        else{value + amount}
       }
       else {
         value
       }
+
     })
 
     while(readyForTurn.nonEmpty){
-      nextTurns.enqueue(readyForTurn.dequeue)
+      val next = readyForTurn.dequeue()
+      characters(next) = next.getWeight + next.getWeapon.getWeight * 0.5
+      nextTurns.enqueue(next)
     }
   }
 
@@ -127,9 +137,9 @@ class TurnScheduler {
    *
    * @return An Option containing the next character if available, otherwise None.
    */
-  def nextCharacter : Option[Player] = {
+  def nextCharacter : Player = {
     if(nextTurns.nonEmpty){
-      Some(nextTurns.front)
+      nextTurns.front
     }
     else{
       throw NoneException("Queue is Empty")

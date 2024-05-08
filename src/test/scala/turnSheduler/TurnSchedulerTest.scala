@@ -74,37 +74,35 @@ class TurnSchedulerTest extends munit.FunSuite {
 
   }
 
-  test("Increasing Action Bar") {
+  test("Increasing Action Bar up to maximum actionBar value") {
     val sword1 = Sword("sword1", 5, 10)
-    warrior1.equip(sword1)
+    warrior1.equip(sword1) //15  15 + 5 = 20
 
     scheduler.addCharacter(warrior1)
     scheduler.increaseActionBar(50)
     scheduler.getCharacters.get(warrior1) match {
-      case Some(value) => assert(value == 50)
+      case Some(value) => assert(value == 20)
       case None => throw NoneException("Value is none")
     }
 
   }
 
   test("The player with the most advantage in the action bar gets in the queue first"){
-    val sword1 = Sword("sword1", 5, 10)
-    val sword2 = Sword("sword2", 5, 10)
-    warrior1.equip(sword1)
-    warrior3.equip(sword2)
+    print("testing begin")
+    val sword1 = Sword("sword1", 5, 10) //15
+    val sword2 = Sword("sword2", 5, 10) //1
+    warrior1.equip(sword1) //15  15 + 5 = 20
+    warrior3.equip(sword2) //1   1  + 5 = 6
 
     scheduler.addCharacter(warrior1)
     scheduler.addCharacter(warrior3)
 
     scheduler.increaseActionBar(100)
 
-    scheduler.nextCharacter match {
-      case Some(character) =>
-        print(character)
-        assert(character == warrior3)
-      case None => throw NoneException("Queue is empty")
-    }
-
+    val value = scheduler.nextCharacter
+    print(value)
+    assert(value == warrior3)
+    print("testing end")
   }
 
   test("Checking Readiness") {
@@ -131,12 +129,8 @@ class TurnSchedulerTest extends munit.FunSuite {
 
     scheduler.increaseActionBar(10)
 
+    assert(scheduler.nextCharacter == warrior3)
 
-
-    scheduler.nextCharacter match {
-      case Some(value) => print(value);assert(value == warrior3)
-      case None => throw NoneException("Queue is empty")
-    }
   }
 
   test("Getting all the ready characters"){
@@ -152,8 +146,9 @@ class TurnSchedulerTest extends munit.FunSuite {
     scheduler.increaseActionBar(100)
 
     val expected = ArrayBuffer(warrior3, warrior1)
-    print(expected)
-    assert(scheduler.getReady == expected)
+    val value = scheduler.getReady
+    print(value)
+    assert(value == expected)
 
   }
 }

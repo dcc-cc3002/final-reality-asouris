@@ -25,11 +25,14 @@ Lastly, there were tests added for almost all functionalities and a big percenta
 First, any mistakes from the past assignments were corrected. And also, all the testing for every functionality already implemented was done.
 
 Then, in this assigment we were asked to add an attack functionality for characters to attack each other affecting their life attribute. That was implemented with no major complications by two functions: `attackCharacter()` and `receiveAttack()`. This last one was implemented to make the attacked character`s issue how it handled border cases when receiving damage.
+
 We were also asked to check privacy matters with attributes, members and methods. I revised that later on and went to check on initialization of attributes when creating an object.
 The task was to define a range of valid values for the attributes in constructors, then check in the constructor if the parameters were within that range.
 In order to do this I did some research to find the best way to ensure that a valid value was passed. Checking with an if statement sounded a little sketchy, so I opted for using require() to check the parameters. 
 
 Now, back on the privacy issues, the default should be to make all things private if possible to maintain control over how things are being changed. So I did that because I didn't implement it right the first time.
+
+
 
 This project is licensed under the
 [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
