@@ -14,15 +14,15 @@ package character
  * @author asouris
  */
 trait Character(){
-    /** Character's name*/
-    val name: String
-    /** Character's life*/
-    var life: Int
-    /** Character's defense*/
-    var defense: Int 
-    /** Character's weight*/
-    var weight: Int
 
+    def getName: String
+
+    def getLife: Int
+
+    def getDefense: Int
+
+    def getWeight: Int
+    
     /** Checks if the character is defeated.
      *
      * Returns `true` if the character's life points have reached zero or less, indicating defeat.

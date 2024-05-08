@@ -23,12 +23,11 @@ class Wand(name: String, attack: Int, weight: Int, magicAttack: Int)
   
 
   override def equals(other: Any): Boolean = {
-    if (other.isInstanceOf[Wand]) {
-      val wand1 = other.asInstanceOf[Wand]
-      name == wand1.name && attack == wand1.attack && weight == wand1.weight
-    } else {
-      false
-    }
+    other match
+      case wand1: Wand =>
+        name == wand1.getName && attack == wand1.getAttack && weight == wand1.getWeight && magicAttack == wand1.getMagicAttack
+      case _ =>
+        false
   }
 
   override def toString: String = {

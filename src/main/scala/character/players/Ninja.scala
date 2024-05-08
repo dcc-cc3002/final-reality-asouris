@@ -31,7 +31,7 @@ class Ninja(
   override def equals(other: Any): Boolean = {
     if (other.isInstanceOf[Ninja]) {
       val ninja1 = other.asInstanceOf[Ninja]
-      name == ninja1.name && life == ninja1.life && defense == ninja1.defense && weight == ninja1.weight
+      name == ninja1.getName && life == ninja1.getLife && defense == ninja1.getDefense && weight == ninja1.getWeight
     } else {
       false
     }

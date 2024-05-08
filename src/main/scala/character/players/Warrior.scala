@@ -28,11 +28,13 @@ class Warrior(
     defense: Int,
     weight: Int
 ) extends AbstractPlayer(name, life, defense, weight){
+  
+  
 
   override def equals(other: Any): Boolean = {
     if (other.isInstanceOf[Warrior]) {
       val warrior1 = other.asInstanceOf[Warrior]
-      name == warrior1.name && life == warrior1.life && defense == warrior1.defense && weight == warrior1.weight
+      name == warrior1.getName && life == warrior1.getLife && defense == warrior1.getDefense && weight == warrior1.getWeight
     } else {
       false
     }

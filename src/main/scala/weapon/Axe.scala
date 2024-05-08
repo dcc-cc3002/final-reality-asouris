@@ -19,12 +19,11 @@ class Axe(name: String, attack: Int, weight: Int)
   extends AbstractWeapon(name, attack, weight) with EquippableByWarrior with EquippableByPaladin{
   
   override def equals (other: Any): Boolean = {
-    if(other.isInstanceOf[Axe]){
-      val axe1 = other.asInstanceOf[Axe]
-      name == axe1.name && attack == axe1.attack && weight == axe1.weight
-    } else{
-      false
-    }
+    other match
+      case axe1: Axe =>
+        name == axe1.getName && attack == axe1.getAttack && weight == axe1.getWeight
+      case _ =>
+        false
   }
 
   override def toString : String = {

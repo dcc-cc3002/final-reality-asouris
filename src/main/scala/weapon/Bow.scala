@@ -21,12 +21,11 @@ class Bow(name: String, attack: Int, weight: Int)
   extends AbstractWeapon(name, attack, weight) with EquippableByWarrior with EquippableByNinja with EquippableByWhiteMage{
 
   override def equals(other: Any): Boolean = {
-    if (other.isInstanceOf[Bow]) {
-      val bow1 = other.asInstanceOf[Bow]
-      name == bow1.name && attack == bow1.attack && weight == bow1.weight
-    } else {
-      false
-    }
+    other match
+      case bow1: Bow =>
+        name == bow1.getName && attack == bow1.getAttack && weight == bow1.getWeight
+      case _ =>
+        false
   }
 
   override def toString: String = {

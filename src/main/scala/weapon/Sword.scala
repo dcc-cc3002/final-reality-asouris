@@ -22,12 +22,11 @@ class Sword(name: String, attack: Int, weight: Int)
   
 
   override def equals(other: Any): Boolean = {
-    if (other.isInstanceOf[Sword]) {
-      val sword1 = other.asInstanceOf[Sword]
-      name == sword1.name && attack == sword1.attack && weight == sword1.weight
-    } else {
-      false
-    }
+    other match
+      case sword1: Sword =>
+        name == sword1.getName && attack == sword1.getAttack && weight == sword1.getWeight
+      case _ =>
+        false
   }
 
   override def toString: String = {

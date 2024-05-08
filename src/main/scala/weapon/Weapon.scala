@@ -15,23 +15,17 @@ import character.players.Player
   *   asouris
   */
 trait Weapon{
+  def getName : String
   
-  /** The name of the weapon. */
-  val name: String
-
-  /** The damage per attack by the weapon. */
-  val attack: Int
-
-  /** The weight of the weapon*/
-  val weight: Int
-
-  /** The current owner of the weapon*/
-  var owner: Option[Player]
+  def getAttack : Int
+  
+  def getWeight : Int
   
   def hasOwner : Boolean 
   
-  def setOwner(player: Player) : Unit
+  def getOwner : Option[Player]
   
+  def setOwner(player: Player) : Unit
   
   def toWeapon : Weapon = this
 }

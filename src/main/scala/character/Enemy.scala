@@ -19,8 +19,11 @@ package character
   * @author
   *   asouris
   */
-class Enemy(name: String, life: Int, var attack: Int, defense: Int, weight: Int) 
+class Enemy(name: String, life: Int, private var attack: Int, defense: Int, weight: Int) 
   extends AbstractCharacter(name, life, defense, weight) {
+  require(attack >= 1)
+  
+  def getAttack : Int = attack
 
   /** Checks if the enemy is defeated.
    *
@@ -31,13 +34,13 @@ class Enemy(name: String, life: Int, var attack: Int, defense: Int, weight: Int)
    */
     
   override def attackCharacter(character: Character): Unit = {
-    character.receiveAttack(attack)
+    character.receiveAttack(this.attack)
   }
 
   override def equals(other: Any): Boolean = {
     if (other.isInstanceOf[Enemy]) {
       val enemy1 = other.asInstanceOf[Enemy]
-      name == enemy1.name && life == enemy1.life && defense == enemy1.defense && weight == enemy1.weight
+      name == enemy1.getName && life == enemy1.getLife && defense == enemy1.getDefense && weight == enemy1.getWeight
     } else {
       false
     }

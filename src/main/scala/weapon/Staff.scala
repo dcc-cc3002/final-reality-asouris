@@ -21,12 +21,11 @@ class Staff(name: String, attack: Int, weight: Int, magicAttack: Int)
 
 
   override def equals(other: Any): Boolean = {
-    if (other.isInstanceOf[Staff]) {
-      val staff1 = other.asInstanceOf[Staff]
-      name == staff1.name && attack == staff1.attack && weight == staff1.weight
-    } else {
-      false
-    }
+    other match
+      case staff1: Staff =>
+        name == staff1.getName && attack == staff1.getAttack && weight == staff1.getWeight && magicAttack == staff1.getMagicAttack
+      case _ =>
+        false
   }
 
   override def toString: String = {

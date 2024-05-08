@@ -20,7 +20,9 @@ import character.Character
 abstract class AbstractPlayer(name: String, life: Int, defense: Int, weight: Int)
   extends AbstractCharacter(name, life, defense, weight) with Player {
 
-    var equippedWeapon : Option[Weapon] = None
+    
+    
+    private var equippedWeapon : Option[Weapon] = None
 
     /**
      * Retrieves the currently equipped weapon of the player.
@@ -61,7 +63,7 @@ abstract class AbstractPlayer(name: String, life: Int, defense: Int, weight: Int
      */
     override def attackCharacter(character: Character): Unit = {
         equippedWeapon match {
-            case Some(weapon) => character.receiveAttack(weapon.attack)
+            case Some(weapon) => character.receiveAttack(weapon.getAttack)
             case None => throw NoneException("Player with no weapon cannot attack")
         }
     }

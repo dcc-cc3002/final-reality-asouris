@@ -22,17 +22,19 @@ import weapon.traits.EquippableByPaladin
   * @author
   *   asouris
   */
-class Paladin(
-    name: String,
+class Paladin(name: String,
     life: Int,
     defense: Int,
     weight: Int
 ) extends AbstractPlayer(name, life, defense, weight) {
+  
+  
+  
 
   override def equals(other: Any): Boolean = {
     if (other.isInstanceOf[Paladin]) {
       val paladin1 = other.asInstanceOf[Paladin]
-      name == paladin1.name && life == paladin1.life && defense == paladin1.defense && weight == paladin1.weight
+      name == paladin1.getName && life == paladin1.getLife && defense == paladin1.getDefense && weight == paladin1.getWeight
     } else {
       false
     }

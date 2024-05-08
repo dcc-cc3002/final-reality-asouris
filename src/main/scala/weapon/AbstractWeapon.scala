@@ -3,16 +3,19 @@ package weapon
 import character.players.Player
 import exceptions.OwnerException
 
-abstract class AbstractWeapon(val name: String, val attack : Int, val weight: Int) extends Weapon{
+abstract class AbstractWeapon(private val name: String, private val attack : Int, private val weight: Int) extends Weapon{
+  require(name != "")
+  require(attack >= 1)
+  require(weight >= 1)
   
-  var owner : Option[Player] = None
+  private var owner : Option[Player] = None
   
   def getName : String = name
   def getAttack : Int = attack
   def getWeight : Int = weight
   def getOwner : Option[Player] = owner
 
-  def hasOwner : Boolean = !(owner == None)
+  def hasOwner : Boolean = owner.isDefined
  
   //sets owner if weapon doesnt have one
   def setOwner (player : Player) : Unit = {

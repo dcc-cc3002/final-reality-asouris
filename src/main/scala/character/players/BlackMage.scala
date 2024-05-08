@@ -36,7 +36,7 @@ class BlackMage(
   override def equals(other: Any): Boolean = {
     if (other.isInstanceOf[BlackMage]) {
       val blackMage1 = other.asInstanceOf[BlackMage]
-      name == blackMage1.name && life == blackMage1.life && defense == blackMage1.defense && weight == blackMage1.weight && magicPoints == blackMage1.magicPoints
+      name == blackMage1.getName && life == blackMage1.getLife && defense == blackMage1.getDefense && weight == blackMage1.getWeight && magicPoints == blackMage1.getMagicPoints
     } else {
       false
     }
