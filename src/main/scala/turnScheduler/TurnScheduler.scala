@@ -20,6 +20,8 @@ class TurnScheduler {
   private val characters: mutable.Map[Player, Int] = mutable.Map[Player, Int]()
   /** A map of players and their respective turn orders. */
   private val nextTurns = new mutable.Queue[Player]
+  
+  def getCharacters : mutable.Map[Player, Int] = characters
 
   /**
    * Adds a new character to the turn scheduler.
