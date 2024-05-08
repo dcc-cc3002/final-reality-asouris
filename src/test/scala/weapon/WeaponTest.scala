@@ -24,6 +24,25 @@ class WeaponTest extends munit.FunSuite{
 
   }
 
+  test("A weapon cannot be created with an empty name"){
+    var axeGood = Axe("axeGood", 10, 10)
+    intercept[IllegalArgumentException] {
+      var axeBad = Axe("", 10, 10)
+    }
+  }
+
+  test("A weapon cannot be created with attributes attack and weight lesser than 1"){
+    var axe0 = Axe("axe0", 1, 1)
+    var axe1 = Axe("axe1", 100, 10)
+
+    intercept[IllegalArgumentException] {
+      var axeBad = Axe("axeBad", 0, 10)
+    }
+    intercept[IllegalArgumentException] {
+      var bowBad = Bow("bowBad", 100, -1)
+    }
+  }
+
   test("hasOwner should return true if the weapon has an owner, false if not"){
     assert(!wand.hasOwner)
     mage.equip(wand)

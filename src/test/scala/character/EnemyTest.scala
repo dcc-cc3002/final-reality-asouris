@@ -14,6 +14,15 @@ class EnemyTest extends munit.FunSuite {
     assert(!enemy1.equals(enemy0))
   }
 
+  test("An enemy cannot be created with the attack attribute lesser than 1"){
+    var enemy0 = Enemy("enemy0", 10, 1, 10, 10)
+    var enemy1 = Enemy("enemy1", 10, 100, 10, 10)
+
+    intercept[IllegalArgumentException]{
+      var enemyBad = Enemy("enemyBad", 10, 0, 10, 10)
+    }
+  }
+
   test("attackCharacter should make a character receive an attack of the magnitude of the attackers attack points if attack is too little nothing happens"){
     var enemy0 = Enemy("enemy0", 10, 12, 5, 40)
     var enemy1 = Enemy("enemy1", 15, 4, 2, 20)
