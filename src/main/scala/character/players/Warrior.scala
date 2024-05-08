@@ -32,12 +32,11 @@ class Warrior(
   
 
   override def equals(other: Any): Boolean = {
-    if (other.isInstanceOf[Warrior]) {
-      val warrior1 = other.asInstanceOf[Warrior]
-      name == warrior1.getName && life == warrior1.getLife && defense == warrior1.getDefense && weight == warrior1.getWeight
-    } else {
-      false
-    }
+    other match
+      case warrior1: Warrior =>
+        name == warrior1.getName && life == warrior1.getLife && defense == warrior1.getDefense && weight == warrior1.getWeight
+      case _ =>
+        false
   }
 
   override def toString: String = {
