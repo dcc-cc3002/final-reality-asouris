@@ -17,7 +17,7 @@ import scala.collection.mutable
 class TurnScheduler {
 
   /** A map of players and their current value for their actionBar*/
-  val characters: mutable.Map[Player, Int] = mutable.Map[Player, Int]()
+  private val characters: mutable.Map[Player, Int] = mutable.Map[Player, Int]()
   /** A map of players and their respective turn orders. */
   private val nextTurns = new mutable.Queue[Player]
 
@@ -71,10 +71,7 @@ class TurnScheduler {
     def order(character: Player) : Double = {
       characters.get(character) match {
         case Some(value) =>
-          character.equippedWeapon match {
-            case Some(weapon) => value - (character.weight + weapon.weight * 0.5)
-            case None => throw NoneException("Weapon is None")
-          }
+          value - (character.getWeight + character.getWeapon.getWeight * 0.5)
         case None => throw NoneException("Value is None")
       }
     }
@@ -82,14 +79,9 @@ class TurnScheduler {
 
     characters.transform((key, value) => {
       if (!isReady(key)) {
-        key.equippedWeapon match {
-          case Some(weapon) => 
-            val actionBar = key.weight + weapon.weight * 0.5
-            if(value + amount >= actionBar){readyForTurn.enqueue(key)}
-            value + amount
-          
-          case None => throw NoneException("Weapon is None")
-        }
+        val actionBar = key.getWeight + key.getWeapon.getWeight * 0.5
+        if(value + amount >= actionBar){readyForTurn.enqueue(key)}
+        value + amount
       }
       else {
         value
@@ -110,10 +102,7 @@ class TurnScheduler {
   def isReady(character: Player): Boolean = {
     characters.get(character) match {
       case Some(value) =>
-        character.equippedWeapon match {
-          case Some(weapon) => value >= character.weight + weapon.weight * 0.5
-          case None => throw NoneException("Weapon is None")
-        }
+        value >= character.getWeight + character.getWeapon.getWeight * 0.5
       case None => throw NoneException("Value is None")
     }
   }
