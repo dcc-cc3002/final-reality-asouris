@@ -2,7 +2,7 @@ package character.players
 
 import character.Enemy
 import exceptions.NoneException
-import weapon.Axe
+import weapon.{Axe, Weapon}
 
 class AbstractPlayerTest extends munit.FunSuite{
 
@@ -35,6 +35,8 @@ class AbstractPlayerTest extends munit.FunSuite{
     warrior.attackCharacter(enemy)
     assert(enemy.getLife == 25)
   }
+  
+ 
 
 
 
