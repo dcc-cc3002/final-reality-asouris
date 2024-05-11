@@ -34,12 +34,11 @@ class BlackMage(
 ) extends AbstractMagicPlayer(name, life, defense, weight, magicPoints) {
 
   override def equals(other: Any): Boolean = {
-    if (other.isInstanceOf[BlackMage]) {
-      val blackMage1 = other.asInstanceOf[BlackMage]
-      name == blackMage1.getName && life == blackMage1.getLife && defense == blackMage1.getDefense && weight == blackMage1.getWeight && magicPoints == blackMage1.getMagicPoints
-    } else {
-      false
-    }
+    other match
+      case blackMage1: BlackMage =>
+        name == blackMage1.getName && life == blackMage1.getLife && defense == blackMage1.getDefense && weight == blackMage1.getWeight && magicPoints == blackMage1.getMagicPoints
+      case _ =>
+        false
   }
 
   override def toString: String = {
@@ -47,8 +46,7 @@ class BlackMage(
   }
 
   def equip(newWeapon: EquippableByBlackMage): Unit = {
-    //si llegó hasta aqui es valido el equipar
-    super.validEquip(Some(newWeapon.toWeapon))
+    super.validEquip(newWeapon.toWeapon)
   }
 
 }

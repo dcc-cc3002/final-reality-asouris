@@ -29,12 +29,11 @@ class Ninja(
 ) extends AbstractPlayer(name, life, defense, weight){
 
   override def equals(other: Any): Boolean = {
-    if (other.isInstanceOf[Ninja]) {
-      val ninja1 = other.asInstanceOf[Ninja]
-      name == ninja1.getName && life == ninja1.getLife && defense == ninja1.getDefense && weight == ninja1.getWeight
-    } else {
-      false
-    }
+    other match
+      case ninja1: Ninja =>
+        name == ninja1.getName && life == ninja1.getLife && defense == ninja1.getDefense && weight == ninja1.getWeight
+      case _ =>
+        false
   }
 
   override def toString: String = {
@@ -42,7 +41,7 @@ class Ninja(
   }
 
   def equip(newWeapon: EquippableByNinja): Unit = {
-    super.validEquip(Some(newWeapon.toWeapon))
+    super.validEquip(newWeapon.toWeapon)
   }
 
 }

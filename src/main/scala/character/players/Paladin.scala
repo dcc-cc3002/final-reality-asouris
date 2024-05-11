@@ -32,12 +32,11 @@ class Paladin(name: String,
   
 
   override def equals(other: Any): Boolean = {
-    if (other.isInstanceOf[Paladin]) {
-      val paladin1 = other.asInstanceOf[Paladin]
-      name == paladin1.getName && life == paladin1.getLife && defense == paladin1.getDefense && weight == paladin1.getWeight
-    } else {
-      false
-    }
+    other match
+      case paladin1: Paladin =>
+        name == paladin1.getName && life == paladin1.getLife && defense == paladin1.getDefense && weight == paladin1.getWeight
+      case _ =>
+        false
   }
 
   override def toString: String = {
@@ -45,7 +44,6 @@ class Paladin(name: String,
   }
 
   def equip(newWeapon: EquippableByPaladin): Unit = {
-    //si llegó hasta aqui es valido el equipar
-    super.validEquip(Some(newWeapon.toWeapon))
+    super.validEquip(newWeapon.toWeapon)
   }
 }

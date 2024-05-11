@@ -44,7 +44,6 @@ class Warrior(
   }
 
   def equip(newWeapon: EquippableByWarrior): Unit = {
-    //si llegó hasta aqui es valido el equipar
-    super.validEquip(Some(newWeapon.toWeapon))
+    super.validEquip(newWeapon.toWeapon)
   }
 }

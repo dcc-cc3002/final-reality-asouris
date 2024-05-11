@@ -44,14 +44,9 @@ abstract class AbstractPlayer(name: String, life: Int, defense: Int, weight: Int
      * @param weapon The new weapon to be equipped.
      * @throws NoneException If the provided weapon is None.
      */
-    protected def validEquip(weapon: Option[Weapon]): Unit = {
-        weapon match {
-            case Some(newWeapon) => 
-                equippedWeapon = Some(newWeapon)
-                newWeapon.setOwner(this)
-            
-            case None => throw NoneException("Weapon is None")
-        }
+    protected def validEquip(weapon: Weapon): Unit = {
+        equippedWeapon = Some(weapon)
+        weapon.setOwner(this)
     }
 
     /**
