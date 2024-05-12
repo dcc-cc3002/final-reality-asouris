@@ -31,7 +31,7 @@ class Wand(name: String, attack: Int, weight: Int, magicAttack: Int)
   }
 
   override def toString: String = {
-    s"Wand($name, $attack, $weight)"
+    s"Wand($name, $attack, $weight, $magicAttack)"
   }
 
 }

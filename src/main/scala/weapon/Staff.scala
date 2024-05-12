@@ -29,6 +29,6 @@ class Staff(name: String, attack: Int, weight: Int, magicAttack: Int)
   }
 
   override def toString: String = {
-    s"Staff($name, $attack, $weight)"
+    s"Staff($name, $attack, $weight, $magicAttack)"
   }
 }
