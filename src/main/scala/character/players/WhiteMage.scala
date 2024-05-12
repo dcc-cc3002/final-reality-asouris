@@ -15,10 +15,8 @@ import weapon.traits.EquippableByWhiteMage
   *   The defense of the character
   * @param weight
   *   The weight of the character
- * @param weapon
- *    The weapon of the character
-  * @param mana
-  *   The magic pointsof the character
+  * @param magicPoints
+  *   The magic points of the character
   *
   * @constructor Creates a new White Mage character with the specified properties.
   *
@@ -33,6 +31,12 @@ class WhiteMage(
     magicPoints: Int
 ) extends AbstractMagicPlayer(name, life, defense, weight, magicPoints){
 
+  /**
+   * Checks whether this white mage is equal to another object.
+   *
+   * @param other The object to compare with.
+   * @return True if the objects are equal, false otherwise.
+   */
   override def equals(other: Any): Boolean = {
     other match
       case whiteMage1: WhiteMage =>
@@ -41,10 +45,21 @@ class WhiteMage(
         false
   }
 
+  /**
+   * Returns a string representation of this white mage.
+   *
+   * @return A string representation containing the white mage's properties.
+   */
   override def toString: String = {
     s"WhiteMage($name, $life, $defense, $weight, $magicPoints)"
   }
 
+  /**
+   * Equips a new weapon to the white mage via the method validEquip.
+   * This method overrides the one declared in Player.
+   *
+   * @param newWeapon The weapon to be equipped.
+   */
   def equip(newWeapon: EquippableByWhiteMage): Unit = {
     super.validEquip(newWeapon.toWeapon)
   }

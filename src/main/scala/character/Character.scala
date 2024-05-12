@@ -15,15 +15,36 @@ package character
  */
 trait Character(){
 
+    /**
+     * Retrieves the name of the character.
+     *
+     * @return The name of the character.
+     */
     def getName: String
 
+    /**
+     * Retrieves the current life points of the character.
+     *
+     * @return The current life points of the character.
+     */
     def getLife: Int
 
+    /**
+     * Retrieves the defense value of the character.
+     *
+     * @return The defense value of the character.
+     */
     def getDefense: Int
 
+    /**
+     * Retrieves the weight of the character.
+     *
+     * @return The weight of the character.
+     */
     def getWeight: Int
-    
-    /** Checks if the character is defeated.
+
+    /**
+     * Checks if the character is defeated.
      *
      * Returns `true` if the character's life points have reached zero or less, indicating defeat.
      * Returns `false` otherwise.
@@ -31,7 +52,19 @@ trait Character(){
      * @return `true` if the character is defeated, `false` otherwise.
      */
     def isDefeated: Boolean
+
+    /**
+     * Attacks another character.
+     *
+     * @param character The character to be attacked.
+     */
     def attackCharacter(character : Character) : Unit
+
+    /**
+     * Receives an attack from another character.
+     *
+     * @param attack The amount of attack received.
+     */
     def receiveAttack(attack : Int): Unit
 
 }

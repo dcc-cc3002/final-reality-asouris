@@ -20,8 +20,6 @@ import character.Character
 abstract class AbstractPlayer(name: String, life: Int, defense: Int, weight: Int)
   extends AbstractCharacter(name, life, defense, weight) with Player {
 
-    
-    
     private var equippedWeapon : Option[Weapon] = None
 
     /**
@@ -39,10 +37,9 @@ abstract class AbstractPlayer(name: String, life: Int, defense: Int, weight: Int
 
     /**
      * Equips a valid weapon for the player.
-     * This method ensures that the player cannot equip a None weapon and sets the owner of the new weapon to the player.
+     * This method equips a weapon previously validated to the character. It also sets the weapon's owner
      *
      * @param weapon The new weapon to be equipped.
-     * @throws NoneException If the provided weapon is None.
      */
     protected def validEquip(weapon: Weapon): Unit = {
         equippedWeapon = Some(weapon)

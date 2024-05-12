@@ -12,6 +12,8 @@ import scala.collection.mutable
 /** A class to manage the turn scheduling of players.
  * This class maintains a map of players and their current value for their actionBar
  * It also has a queue to determine the order of upcoming turns.
+ * 
+ * @author asouris
  */
 
 class TurnScheduler {
@@ -21,6 +23,10 @@ class TurnScheduler {
   /** A map of players and their respective turn orders. */
   private val nextTurns = new mutable.Queue[Player]
 
+  /**
+   * Gets the map containing players and their action bars
+   * @return A map containing players and their action bars
+   */
   def getCharacters : mutable.Map[Player, Double] = characters
 
   /**
@@ -65,6 +71,10 @@ class TurnScheduler {
 
   /**
    * Increases the action bar value of all characters by a specified amount.
+   * 
+   * This function also checks if any character filled their actionBar, if so, they are added to
+   * the ready list. If more than 1 character filled its actionBar at the same time, the one with the most
+   * advantage over its own maximum value of actionBar goes first.
    *
    * @param amount The amount by which to increase the action bar value.
    */

@@ -2,22 +2,29 @@ package weapon
 import weapon.traits.EquippableByWarrior
 import weapon.traits.EquippableByPaladin
 
-/** Represents an Axe, a type of weapon.
+/**
+ * Represents an Axe, a type of weapon.
  *
- * An Axe is a weapon with a name, attack power, weight, and an optional owner.
+ * An Axe is a weapon with a name, attack power, weight
  *
  * @constructor Creates a new Axe with the specified properties.
  * @param name   The name of the Axe.
  * @param attack The attack power of the Axe.
  * @param weight The weight of the Axe.
- * @param owner  The optional owner of the Axe, typically a character who wields it.
- *
+ *               
  * @author asouris
  */
 
 class Axe(name: String, attack: Int, weight: Int)
   extends AbstractWeapon(name, attack, weight) with EquippableByWarrior with EquippableByPaladin{
-  
+  /**
+   * Checks if this Axe is equal to another object.
+   *
+   * Two Axes are considered equal if they have the same name, attack power, and weight.
+   *
+   * @param other The object to compare with.
+   * @return `true` if the objects are equal, `false` otherwise.
+   */
   override def equals (other: Any): Boolean = {
     other match
       case axe1: Axe =>
@@ -26,6 +33,11 @@ class Axe(name: String, attack: Int, weight: Int)
         false
   }
 
+  /**
+   * Returns a string representation of this Axe.
+   *
+   * @return A string representation containing the Axe's properties.
+   */
   override def toString : String = {
     s"Axe($name, $attack, $weight)"
   }

@@ -22,21 +22,31 @@ package character
 class Enemy(name: String, life: Int, private var attack: Int, defense: Int, weight: Int) 
   extends AbstractCharacter(name, life, defense, weight) {
   require(attack >= 1)
-  
+
+  /**
+   * Retrieves the attack value of the enemy.
+   *
+   * @return The attack value of the enemy.
+   */
   def getAttack : Int = attack
 
-  /** Checks if the enemy is defeated.
+  /**
+   * Attacks another character, causing damage based on the enemy's attack value.
    *
-   * Returns `true` if the enemy's life points are zero or less, indicating defeat.
-   * Returns `false` otherwise.
-   *
-   * @return `true` if the enemy is defeated, `false` otherwise.
+   * @param character The character to be attacked.
    */
-    
   override def attackCharacter(character: Character): Unit = {
     character.receiveAttack(this.attack)
   }
 
+  /**
+   * Compares this enemy with another object for equality.
+   *
+   * Two enemies are considered equal if they have the same name, life points, defense, and weight.
+   *
+   * @param other The object to compare with.
+   * @return `true` if the objects are equal, `false` otherwise.
+   */
   override def equals(other: Any): Boolean = {
     other match
       case enemy1: Enemy =>
@@ -45,6 +55,11 @@ class Enemy(name: String, life: Int, private var attack: Int, defense: Int, weig
         false
   }
 
+  /**
+   * Returns a string representation of this enemy.
+   *
+   * @return A string representation containing the enemy's properties.
+   */
   override def toString: String = {
     s"Enemy($name, $life, $attack, $defense, $weight)"
   }

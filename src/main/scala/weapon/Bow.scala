@@ -7,19 +7,25 @@ import weapon.traits.EquippableByWhiteMage
 
 /** Represents a Bow, a type of weapon.
  *
- * A Bow is weapon with a name, attack power, weight, and an optional owner.
+ * A Bow is weapon with a name, attack power, weight.
  *
  * @constructor Creates a new Bow with the specified properties.
  * @param name   The name of the Bow.
  * @param attack The attack power of the Bow.
  * @param weight The weight of the Bow.
- * @param owner  The optional owner of the Bow, typically a character who wields it.
  * 
  * @author asouris
  */
 class Bow(name: String, attack: Int, weight: Int)
   extends AbstractWeapon(name, attack, weight) with EquippableByWarrior with EquippableByNinja with EquippableByWhiteMage{
-
+  /**
+   * Checks if this Bow is equal to another object.
+   *
+   * Two Bows are considered equal if they have the same name, attack power, and weight.
+   *
+   * @param other The object to compare with.
+   * @return `true` if the objects are equal, `false` otherwise.
+   */
   override def equals(other: Any): Boolean = {
     other match
       case bow1: Bow =>
@@ -28,6 +34,11 @@ class Bow(name: String, attack: Int, weight: Int)
         false
   }
 
+  /**
+   * Returns a string representation of this Bow.
+   *
+   * @return A string representation containing the Bow's properties.
+   */
   override def toString: String = {
     s"Bow($name, $attack, $weight)"
   }

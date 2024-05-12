@@ -28,9 +28,14 @@ class Warrior(
     defense: Int,
     weight: Int
 ) extends AbstractPlayer(name, life, defense, weight){
-  
-  
 
+
+  /**
+   * Checks whether this warrior is equal to another object.
+   *
+   * @param other The object to compare with.
+   * @return True if the objects are equal, false otherwise.
+   */
   override def equals(other: Any): Boolean = {
     other match
       case warrior1: Warrior =>
@@ -39,10 +44,21 @@ class Warrior(
         false
   }
 
+  /**
+   * Returns a string representation of this warrior.
+   *
+   * @return A string representation containing the warrior's properties.
+   */
   override def toString: String = {
     s"Warrior($name, $life, $defense, $weight)"
   }
 
+  /**
+   * Equips a new weapon to the warrior via the method validEquip.
+   * This method overrides the one declared in Player.
+   *
+   * @param newWeapon The weapon to be equipped.
+   */
   def equip(newWeapon: EquippableByWarrior): Unit = {
     super.validEquip(newWeapon.toWeapon)
   }

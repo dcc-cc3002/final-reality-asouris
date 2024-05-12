@@ -28,6 +28,12 @@ class Ninja(
     weight: Int
 ) extends AbstractPlayer(name, life, defense, weight){
 
+  /**
+   * Checks whether this ninja is equal to another object.
+   *
+   * @param other The object to compare with.
+   * @return True if the objects are equal, false otherwise.
+   */
   override def equals(other: Any): Boolean = {
     other match
       case ninja1: Ninja =>
@@ -36,10 +42,21 @@ class Ninja(
         false
   }
 
+  /**
+   * Returns a string representation of this ninja.
+   *
+   * @return A string representation containing the ninja's properties.
+   */
   override def toString: String = {
     s"Ninja($name, $life, $defense, $weight)"
   }
 
+  /**
+   * Equips a new weapon to the ninja via the method validEquip.
+   * This method overrides the one declared in Player.
+   *
+   * @param newWeapon The weapon to be equipped.
+   */
   def equip(newWeapon: EquippableByNinja): Unit = {
     super.validEquip(newWeapon.toWeapon)
   }

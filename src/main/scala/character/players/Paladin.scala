@@ -27,10 +27,14 @@ class Paladin(name: String,
     defense: Int,
     weight: Int
 ) extends AbstractPlayer(name, life, defense, weight) {
-  
-  
-  
 
+
+  /**
+   * Checks whether this paladin is equal to another object.
+   *
+   * @param other The object to compare with.
+   * @return True if the objects are equal, false otherwise.
+   */
   override def equals(other: Any): Boolean = {
     other match
       case paladin1: Paladin =>
@@ -39,10 +43,21 @@ class Paladin(name: String,
         false
   }
 
+  /**
+   * Returns a string representation of this paladin.
+   *
+   * @return A string representation containing the paladin's properties.
+   */
   override def toString: String = {
     s"Paladin($name, $life, $defense, $weight)"
   }
 
+  /**
+   * Equips a new weapon to the paladin via the method validEquip.
+   * This method overrides the one declared in Player.
+   *
+   * @param newWeapon The weapon to be equipped.
+   */
   def equip(newWeapon: EquippableByPaladin): Unit = {
     super.validEquip(newWeapon.toWeapon)
   }
