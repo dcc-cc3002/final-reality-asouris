@@ -54,18 +54,17 @@ class Party (){
    * @return `true` if the parties are equal, `false` otherwise.
    */
   override def equals(other: Any): Boolean = {
-    if (other.isInstanceOf[Party]) {
-      val party1 = other.asInstanceOf[Party]
-      // Check if both parties have the same number of members
-      if (members.length != party1.members.length) {
+    other match
+      case party1: Party =>
+        // Check if both parties have the same number of members
+        if (members.length != party1.members.length) {
+          false
+        } else {
+          // Check if all members in both parties are equal
+          this.members.zip(party1.members).forall { case (m1, m2) => m1 == m2 }
+        }
+      case _ =>
         false
-      } else {
-        // Check if all members in both parties are equal
-        this.members.zip(party1.members).forall { case (m1, m2) => m1 == m2 }
-      }
-    } else {
-      false
-    }
   }
 
   /** Returns a string representation of the party.

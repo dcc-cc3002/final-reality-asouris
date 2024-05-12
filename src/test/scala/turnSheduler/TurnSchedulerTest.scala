@@ -35,7 +35,7 @@ class TurnSchedulerTest extends munit.FunSuite {
     assert(scheduler.getCharacters.contains(warrior2))
   }
 
-  test("Getting maximum value"){
+  test("Getting maximum value should return the maximum barAction among characters. Returns 0 if empty"){
     val sword1 = Sword("sword1", 5, 10)
     val sword2 = Sword("sword2", 5, 10)
     warrior1.equip(sword1)
@@ -45,11 +45,14 @@ class TurnSchedulerTest extends munit.FunSuite {
     scheduler.increaseActionBar(10)
 
     scheduler.addCharacter(warrior3)
-
-    scheduler.getMaximum match {
-      case Some(value) => assert(value == 10)
-      case None => throw NoneException("Map is empty")
-    }
+    
+    val expected = 10
+    assert(scheduler.getMaximum == expected)
+    
+    var scheduler2 = TurnScheduler()
+    
+    assert(scheduler2.getMaximum == 0)
+    
   }
 
   test("Resetting action bar"){
@@ -61,16 +64,10 @@ class TurnSchedulerTest extends munit.FunSuite {
     scheduler.addCharacter(warrior1)
     scheduler.addCharacter(warrior3)
     scheduler.increaseActionBar(10)
-    scheduler.getMaximum match {
-      case Some(value) => assert(value == 10)
-      case None => throw NoneException("Map is empty")
-    }
+    assert(scheduler.getMaximum == 10)
 
     scheduler.resetActionBar()
-    scheduler.getMaximum match {
-      case Some(value) => assert(value == 0)
-      case None => throw NoneException("Map is empty")
-    }
+    assert(scheduler.getMaximum == 0)
 
   }
 
@@ -118,7 +115,7 @@ class TurnSchedulerTest extends munit.FunSuite {
 
   }
 
-  test("Getting Next Character") {
+  test("Getting Next Character. It throws an exception if queue is empty") {
     val sword1 = Sword("sword1", 5, 10)
     val sword2 = Sword("sword2", 5, 10)
     warrior1.equip(sword1)
@@ -130,6 +127,13 @@ class TurnSchedulerTest extends munit.FunSuite {
     scheduler.increaseActionBar(10)
 
     assert(scheduler.nextCharacter == warrior3)
+    
+    //gets all characters out
+    scheduler.getReady
+    
+    intercept[NoneException]{
+      val next = scheduler.nextCharacter
+    }
 
   }
 

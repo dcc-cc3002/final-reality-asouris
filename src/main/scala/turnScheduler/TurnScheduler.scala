@@ -46,12 +46,12 @@ class TurnScheduler {
    *
    * @return An Option containing the maximum action bar value if characters exist, otherwise None.
    */
-  def getMaximum : Option[Double] = {
+  def getMaximum : Double = {
     if (characters.isEmpty){
-      None
+      0
     }
     else{
-      Some(characters.maxBy(_._2)._2)
+      characters.maxBy(_._2)._2
     }
   }
 

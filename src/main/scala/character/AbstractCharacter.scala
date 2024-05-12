@@ -16,10 +16,6 @@ abstract class AbstractCharacter(private val name: String, private var life: Int
     require(value >= 0)
     this.life = value
   }
-  
-  override def toString : String = {
-    s"Character($name, $life, $defense, $weight)"
-  }
 
   /** Checks if the player character is defeated.
    *

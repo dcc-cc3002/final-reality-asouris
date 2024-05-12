@@ -4,9 +4,6 @@ abstract class AbstractMagicPlayer (name: String, life: Int, defense: Int, weigh
 extends AbstractPlayer(name, life, defense, weight){
   
   def getMagicPoints : Int = magicPoints
-
-  override def toString: String = {
-    s"Magic Character($name, $life, $defense, $weight, $magicPoints)"
-  }
+  
 
 }

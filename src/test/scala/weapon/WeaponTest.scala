@@ -29,6 +29,9 @@ class WeaponTest extends munit.FunSuite{
     intercept[IllegalArgumentException] {
       var axeBad = Axe("", 10, 10)
     }
+    intercept[IllegalArgumentException] {
+      var wandBad = Wand("", 10, 10, 5)
+    }
   }
 
   test("A weapon cannot be created with attributes attack and weight lesser than 1"){
