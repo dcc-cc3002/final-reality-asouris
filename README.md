@@ -1,4 +1,5 @@
 # Final Reality
+This is for the class CC3002. And it will be a journal about my progress with the project.
 
 Final Reality is a simplified clone of the renowned game, Final Fantasy. Its main purpose is to
 serve as an educational tool, teaching foundational programming concepts.
@@ -38,6 +39,12 @@ In order to do this I did some research to find the best way to ensure that a va
 Now, back on the privacy issues, the default should be to make all things private if possible to maintain control over how things are being changed. So I did that because I didn't implement it right the first time.
 
 Then I added testing to get 90+% coverage :). And finally I added all the documentation that was missing.
+
+## Assigment 2
+The second part begins
+### Assignment 2: Part 3
+There was only one task on this part, and it was to implement a way for players to equip weapons respecting the restrictions of type of player.
+I actually did this for the last assignment :). The only thing I fixed a little were the exceptions.
 
 This project is licensed under the
 [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
