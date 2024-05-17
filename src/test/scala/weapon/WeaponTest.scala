@@ -3,7 +3,7 @@ package weapon
 
 import character.players.Warrior
 import character.players.BlackMage
-import exceptions.OwnerException
+import exceptions.BadBehaviourException
 
 
 
@@ -60,7 +60,7 @@ class WeaponTest extends munit.FunSuite{
 
   test("setOwner should throw an exception when trying to set an owner to a weapon with owner"){
     sword.setOwner(warrior)
-    intercept[OwnerException]{
+    intercept[BadBehaviourException]{
       sword.setOwner(mage)
     }
   }

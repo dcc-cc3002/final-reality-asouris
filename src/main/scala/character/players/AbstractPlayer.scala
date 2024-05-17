@@ -1,6 +1,7 @@
 package character.players
 import weapon.Weapon
 import exceptions.NoneException
+import exceptions.BadBehaviourException
 import character.AbstractCharacter
 import character.Character
 
@@ -51,12 +52,12 @@ abstract class AbstractPlayer(name: String, life: Int, defense: Int, weight: Int
      * This method enables the player to attack another character.
      *
      * @param character The character to be attacked.
-     * @throws NoneException If the player does not have any equipped weapon.
+     * @throws BadBehaviourException If the player does not have any equipped weapon.
      */
     override def attackCharacter(character: Character): Unit = {
         equippedWeapon match {
             case Some(weapon) => character.receiveAttack(weapon.getAttack)
-            case None => throw NoneException("Player with no weapon cannot attack")
+            case None => throw BadBehaviourException("Player with no weapon cannot attack")
         }
     }
 

@@ -1,7 +1,7 @@
 package character.players
 
 import character.Enemy
-import exceptions.NoneException
+import exceptions.BadBehaviourException
 import weapon.{Axe, Weapon}
 
 class AbstractPlayerTest extends munit.FunSuite{
@@ -10,7 +10,7 @@ class AbstractPlayerTest extends munit.FunSuite{
     var warrior = Warrior("warrior", 20, 10, 5)
     var enemy = Enemy("enemy", 25, 10, 5, 5)
 
-    intercept[NoneException]{
+    intercept[BadBehaviourException]{
       warrior.attackCharacter(enemy)
     }
   }
