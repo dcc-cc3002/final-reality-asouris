@@ -1,7 +1,7 @@
 package weapon
 
 import character.players.Player
-import exceptions.BadBehaviourException
+import exceptions.{BadBehaviourException, NoneException}
 
 /**
  * An abstract base class representing a weapon.
@@ -45,7 +45,11 @@ abstract class AbstractWeapon(private val name: String, private val attack : Int
    *
    * @return An option containing the owner of the weapon, or None if the weapon has no owner.
    */
-  def getOwner: Option[Player] = owner
+  def getOwner: Player = {
+    owner match
+      case Some(value) => value
+      case None => throw NoneException("There is no owner")
+  }
 
   /**
    * Checks if the weapon has an owner.
@@ -67,6 +71,13 @@ abstract class AbstractWeapon(private val name: String, private val attack : Int
     else {
       owner = Some(player)
     }
+  }
+
+  /**
+   * Sets owner to None
+   */
+  override def removeOwner(): Unit = {
+    owner = None
   }
   
 }
