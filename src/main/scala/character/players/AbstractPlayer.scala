@@ -2,8 +2,7 @@ package character.players
 import weapon.Weapon
 import exceptions.NoneException
 import exceptions.BadBehaviourException
-import character.AbstractCharacter
-import character.Character
+import character.{AbstractCharacter, Character, Enemy}
 
 
 /**
@@ -30,10 +29,19 @@ abstract class AbstractPlayer(name: String, life: Int, defense: Int, weight: Int
      * @throws NoneException If the player does not have any weapon equipped.
      */
     def getWeapon: Weapon = {
-        equippedWeapon match{
-            case Some(weapon) => weapon
-            case None => throw NoneException("Weapon is None")
+        equippedWeapon match {
+            case Some(value) => value
+            case None => throw NoneException("There is no weapon")
         }
+    }
+
+    /**
+     * Checks if the player has a weapon.
+     *
+     * @return True if the player has a weapon, false otherwise.
+     */
+    override def hasWeapon: Boolean = {
+        equippedWeapon.isDefined
     }
 
     /**
@@ -46,20 +54,41 @@ abstract class AbstractPlayer(name: String, life: Int, defense: Int, weight: Int
         equippedWeapon = Some(weapon)
         weapon.setOwner(this)
     }
+    
+    /**
+     * Unequipps a weapon by removing the player from being the owner of the weapon, then removing the weapon
+     * from the equippedWeapon attribute.
+     */
+    override def unequipWeapon(): Unit = {
+        this.getWeapon.removeOwner()
+        equippedWeapon = None
+    }
 
     /**
-     * Overrides the attackCharacter method from the Character trait.
-     * This method enables the player to attack another character.
+     * Overrides the attackEnemy method from the Character trait.
+     * This method enables the player to attack an Enemy
      *
-     * @param character The character to be attacked.
+     * @param enemy The enemy to be attacked.
      * @throws BadBehaviourException If the player does not have any equipped weapon.
      */
-    override def attackCharacter(character: Character): Unit = {
+    override def attackEnemy(enemy: Enemy): Unit = {
         equippedWeapon match {
-            case Some(weapon) => character.receiveAttack(weapon.getAttack)
+            case Some(weapon) => enemy.receiveAttack(weapon.getAttack)
             case None => throw BadBehaviourException("Player with no weapon cannot attack")
         }
     }
+
+    /**
+     * Overrides the attackPlayer method from the Character trait.
+     * This method throws an exception, since a player cannot attack another player
+     *
+     * @param player The player to be attacked.
+     * @throws BadBehaviourException Since a player cannot attack another player
+     */
+    override def attackPlayer(player: Player): Unit = {
+        throw BadBehaviourException("A player cannot attack another player")
+    }
+    
 
 
 
