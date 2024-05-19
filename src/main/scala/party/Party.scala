@@ -1,7 +1,8 @@
 package party
-import scala.util.control.Breaks._
+import scala.util.control.Breaks.*
 import scala.collection.mutable.ArrayBuffer
 import character.players.Player
+import exceptions.BadBehaviourException
 
 /** Represents a party of playable characters.
  *
@@ -17,12 +18,18 @@ class Party (){
   /** Members of the Party */
   private val members: ArrayBuffer[Player] = new ArrayBuffer[Player]()
 
-  /** Adds a character to the party.
+  /** Adds a character to the party only if there are 2 members or less.
    *
    * @param newMember The character to be added to the party.
+   * @throws BadBehaviourException If trying to add a fourth member
    */
   def addCharacter(newMember: Player): Unit = {
-    members.addOne(newMember)
+    if(members.length >= 3){
+      throw BadBehaviourException("A party cannot have more than 3 members")
+    }
+    else{
+      members.addOne(newMember)
+    }
   }
 
   /** Checks if all members of the party are defeated.
