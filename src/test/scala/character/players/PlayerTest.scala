@@ -36,7 +36,7 @@ class PlayerTest extends munit.FunSuite {
 
   }
   
-  test("getWeapon returns the weapon of the plyable character or an exeption if it didnt had one"){
+  test("getWeapon returns the weapon of the playable character or an exception if it didnt had one"){
     warrior.equip(axe)
     assert(warrior.getWeapon == axe)
     
@@ -57,22 +57,38 @@ class PlayerTest extends munit.FunSuite {
   test("equip sets equippedWeapon in the character and sets the owner of the weapon if it could be equipped"){
     warrior.equip(axe)
     assert(warrior.getWeapon == axe)
-    assert(axe.getOwner.contains(warrior))
+    assert(axe.getOwner == warrior)
 
     mage.equip(wand)
     assert(mage.getWeapon == wand)
-    assert(wand.getOwner.contains(mage))
+    assert(wand.getOwner == mage)
 
     mageWhite.equip(staff)
     assert(mageWhite.getWeapon == staff)
-    assert(staff.getOwner.contains(mageWhite))
+    assert(staff.getOwner == mageWhite)
 
     paladin.equip(sword)
     assert(paladin.getWeapon == sword)
-    assert(sword.getOwner.contains(paladin))
+    assert(sword.getOwner == paladin)
 
     ninja.equip(bow)
     assert(ninja.getWeapon == bow)
-    assert(bow.getOwner.contains(ninja))
+    assert(bow.getOwner == ninja)
+  }
+
+  test("A player should be able to unequipped a weapon"){
+    warrior.equip(axe)
+    assert(warrior.getWeapon == axe)
+
+    warrior.unequipWeapon()
+
+    assert(!warrior.hasWeapon)
+    assert(!axe.hasOwner)
+  }
+
+  test("hasWeapon should return true if the player has an weapon, false if not") {
+    assert(!mage.hasWeapon)
+    mage.equip(wand)
+    assert(mage.hasWeapon)
   }
 }

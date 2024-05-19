@@ -1,6 +1,7 @@
 package character
 
 import character.players.Warrior
+import exceptions.BadBehaviourException
 
 
 class EnemyTest extends munit.FunSuite {
@@ -40,16 +41,22 @@ class EnemyTest extends munit.FunSuite {
     }
   }
 
-  test("attackCharacter should make a character receive an attack of the magnitude of the attackers attack points if attack is too little nothing happens"){
+  test("attackPlayer should make a player receive an attack of the magnitude of the attackers attack points if attack is too little nothing happens"){
+    var enemy = Enemy("enemy", 10, 12, 5, 40)
+    var warrior = Warrior("warrior", 15, 4, 2)
+
+    assert(warrior.getLife == 15)
+    enemy.attackPlayer(warrior)
+    assert(warrior.getLife == 7)
+  }
+
+  test("attackEnemy throws an exception since an enemy cannot attack another enemy"){
     var enemy0 = Enemy("enemy0", 10, 12, 5, 40)
     var enemy1 = Enemy("enemy1", 15, 4, 2, 20)
 
-    assert(enemy1.getLife == 15)
-    enemy0.attackCharacter(enemy1)
-    assert(enemy1.getLife == 5)
-
-    assert(enemy0.getLife == 10)
-    enemy1.attackCharacter(enemy0)
-    assert(enemy0.getLife == 10)
+    intercept[BadBehaviourException]{
+      enemy0.attackEnemy(enemy1)
+    }
   }
+
 }

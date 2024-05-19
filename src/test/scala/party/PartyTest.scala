@@ -1,7 +1,8 @@
 package party
 
 import character.Enemy
-import character.players.{Ninja, Paladin, Warrior}
+import character.players.{BlackMage, Ninja, Paladin, Warrior}
+import exceptions.BadBehaviourException
 
 
 class PartyTest extends munit.FunSuite {
@@ -56,5 +57,23 @@ class PartyTest extends munit.FunSuite {
   test("A Party should be defeated when it has no members") {
     val party = new Party()
     assert(party.isDefeated) // Party should be defeated when it has no members
+  }
+  
+  test("A party cannot have more than 3 members"){
+    val warrior = new Warrior("warrior", 20, 10, 15)
+    val paladin = new Paladin("paladin", 20, 10, 15)
+    val ninja = new Ninja("ninja", 20, 10, 15)
+    val mage = new BlackMage("mage", 10, 4, 15, 6)
+    
+    val party = new Party()
+    
+    party.addCharacter(warrior)
+    party.addCharacter(paladin)
+    party.addCharacter(ninja)
+    
+    intercept[BadBehaviourException]{
+      party.addCharacter(mage)
+    }
+    
   }
 }

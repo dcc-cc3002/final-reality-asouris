@@ -52,10 +52,9 @@ class WeaponTest extends munit.FunSuite{
     assert(wand.hasOwner)
   }
 
-  test("setOwner should set the owner of the weapon if there inst any") {
-    assert(sword.getOwner.isEmpty)
+  test("setOwner should set the owner of the weapon") {
     sword.setOwner(warrior)
-    assert(sword.getOwner.contains(warrior))
+    assert(sword.getOwner == warrior)
   }
 
   test("setOwner should throw an exception when trying to set an owner to a weapon with owner"){
