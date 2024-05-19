@@ -1,5 +1,7 @@
 package character
 
+import character.players.Player
+
 /** Represents a character in the game.
  *
  * A character can be a playable character controlled by the player, or an enemy controlled by the computer.
@@ -8,9 +10,7 @@ package character
  * @param life The current life of the character.
  * @param defense The defense of the character.
  * @param weight The weight of the character.
- *
  * @constructor Creates a new character with the specified properties.
- *
  * @author asouris
  */
 trait Character(){
@@ -52,19 +52,27 @@ trait Character(){
      * @return `true` if the character is defeated, `false` otherwise.
      */
     def isDefeated: Boolean
-
-    /**
-     * Attacks another character.
-     *
-     * @param character The character to be attacked.
-     */
-    def attackCharacter(character : Character) : Unit
-
+    
+   
     /**
      * Receives an attack from another character.
      *
      * @param attack The amount of attack received.
      */
     def receiveAttack(attack : Int): Unit
+
+    /**
+     * Attacks an enemy.
+     *
+     * @param enemy The enemy to be attacked.
+     */
+    def attackEnemy(enemy: Enemy) : Unit
+
+    /**
+     * Attacks a player.
+     *
+     * @param player The player to be attacked.
+     */
+    def attackPlayer(player: Player) : Unit
 
 }
