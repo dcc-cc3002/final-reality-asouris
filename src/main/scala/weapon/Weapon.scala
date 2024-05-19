@@ -42,7 +42,7 @@ trait Weapon{
    *
    * @return An option containing the owner of the weapon, or None if the weapon has no owner.
    */
-  def getOwner : Option[Player]
+  def getOwner : Player
 
   /**
    * Sets the owner of the weapon.
@@ -59,4 +59,9 @@ trait Weapon{
    * @return The weapon itself.
    */
   def toWeapon : Weapon = this
+
+  /**
+   * Sets owner to none
+   */
+  def removeOwner() : Unit
 }
