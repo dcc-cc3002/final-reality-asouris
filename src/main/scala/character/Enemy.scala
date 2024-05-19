@@ -1,5 +1,8 @@
 package character
 
+import character.players.Player
+import exceptions.BadBehaviourException
+
 /** Represent an enemy.
   *
   * An enemy is a character controlled by the computer
@@ -31,12 +34,12 @@ class Enemy(name: String, life: Int, private var attack: Int, defense: Int, weig
   def getAttack : Int = attack
 
   /**
-   * Attacks another character, causing damage based on the enemy's attack value.
+   * Attacks a player, causing damage based on the enemy's attack value.
    *
-   * @param character The character to be attacked.
+   * @param player The player to be attacked.
    */
-  override def attackCharacter(character: Character): Unit = {
-    character.receiveAttack(this.attack)
+  override def attackPlayer(player: Player): Unit = {
+    player.receiveAttack(this.attack)
   }
 
   /**
@@ -63,6 +66,16 @@ class Enemy(name: String, life: Int, private var attack: Int, defense: Int, weig
   override def toString: String = {
     s"Enemy($name, $life, $attack, $defense, $weight)"
   }
-  
+
+  /**
+   * Overrides the attackEnemy method from the Character trait.
+   * This method throws an exception, since an enemy cannot attack another enemy
+   *
+   * @param enemy The enemy to be attacked.
+   * @throws BadBehaviourException Since an enemy cannot attack another enemy
+   */
+  override def attackEnemy(enemy: Enemy): Unit = {
+    throw BadBehaviourException("An enemy cannot attack another enemy")
+  }
   
 }
