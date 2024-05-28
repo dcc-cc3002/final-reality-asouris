@@ -9,6 +9,7 @@ import character.{AbstractCharacter, Character, Enemy}
  * An abstract class representing a player in a game.
  *
  * @param name    The name of the player.
+ * @param maxLife     The max amount of life points 
  * @param life    The life points of the player.
  * @param defense The defense points of the player.
  * @param weight  The weight of the player.
@@ -17,8 +18,8 @@ import character.{AbstractCharacter, Character, Enemy}
  *
  * @author asouris
  */
-abstract class AbstractPlayer(name: String, life: Int, defense: Int, weight: Int)
-  extends AbstractCharacter(name, life, defense, weight) with Player {
+abstract class AbstractPlayer(name: String, maxLife: Int, life: Int, defense: Int, weight: Int)
+  extends AbstractCharacter(name, maxLife, life, defense, weight) with Player {
 
     private var equippedWeapon : Option[Weapon] = None
 
@@ -87,6 +88,13 @@ abstract class AbstractPlayer(name: String, life: Int, defense: Int, weight: Int
      */
     override def attackPlayer(player: Player): Unit = {
         throw BadBehaviourException("A player cannot attack another player")
+    }
+
+    override def getAttack: Int = {
+        equippedWeapon match{
+            case Some(weapon) => weapon.getAttack
+            case None => throw NoneException("Cannot get attack from a character with no weapon")
+        }
     }
     
 

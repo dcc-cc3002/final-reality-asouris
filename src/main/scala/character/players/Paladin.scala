@@ -8,25 +8,26 @@ import weapon.traits.EquippableByPaladin
   *
   * @param name
   *   The name of the character
+  * @param maxLife
+  *   The max amount of life 
   * @param life
   *   The life of the character
   * @param defense
   *   The defense of the character
   * @param weight
   *   The weight of the character
-  * @param weapon
-  *   The weapon of the character
   *
   * @constructor Creates a new Paladin character with the specified properties.
   *
   * @author
   *   asouris
   */
-class Paladin(name: String,
-    life: Int,
-    defense: Int,
-    weight: Int
-) extends AbstractPlayer(name, life, defense, weight) {
+class Paladin(name: String, 
+              maxLife: Int,
+              life: Int,
+              defense: Int, 
+              weight: Int
+) extends AbstractPlayer(name, maxLife, life, defense, weight) {
 
 
   /**
@@ -38,7 +39,7 @@ class Paladin(name: String,
   override def equals(other: Any): Boolean = {
     other match
       case paladin1: Paladin =>
-        name == paladin1.getName && life == paladin1.getLife && defense == paladin1.getDefense && weight == paladin1.getWeight
+        name == paladin1.getName && maxLife == paladin1.getMaxLife && life == paladin1.getLife && defense == paladin1.getDefense && weight == paladin1.getWeight
       case _ =>
         false
   }
@@ -49,7 +50,7 @@ class Paladin(name: String,
    * @return A string representation containing the paladin's properties.
    */
   override def toString: String = {
-    s"Paladin($name, $life, $defense, $weight)"
+    s"Paladin($name, $maxLife, $life, $defense, $weight)"
   }
 
   /**

@@ -16,9 +16,9 @@ class TurnSchedulerTest extends munit.FunSuite {
 
   override def beforeEach(context: BeforeEach): Unit = {
     scheduler = new TurnScheduler
-    warrior1 = new Warrior("warrior1", 100, 10, 15)
-    warrior2 = new Warrior("warrior2", 120, 20, 4)
-    warrior3 = new Warrior("warrior1", 100, 10, 1)
+    warrior1 = new Warrior("warrior1", 100, 100, 10, 15)
+    warrior2 = new Warrior("warrior2", 120, 120, 20, 4)
+    warrior3 = new Warrior("warrior1", 100, 100, 10, 1)
   }
 
   test("Adding and Removing Players") {

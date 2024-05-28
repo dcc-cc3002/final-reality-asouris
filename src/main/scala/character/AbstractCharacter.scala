@@ -9,11 +9,12 @@ package character
  *                
  * @author asouris
  */
-abstract class AbstractCharacter(private val name: String, private var life: Int, private var defense: Int, private var weight: Int) extends Character {
+abstract class AbstractCharacter(private val name: String, private val maxLife: Int, private var life: Int, private var defense: Int, private var weight: Int) extends Character {
   require(name != "")
-  require(life >= 1)
+  require(life >= 0 && life <= maxLife)
   require(defense >= 0)
   require(weight >= 1)
+  require(maxLife >= 1)
   /**
    * Retrieves the name of the character.
    *
@@ -42,6 +43,8 @@ abstract class AbstractCharacter(private val name: String, private var life: Int
    */
   override def getWeight : Int = weight
 
+  override def getMaxLife: Int = maxLife
+  
   /**
    * Sets the life points of the character to the specified value.
    *
@@ -49,8 +52,9 @@ abstract class AbstractCharacter(private val name: String, private var life: Int
    * @throws IllegalArgumentException if the value is negative.
    */
   def setLife(value: Int) : Unit = {
-    require(value >= 0)
-    this.life = value
+    life += value
+    if(life < 0) life = 0
+    if(life > maxLife) life = maxLife
   }
   /**
    * Checks if the character is defeated.
@@ -75,10 +79,10 @@ abstract class AbstractCharacter(private val name: String, private var life: Int
     val current = this.getLife
     if(totalAttack > 0){
       if (current < totalAttack) {
-        this.setLife(0)
+        this.setLife(-current)
       }
       else{
-        this.setLife(current - totalAttack)
+        this.setLife(- totalAttack)
       }
     }
   }

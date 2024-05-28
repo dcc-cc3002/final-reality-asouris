@@ -8,26 +8,25 @@ import weapon.traits.EquippableByWarrior
   *
   * @param name
   *   The name of the character.
+  * @param maxLife
+  *   The max amount of life 
   * @param life
   *   The life of the character.
   * @param defense
   *   The defense of the character.
   * @param weight
   *   The weight of the character.
-  * @param weapon
-  *   The weapon of the character
-  *
   * @constructor Creates a new warrior character with the specified properties.
-  *
   * @author
   *   asouris
   */
 class Warrior(
     name: String,
+    maxLife: Int,
     life: Int,
     defense: Int,
     weight: Int
-) extends AbstractPlayer(name, life, defense, weight){
+) extends AbstractPlayer(name, maxLife, life, defense, weight){
 
 
   /**
@@ -39,7 +38,7 @@ class Warrior(
   override def equals(other: Any): Boolean = {
     other match
       case warrior1: Warrior =>
-        name == warrior1.getName && life == warrior1.getLife && defense == warrior1.getDefense && weight == warrior1.getWeight
+        name == warrior1.getName && maxLife == warrior1.getMaxLife && life == warrior1.getLife && defense == warrior1.getDefense && weight == warrior1.getWeight
       case _ =>
         false
   }
@@ -50,7 +49,7 @@ class Warrior(
    * @return A string representation containing the warrior's properties.
    */
   override def toString: String = {
-    s"Warrior($name, $life, $defense, $weight)"
+    s"Warrior($name, $maxLife, $life, $defense, $weight)"
   }
 
   /**

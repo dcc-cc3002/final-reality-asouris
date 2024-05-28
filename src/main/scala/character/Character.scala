@@ -6,11 +6,6 @@ import character.players.Player
  *
  * A character can be a playable character controlled by the player, or an enemy controlled by the computer.
  *
- * @param name The name of the character.
- * @param life The current life of the character.
- * @param defense The defense of the character.
- * @param weight The weight of the character.
- * @constructor Creates a new character with the specified properties.
  * @author asouris
  */
 trait Character(){
@@ -42,6 +37,10 @@ trait Character(){
      * @return The weight of the character.
      */
     def getWeight: Int
+    
+    def getMaxLife: Int
+    
+    def setLife(value: Int): Unit
 
     /**
      * Checks if the character is defeated.

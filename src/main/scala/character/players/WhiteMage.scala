@@ -1,6 +1,8 @@
 package character.players
+import spells.traits.{DarkSpell, LightSpell}
 import character.players.Player
 import weapon.traits.EquippableByWhiteMage
+import character.Character
 
 
 /** Represents a WhiteMage.
@@ -9,27 +11,32 @@ import weapon.traits.EquippableByWhiteMage
   *
   * @param name
   *   The name of the character
+  * @param maxLife
+  *  The max amount of life 
   * @param life
   *   The life of the character
   * @param defense
   *   The defense of the character
   * @param weight
   *   The weight of the character
-  * @param magicPoints
-  *   The magic points of the character
-  *
+  * @param mana
+  *   The mana of the character
+ * @param maxMana
+ *    Tha maximum amount of mana
+ *    
   * @constructor Creates a new White Mage character with the specified properties.
-  *
   * @author
   *   asouris
   */
 class WhiteMage(
     name: String,
+    maxLife: Int,
     life: Int,
     defense: Int,
     weight: Int,
-    magicPoints: Int
-) extends AbstractMagicPlayer(name, life, defense, weight, magicPoints){
+    mana: Int,
+    maxMana: Int
+) extends AbstractMagicPlayer(name, maxLife, life, defense, weight, mana, maxMana){
 
   /**
    * Checks whether this white mage is equal to another object.
@@ -40,7 +47,7 @@ class WhiteMage(
   override def equals(other: Any): Boolean = {
     other match
       case whiteMage1: WhiteMage =>
-        name == whiteMage1.getName && life == whiteMage1.getLife && defense == whiteMage1.getDefense && weight == whiteMage1.getWeight && magicPoints == whiteMage1.getMagicPoints
+        name == whiteMage1.getName && maxLife == whiteMage1.getMaxLife && life == whiteMage1.getLife && defense == whiteMage1.getDefense && weight == whiteMage1.getWeight && mana == whiteMage1.getMana && maxMana == whiteMage1.getMaxMana
       case _ =>
         false
   }
@@ -51,7 +58,7 @@ class WhiteMage(
    * @return A string representation containing the white mage's properties.
    */
   override def toString: String = {
-    s"WhiteMage($name, $life, $defense, $weight, $magicPoints)"
+    s"WhiteMage($name, $maxLife, $life, $defense, $weight, $mana, $maxMana)"
   }
 
   /**

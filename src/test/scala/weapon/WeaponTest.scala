@@ -19,8 +19,8 @@ class WeaponTest extends munit.FunSuite{
     axe = new Axe("supreme", 4, 15)
     wand = new Wand("ElProgcomp", 10, 10, 20)
 
-    warrior = new Warrior("warrior", 20, 10, 15)
-    mage = new BlackMage("mage", 10, 4, 15, 6)
+    warrior = new Warrior("warrior", 20, 20, 10, 15)
+    mage = new BlackMage("mage", 10, 10, 4, 15, 6, 6)
 
   }
 

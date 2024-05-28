@@ -26,12 +26,12 @@ class PlayerTest extends munit.FunSuite {
     wand = new Wand("ElProgcomp", 10, 10, 20)
     staff = new Staff("regularStaff", 10, 20, 5)
 
-    warrior = new Warrior("warrior", 20, 10, 15)
-    paladin = new Paladin("paladin", 20, 10, 15)
-    ninja = new Ninja("ninja", 20, 10, 15)
+    warrior = new Warrior("warrior", 20, 20, 10, 15)
+    paladin = new Paladin("paladin", 20, 20, 10, 15)
+    ninja = new Ninja("ninja", 20, 20, 10, 15)
     
-    mage = new BlackMage("mage", 10, 4, 15, 6)
-    mageWhite = new WhiteMage("mageWhite", 10, 4, 15, 6)
+    mage = new BlackMage("mage", 10, 10, 4, 15, 6, 6)
+    mageWhite = new WhiteMage("mageWhite", 10, 10, 4, 15, 6, 6)
     
 
   }
