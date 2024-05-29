@@ -3,11 +3,17 @@ package spells
 import character.Enemy
 import character.players.{AbstractMagicPlayer, Player}
 import spells.traits.DarkSpell
+import character.Character
 
 import scala.util.Random
 
-class Fire extends DarkSpell{
-  def activateSpell(target: Enemy, mage: AbstractMagicPlayer): Unit = {
+class Fire extends AbstractSpell with DarkSpell{
+  
+  private val cost: Int = 15
+
+  override def getCost: Int = cost
+  
+  override def activateSpell(target: Character, mage: AbstractMagicPlayer): Unit = {
     val damage = mage.getAttack
     
     target.setLife( - damage)
@@ -19,6 +25,6 @@ class Fire extends DarkSpell{
       print("Burnt")
     }
 
-    mage.setMana( -15 )
+    mage.setMana( - getCost )
   }
 }

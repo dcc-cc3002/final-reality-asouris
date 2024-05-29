@@ -3,12 +3,18 @@ package spells
 import character.Enemy
 import character.players.{AbstractMagicPlayer, Player}
 import spells.traits.LightSpell
+import character.Character
 
-class Poison extends LightSpell{
+class Poison extends AbstractSpell with LightSpell{
 
-  def activateSpell(target: Enemy, mage: AbstractMagicPlayer): Unit = {
+  private val cost : Int = 30
+
+  override def getCost: Int = cost
+
+  override def activateSpell(target: Character, mage: AbstractMagicPlayer): Unit = {
     //Poison
-    mage.setMana(-30)
+    mage.setMana(-getCost)
   }
+
 
 }
