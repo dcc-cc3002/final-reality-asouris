@@ -2,7 +2,9 @@ package character.players
 import spells.traits.{DarkSpell, LightSpell}
 import character.players.Player
 import weapon.traits.EquippableByWhiteMage
-import character.Character
+import character.{Character, Enemy}
+import exceptions.SpellException
+import spells.{Healing, Paralysis, Poison}
 
 
 /** Represents a WhiteMage.
@@ -70,4 +72,73 @@ class WhiteMage(
   def equip(newWeapon: EquippableByWhiteMage): Unit = {
     super.validEquip(newWeapon.toWeapon)
   }
+
+  def castFire(target: Enemy): Unit = {
+    throw SpellException("WhiteMage cannot use dark magic")
+  }
+
+  def castHealing(target: Player): Unit = {
+    if(this.hasWeapon) {
+      if (!target.isDefeated) {
+        val healing = new Healing()
+        if (healing.getCost <= this.getMana) {
+          healing.activateSpell(target, this)
+        }
+        else {
+          throw SpellException("Not enough mana for spell")
+        }
+      }
+      else {
+        throw SpellException("Cannot cast spell on dead character")
+      }
+    }
+    else{
+      throw SpellException("Cannot cast spells with no weapon")
+    }
+  }
+
+  def castParalysis(target: Enemy): Unit = {
+    if(this.hasWeapon) {
+      if (!target.isDefeated) {
+        val paralysis = new Paralysis()
+        if (paralysis.getCost <= this.getMana) {
+          paralysis.activateSpell(target, this)
+        }
+        else {
+          throw SpellException("Not enough mana for spell")
+        }
+      }
+      else {
+        throw SpellException("Cannot cast spell on dead character")
+      }
+    }
+    else{
+      throw SpellException("Cannot cast spells with no weapon")
+    }
+  }
+
+  def castPoison(target: Enemy): Unit = {
+    if(this.hasWeapon) {
+      if (!target.isDefeated) {
+        val poison = new Poison()
+        if (poison.getCost <= this.getMana) {
+          poison.activateSpell(target, this)
+        }
+        else {
+          throw SpellException("Not enough mana for spell")
+        }
+      }
+      else {
+        throw SpellException("Cannot cast spell on dead character")
+      }
+    }
+    else{
+      throw SpellException("Cannot cast spells with no weapon")
+    }
+  }
+
+  def castThunder(target: Enemy): Unit = {
+    throw SpellException("WhiteMage cannot use dark magic")
+  }
+
 }

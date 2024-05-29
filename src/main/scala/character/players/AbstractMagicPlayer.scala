@@ -2,6 +2,8 @@ package character.players
 
 import spells.traits.Spell
 import exceptions.SpellException
+import character.{Character, Enemy}
+import spells.AbstractSpell
 
 /**
  * An abstract class representing a playable character with magical abilities.
@@ -33,9 +35,22 @@ extends AbstractPlayer(name, maxLife, life, defense, weight){
     if(mana>maxMana) mana = maxMana
   }
   
-  def castSpell(spell : Spell, target : Player): Unit = {
-    throw SpellException(s"$this cannot cast $spell")
+  def castFire(target: Character): Unit = {
+    throw SpellException("Cannot cast Fire on ally")
   }
+  def castHealing(target: Character): Unit = {
+    throw SpellException("Cannot cast Fire on enemy")
+  }
+  def castParalysis(target: Character): Unit = {
+    throw SpellException("Cannot cast Fire on ally")
+  }
+  def castPoison(target: Character): Unit = {
+    throw SpellException("Cannot cast Fire on ally")
+  }
+  def castThunder(target: Character): Unit = {
+    throw SpellException("Cannot cast Fire on ally")
+  }
+  
   
 
 }
