@@ -43,6 +43,11 @@ abstract class AbstractCharacter(private val name: String, private val maxLife: 
    */
   override def getWeight : Int = weight
 
+  /**
+   * Retrieves the max amount of life of the character.
+   *
+   * @return The max amount of life of the character.
+   */
   override def getMaxLife: Int = maxLife
   
   /**

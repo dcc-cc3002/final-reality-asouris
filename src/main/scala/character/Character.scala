@@ -37,9 +37,18 @@ trait Character(){
      * @return The weight of the character.
      */
     def getWeight: Int
-    
+
+    /**
+     * Retrieves the max amount of life of the character.
+     *
+     * @return The max amount of life of the character.
+     */
     def getMaxLife: Int
-    
+
+    /**
+     * Sets the life points of the character to the specified value.
+     *
+     */
     def setLife(value: Int): Unit
 
     /**

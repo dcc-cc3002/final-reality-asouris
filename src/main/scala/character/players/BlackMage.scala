@@ -76,6 +76,12 @@ class BlackMage(
   }
 
 
+  /**
+   * Casts a Fire spell on the target enemy.
+   *
+   * @param target The enemy to cast the spell on.
+   * @throws SpellException if the spell cannot be cast due to various reasons (e.g., insufficient mana, no weapon equipped).
+   */
   def castFire(target: Enemy): Unit = {
     if(this.hasWeapon) {
       if (!target.isDefeated) {
@@ -96,15 +102,43 @@ class BlackMage(
       throw SpellException("Cannot cast spells with no weapon")
     }
   }
+
+  /**
+   * Attempts to cast a Healing spell on the target.
+   *
+   * @param target The player to cast the spell on.
+   * @throws SpellException as BlackMage cannot use light magic.
+   */
   def castHealing(target: Player):Unit = {
     throw SpellException("BlackMage cannot use light magic")
   }
+
+  /**
+   * Attempts to cast a Paralysis spell on the target.
+   *
+   * @param target The enemy to cast the spell on.
+   * @throws SpellException as BlackMage cannot use light magic.
+   */
   def castParalysis(target: Enemy):Unit = {
     throw SpellException("BlackMage cannot use light magic")
   }
+
+  /**
+   * Attempts to cast a Poison spell on the target.
+   *
+   * @param target The enemy to cast the spell on.
+   * @throws SpellException as BlackMage cannot use light magic.
+   */
   def castPoison(target: Enemy):Unit = {
     throw SpellException("BlackMage cannot use light magic")
   }
+
+  /**
+   * Casts a Thunder spell on the target enemy.
+   *
+   * @param target The enemy to cast the spell on.
+   * @throws SpellException if the spell cannot be cast due to various reasons (e.g., insufficient mana, no weapon equipped).
+   */
   def castThunder(target: Enemy):Unit = {
     if(this.hasWeapon) {
       if (!target.isDefeated) {

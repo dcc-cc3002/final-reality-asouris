@@ -90,6 +90,12 @@ abstract class AbstractPlayer(name: String, maxLife: Int, life: Int, defense: In
         throw BadBehaviourException("A player cannot attack another player")
     }
 
+    /**
+     * Gets the attack damage of the character based on its weapon.
+     *
+     * @return The attack of the weapon
+     * @throws SpellException if the character does not have a weapon
+     */
     override def getAttack: Int = {
         equippedWeapon match{
             case Some(weapon) => weapon.getAttack

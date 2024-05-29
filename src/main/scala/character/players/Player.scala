@@ -40,7 +40,11 @@ trait Player extends Character{
    * from the equippedWeapon attribute.
    */
   def unequipWeapon() : Unit
-  
+
+  /**
+   * Gets the attack of a character
+   * @return Attack damage of a character
+   */
   def getAttack: Int
 
 }

@@ -73,10 +73,22 @@ class WhiteMage(
     super.validEquip(newWeapon.toWeapon)
   }
 
+  /**
+   * Attempts to cast a Fire spell on the target.
+   *
+   * @param target The enemy to cast the spell on.
+   * @throws SpellException as WhiteMage cannot use dark magic.
+   */
   def castFire(target: Enemy): Unit = {
     throw SpellException("WhiteMage cannot use dark magic")
   }
 
+  /**
+   * Casts a Healing spell on the target player.
+   *
+   * @param target The player to cast the spell on.
+   * @throws SpellException if the spell cannot be cast due to various reasons (e.g., insufficient mana, no weapon equipped).
+   */
   def castHealing(target: Player): Unit = {
     if(this.hasWeapon) {
       if (!target.isDefeated) {
@@ -97,6 +109,12 @@ class WhiteMage(
     }
   }
 
+  /**
+   * Casts a Paralysis spell on the target enemy.
+   *
+   * @param target The enemy to cast the spell on.
+   * @throws SpellException if the spell cannot be cast due to various reasons (e.g., insufficient mana, no weapon equipped).
+   */
   def castParalysis(target: Enemy): Unit = {
     if(this.hasWeapon) {
       if (!target.isDefeated) {
@@ -117,6 +135,12 @@ class WhiteMage(
     }
   }
 
+  /**
+   * Casts a Poison spell on the target enemy.
+   *
+   * @param target The enemy to cast the spell on.
+   * @throws SpellException if the spell cannot be cast due to various reasons (e.g., insufficient mana, no weapon equipped).
+   */
   def castPoison(target: Enemy): Unit = {
     if(this.hasWeapon) {
       if (!target.isDefeated) {
@@ -137,6 +161,12 @@ class WhiteMage(
     }
   }
 
+  /**
+   * Attempts to cast a Thunder spell on the target.
+   *
+   * @param target The enemy to cast the spell on.
+   * @throws SpellException as WhiteMage cannot use dark magic.
+   */
   def castThunder(target: Enemy): Unit = {
     throw SpellException("WhiteMage cannot use dark magic")
   }

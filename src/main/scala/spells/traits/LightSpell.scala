@@ -1,7 +1,9 @@
 package spells.traits
 
-import spells.AbstractSpell
+/**
+ * This traits represents a spell of dark magic
+ */
 
-trait LightSpell extends AbstractSpell{
+trait LightSpell extends Spell{
 
 }
