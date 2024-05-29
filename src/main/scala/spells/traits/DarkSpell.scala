@@ -1,5 +1,7 @@
 package spells.traits
 
-trait DarkSpell extends Spell {
+import spells.AbstractSpell
+
+trait DarkSpell extends AbstractSpell {
 
 }
