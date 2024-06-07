@@ -4,7 +4,7 @@ import character.Enemy
 import exceptions.SpellException
 import weapon.Wand
 
-class AbstractMagicPlayerTest extends munit.FunSuite{
+class MagicPlayerBehaviourTest extends munit.FunSuite{
   
   test("getMagicPoints should give you value for the attribute magic points of the character"){
     val mage : WhiteMage = new WhiteMage("destroyerOfWorlds", 10, 5, 5, 10, 7, 7)
