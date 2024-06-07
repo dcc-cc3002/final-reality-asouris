@@ -21,7 +21,7 @@ trait Player extends Character{
    *
    * @return True if the player has a weapon, false otherwise.
    */
-  def hasWeapon : Boolean 
+  def hasWeapon : Boolean
 
   /**
    * Attempts to equip a weapon to the player.
@@ -31,9 +31,7 @@ trait Player extends Character{
    * @param weapon The weapon to be equipped.
    * @throws WeaponException If the player cannot equip the specified weapon.
    */
-  def equip(weapon: Weapon): Unit = {
-    throw WeaponException(s"$this cannot equip $weapon")
-  }
+  def equip(weapon: Weapon): Unit
 
   /**
    * Unequipps a weapon by removing the player from being the owner of the weapon, then removing the weapon
