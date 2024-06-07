@@ -4,7 +4,7 @@ import scala.collection.mutable.ArrayBuffer
 import scala.collection.mutable.Queue
 import scala.collection.mutable.PriorityQueue
 import scala.collection.mutable.Map
-import character.players.Player
+import character.Character
 import exceptions.NoneException
 
 import scala.collection.mutable
@@ -19,22 +19,22 @@ import scala.collection.mutable
 class TurnScheduler {
 
   /** A map of players and their current value for their actionBar*/
-  private val characters: mutable.Map[Player, Double] = mutable.Map[Player, Double]()
+  private val characters: mutable.Map[Character, Double] = mutable.Map[Character, Double]()
   /** A map of players and their respective turn orders. */
-  private val nextTurns = new mutable.Queue[Player]
+  private val nextTurns = new mutable.Queue[Character]
 
   /**
    * Gets the map containing players and their action bars
    * @return A map containing players and their action bars
    */
-  def getCharacters : mutable.Map[Player, Double] = characters
+  def getCharacters : mutable.Map[Character, Double] = characters
 
   /**
    * Adds a new character to the turn scheduler.
    *
    * @param character The player to add to the scheduler.
    */
-  def addCharacter(character : Player) : Unit = {
+  def addCharacter(character : Character) : Unit = {
     characters += (character -> 0)
   }
 
@@ -43,7 +43,7 @@ class TurnScheduler {
    *
    * @param character The player to remove from the scheduler.
    */
-  def removeCharacter(character : Player) : Unit = {
+  def removeCharacter(character : Character) : Unit = {
     characters -= character
   }
 
@@ -80,22 +80,20 @@ class TurnScheduler {
    */
   def increaseActionBar(amount : Int) : Unit = {
 
-    def order(character: Player) : Double = {
+    def order(character: Character) : Double = {
       characters.get(character) match {
         case Some(value) =>
-          print(value, amount, character.getWeight, character.getWeapon.getWeight, "\n")
-          print(character, (value+amount) - (character.getWeight + character.getWeapon.getWeight * 0.5), "\n")
-          value - (character.getWeight + character.getWeapon.getWeight * 0.5)
+          value - character.getActionBar
         case None => throw NoneException("Value is None")
       }
     }
     // 0- 20 = -20
     // 0- 6 = -6 este va primero
-    val readyForTurn = mutable.PriorityQueue[Player]()(Ordering.by(order))
+    val readyForTurn = mutable.PriorityQueue[Character]()(Ordering.by(order))
 
     characters.transform((key, value) => {
       if (!isReady(key)) {
-        val actionBar = key.getWeight + key.getWeapon.getWeight * 0.5
+        val actionBar = key.getActionBar
         if(value + amount >= actionBar){
           readyForTurn.enqueue(key)
           value
@@ -110,7 +108,7 @@ class TurnScheduler {
 
     while(readyForTurn.nonEmpty){
       val next = readyForTurn.dequeue()
-      characters(next) = next.getWeight + next.getWeapon.getWeight * 0.5
+      characters(next) = next.getActionBar
       nextTurns.enqueue(next)
     }
   }
@@ -121,10 +119,10 @@ class TurnScheduler {
    * @param character The player to check.
    * @return True if the character is ready, otherwise false.
    */
-  def isReady(character: Player): Boolean = {
+  def isReady(character: Character): Boolean = {
     characters.get(character) match {
       case Some(value) =>
-        value >= character.getWeight + character.getWeapon.getWeight * 0.5
+        value >= character.getActionBar
       case None => throw NoneException("Value is None")
     }
   }
@@ -134,8 +132,8 @@ class TurnScheduler {
    *
    * @return An ArrayBuffer containing characters ready to take their turn.
    */
-  def getReady : ArrayBuffer[Player] = {
-    val ready: ArrayBuffer[Player] = new ArrayBuffer[Player]()
+  def getReady : ArrayBuffer[Character] = {
+    val ready: ArrayBuffer[Character] = new ArrayBuffer[Character]()
     while(nextTurns.nonEmpty) {
       ready.addOne(nextTurns.dequeue)
     }
@@ -147,7 +145,7 @@ class TurnScheduler {
    *
    * @return An Option containing the next character if available, otherwise None.
    */
-  def nextCharacter : Player = {
+  def nextCharacter : Character = {
     if(nextTurns.nonEmpty){
       nextTurns.front
     }
