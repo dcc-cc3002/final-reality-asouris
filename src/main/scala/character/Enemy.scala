@@ -79,5 +79,14 @@ class Enemy(name: String, maxLife: Int, life: Int, private var attack: Int, defe
   override def attackEnemy(enemy: Enemy): Unit = {
     throw BadBehaviourException("An enemy cannot attack another enemy")
   }
+
+  /**
+   * Gets the action bar for the character, in case of an enemy this is its weight
+   *
+   * @return Action bar of the Enemy
+   */
+  override def getActionBar: Double = {
+    this.getWeight
+  }
   
 }
