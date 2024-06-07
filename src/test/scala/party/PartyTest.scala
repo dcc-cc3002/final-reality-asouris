@@ -1,8 +1,10 @@
 package party
 
 import character.Enemy
-import character.players.{BlackMage, Ninja, Paladin, Warrior}
+import character.players.{BlackMage, Ninja, Paladin, Player, Warrior}
 import exceptions.BadBehaviourException
+
+import scala.collection.mutable.ArrayBuffer
 
 
 class PartyTest extends munit.FunSuite {
@@ -32,6 +34,19 @@ class PartyTest extends munit.FunSuite {
     val expected = "Party(Warrior(Sapo, 10, 10, 5, 2), Ninja(Sepo, 15, 15, 8, 3))"
 
     assert(party0.toString == expected)
+  }
+
+  test("A party can add characters"){
+    val party = new Party()
+
+    val expected0 = ArrayBuffer[Player]()
+    assert(party.getMembers == expected0)
+
+    party.addCharacter(new Warrior("Sapo", 10, 10, 5, 2))
+
+    val expected1 = ArrayBuffer[Player](new Warrior("Sapo", 10, 10, 5, 2))
+    assert(party.getMembers == expected1)
+
   }
 
   test("A Party should not be defeated when at least one member is not defeated") {

@@ -17,6 +17,10 @@ class Party (){
 
   /** Members of the Party */
   private val members: ArrayBuffer[Player] = new ArrayBuffer[Player]()
+  
+  def getMembers : ArrayBuffer[Player] = {
+    this.members  
+  }
 
   /** Adds a character to the party only if there are 2 members or less.
    *
