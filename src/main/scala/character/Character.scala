@@ -83,4 +83,9 @@ trait Character(){
      */
     def attackPlayer(player: Player) : Unit
 
+    /**
+     * Calculates the current ActionBar for the character
+     * @return Action bar of the character
+     */
+    def getActionBar : Double
 }

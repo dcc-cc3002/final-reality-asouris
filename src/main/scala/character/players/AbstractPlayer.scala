@@ -1,7 +1,6 @@
 package character.players
 import weapon.Weapon
-import exceptions.NoneException
-import exceptions.BadBehaviourException
+import exceptions.{BadBehaviourException, NoneException, WeaponException}
 import character.{AbstractCharacter, Character, Enemy}
 
 
@@ -102,7 +101,31 @@ abstract class AbstractPlayer(name: String, maxLife: Int, life: Int, defense: In
             case None => throw NoneException("Cannot get attack from a character with no weapon")
         }
     }
-    
+
+    /**
+     * Calculates the actionBar of the player
+     *
+     * @return The actionBar of the player
+     */
+    override def getActionBar: Double = {
+        equippedWeapon match{
+            case Some(weapon) => this.getWeight + 0.5 * weapon.getWeight
+            case None => throw NoneException("Cannot get ActionBar of player with no weapon")
+        }
+    }
+
+    /**
+     * Attempts to equip a weapon to the player.
+     * By default, this method throws a WeaponException indicating that the player cannot equip the weapon.
+     * Subclasses of Player override this method to implement equipping a valid weapon.
+     *
+     * @param weapon The weapon to be equipped.
+     * @throws WeaponException If the player cannot equip the specified weapon.
+     */
+    def equip(weapon: Weapon): Unit = {
+        throw WeaponException(s"$this cannot equip $weapon")
+    }
+
 
 
 
