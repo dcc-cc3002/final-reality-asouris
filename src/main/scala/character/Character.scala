@@ -88,4 +88,21 @@ trait Character(){
      * @return Action bar of the character
      */
     def getActionBar : Double
+
+    /**
+     * returns true weather the character has active effects or not
+     * @return weather the character has active effects or not
+     */
+    def hasEffects : Boolean
+
+    /**
+     * applies the active effects the character may have
+     */
+    def applyEffects() : Unit
+
+    /**
+     * returns true if the character has active a paralyze effect
+     * @return weather the character has active a paralyze effect
+     */
+    def isParalyzed : Boolean
 }
