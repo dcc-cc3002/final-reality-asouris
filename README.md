@@ -46,5 +46,29 @@ The second part begins
 There was only one task on this part, and it was to implement a way for players to equip weapons respecting the restrictions of type of player.
 I actually did this for the last assignment :). The only thing I fixed a little were the exceptions.
 
-This project is licensed under the
+### Assignment 2: Part 4
+In this part of the assignment, we were tasked with handling the possibility of unequipping a weapon and addressing three exceptions. The first task was straightforward, requiring only a few methods to set the player's weapon and the weapon's owner to None.
+
+Next, I replaced the attackCharacter() method with specific methods for each unit being attacked (player or enemy). This allowed me to manage exceptions when attempting to attack a unit from the same team.
+
+Finally, I addressed an exception regarding the party's capacity (limited to three members) by incorporating this check into the addCharacter() method.
+
+### Assignment 2: Final
+In the final part of the second assignment, we began working on spells and their associated exceptions.
+
+First, I fixed some issues with the constructors. I had initially overlooked two fundamental attributes, "maxLife" and "maxMana," so I added them along with the necessary setters and getters.
+
+With these issues resolved, I began working on the spells. Each spell has its own class and overrides the activateSpell() function, which is common to all spells but manages their specific effects.
+
+To facilitate spell casting, I created a function for each spell, such as castPoison() or castHealing(). These functions can be used by mages, enabling me to enforce both the restrictions on dark and light magic and the prohibition against damaging allies or healing enemies.
+
+Lastly, I added a mana cost for each spell so the casting function could verify if the caster had sufficient mana to use the spell.
+
+#### Feedback from assignment 1
+After completing this assignment, we received feedback on our first assignment. I made the following corrections before submitting:
+- Enemies and players should both be able to be on the scheduler, not just players. I added a getActionBar() method to replace the repeated calculations.
+- Traits should not have implementations. I moved these to abstract classes.
+- Finally, I added tests for the addCharacters() method in the party class, which I had previously overlooked.
+
+- This project is licensed under the
 [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
