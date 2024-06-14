@@ -1,5 +1,7 @@
 package character
 import character.players.Warrior
+import exceptions.NoneException
+import weapon.Sword
 
 class CharacterTest extends munit.FunSuite{
 
@@ -60,6 +62,23 @@ class CharacterTest extends munit.FunSuite{
     assert(character1.getLife == 15)
     character1.receiveAttack(30)
     assert(character1.getLife == 0)
+  }
+  test("getActionBar testing"){
+    val player = new Warrior("warrior", 15, 15, 10, 20)
+    val enemy = new Enemy("enemy", 1, 1, 10, 10, 10)
+
+    val expected0 = 10
+    assert(enemy.getActionBar == expected0)
+
+    intercept[NoneException]{
+      var exception = player.getActionBar
+    }
+
+    player.equip(new Sword("sword", 1, 2))
+    val expected1 = 21
+
+    assert(player.getActionBar == expected1)
+
   }
 
 }
