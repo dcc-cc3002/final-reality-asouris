@@ -77,6 +77,9 @@ To get a better idea of what to do, we were to make a state diagram of the diffe
 Later I realized my mistake and fixed it but had to rethink the code.
 This is the final state diagram:
 
+### Assignment 3: Part 6
+I only added a array to keep all spells actives and then it corresponds to the controller to execute them before each turn.
+
 
 This project is licensed under the
 [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
