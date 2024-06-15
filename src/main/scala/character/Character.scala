@@ -2,6 +2,8 @@ package character
 
 import character.players.Player
 
+import scala.collection.mutable.ArrayBuffer
+
 /** Represents a character in the game.
  *
  * A character can be a playable character controlled by the player, or an enemy controlled by the computer.
@@ -105,4 +107,16 @@ trait Character(){
      * @return weather the character has active a paralyze effect
      */
     def isParalyzed : Boolean
+
+    /**
+     * sets characters team in case of battle
+     * @param team Array with characters
+     */
+    def setTeam(team : ArrayBuffer[Character]) : Unit
+
+    /**
+     * gets the array with all ally characters
+     * @return an array with allies
+     */
+    def getTeam : ArrayBuffer[Character]
 }

@@ -1,4 +1,10 @@
 package character
+
+import exceptions.NoneException
+
+import scala.collection.mutable.ArrayBuffer
+import scala.util.control.Breaks.{break, breakable}
+
 /**
  * An abstract class representing a character in the game.
  *
@@ -6,7 +12,6 @@ package character
  * @param life    The amount of life points the character possesses.
  * @param defense The defense value of the character.
  * @param weight  The weight of the character.
- *                
  * @author asouris
  */
 abstract class AbstractCharacter(private val name: String, private val maxLife: Int, private var life: Int, private var defense: Int, private var weight: Int) extends Character {
@@ -15,6 +20,32 @@ abstract class AbstractCharacter(private val name: String, private val maxLife: 
   require(defense >= 0)
   require(weight >= 1)
   require(maxLife >= 1)
+
+  private var _team : Option[ArrayBuffer[Character]] = None
+
+  /**
+   * sets characters team in case of battle
+   *
+   * @param team Array with characters
+   */
+  override def setTeam(team: ArrayBuffer[Character]): Unit = {
+    _team = Some(team)
+  }
+
+  /**
+   * gets the array with all ally characters
+   *
+   * @return an array with allies
+   */
+  def getTeam: ArrayBuffer[Character] = {
+    _team match {
+      case Some(value) => value
+      case None => throw NoneException("No team to return ")
+    }
+  }
+  
+  
+
   /**
    * Retrieves the name of the character.
    *
