@@ -70,5 +70,13 @@ After completing this assignment, we received feedback on our first assignment. 
 - Traits should not have implementations. I moved these to abstract classes.
 - Finally, I added tests for the addCharacters() method in the party class, which I had previously overlooked.
 
-- This project is licensed under the
+## Assignment 3
+### Assignment 3: Part 5
+We started with the game controller, this is the entity that manages the flow of a battle.
+To get a better idea of what to do, we were to make a state diagram of the different states of a battle. I did my diagram but wrong :(, I didnt account for the enemies turns in it, so I started to code the class only for players.
+Later I realized my mistake and fixed it but had to rethink the code.
+This is the final state diagram:
+
+
+This project is licensed under the
 [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
