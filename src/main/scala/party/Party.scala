@@ -3,6 +3,7 @@ import scala.util.control.Breaks.*
 import scala.collection.mutable.ArrayBuffer
 import character.players.Player
 import exceptions.BadBehaviourException
+import character.Character
 
 /** Represents a party of playable characters.
  *
@@ -16,9 +17,9 @@ import exceptions.BadBehaviourException
 class Party (){
 
   /** Members of the Party */
-  private val members: ArrayBuffer[Player] = new ArrayBuffer[Player]()
+  private val members: ArrayBuffer[Character] = new ArrayBuffer[Character]()
   
-  def getMembers : ArrayBuffer[Player] = {
+  def getMembers : ArrayBuffer[Character] = {
     this.members  
   }
 
@@ -27,7 +28,7 @@ class Party (){
    * @param newMember The character to be added to the party.
    * @throws BadBehaviourException If trying to add a fourth member
    */
-  def addCharacter(newMember: Player): Unit = {
+  def addCharacter(newMember: Character): Unit = {
     if(members.length >= 3){
       throw BadBehaviourException("A party cannot have more than 3 members")
     }
@@ -53,7 +54,7 @@ class Party (){
         }
       }
     }
-    return result
+    result
   }
 
   /** Compares this party with another party for equality.
