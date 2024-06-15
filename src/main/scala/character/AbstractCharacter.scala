@@ -1,6 +1,7 @@
 package character
 
 import exceptions.NoneException
+import spells.traits.Spell
 
 import scala.collection.mutable.ArrayBuffer
 import scala.util.control.Breaks.{break, breakable}
@@ -22,6 +23,8 @@ abstract class AbstractCharacter(private val name: String, private val maxLife: 
   require(maxLife >= 1)
 
   private var _team : Option[ArrayBuffer[Character]] = None
+  
+  var spells : ArrayBuffer[Spell] = new ArrayBuffer[Spell]()
 
   /**
    * sets characters team in case of battle
