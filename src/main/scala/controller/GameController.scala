@@ -7,7 +7,7 @@ import turnScheduler.TurnScheduler
 
 import scala.collection.mutable.ArrayBuffer
 
-class GameController(private val _party : Party, private val _enemies: ArrayBuffer[Enemy])  {
+class GameController(private val _party : Party, private val _enemies: ArrayBuffer[Character])  {
 
   private var _state: GameState = new InitialState
   private val _scheduler : TurnScheduler = new TurnScheduler
@@ -26,9 +26,11 @@ class GameController(private val _party : Party, private val _enemies: ArrayBuff
   
   private def initializeScheduler() : Unit = {
     for(member <- _party.getMembers) {
+      member.setTeam(_party.getMembers)
       _scheduler.addCharacter(member)
     }
     for(enemy <- _enemies) {
+      enemy.setTeam(_enemies)
       _scheduler.addCharacter(enemy)
     }
   }
@@ -89,7 +91,7 @@ class GameController(private val _party : Party, private val _enemies: ArrayBuff
   }
 
   def enemiesDefeated : Boolean = {
-    ???
+    _enemies.forall(_.isDefeated)
   }
 
   /**
@@ -103,6 +105,10 @@ class GameController(private val _party : Party, private val _enemies: ArrayBuff
     else{
       this.setState(new BeginningTurn)
     }
+  }
+  
+  def allAlliesDead(character : Character): Unit = {
+    character.getTeam.forall(_.isDefeated)
   }
 
 

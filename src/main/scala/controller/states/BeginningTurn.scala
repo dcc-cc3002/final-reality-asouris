@@ -9,7 +9,8 @@ class BeginningTurn extends GameState{
     if(character.hasEffects){
       character.applyEffects()
 
-      if(character.isDefeated && !controller.partyDefeated){
+
+      if(character.isDefeated && !character.){
         controller.handlingNewTurn()
       }
       else if(!character.isParalyzed){
@@ -17,8 +18,11 @@ class BeginningTurn extends GameState{
         controller.setState(new ChoosingWeapon())
       }
     }
-    controller.currentTurn = Some(character)
-    controller.setState(new ChoosingWeapon())
+    else{
+      controller.currentTurn = Some(character)
+      controller.setState(new ChoosingWeapon())
+
+    }
   }
 
 }
