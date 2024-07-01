@@ -4,6 +4,10 @@ import character.Enemy
 import character.players.{AbstractMagicPlayer, Player}
 import spells.traits.LightSpell
 import character.Character
+import controller.GameController
+import effects.PoisonEffect
+
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * Represents a Poison spell, which is a type of light spell.
@@ -32,9 +36,28 @@ class Poison extends LightSpell{
    * @param mage   The magic player casting the spell.
    */
   override def activateSpell(target: Character, mage: AbstractMagicPlayer): Unit = {
-    //Poison add later
+    target.addEffect(new PoisonEffect(mage.getAttack))
     mage.setMana(-getCost)
   }
 
+  /**
+   * Returns targets for a spell
+   *
+   * @param controller controller where the arrays of enemies and players are
+   * @param character  character casting spell
+   * @return in this case enemies
+   */
+  override def getTargets(controller: GameController, character: Character): ArrayBuffer[Character] = {
+    controller.getEnemies
+  }
 
+  /**
+   * gets mage instance and casts spell
+   *
+   * @param mage   caster
+   * @param target target
+   */
+  def castByOn(mage: Character, target: Character): Unit = {
+    mage.getMage.castPoison(target)
+  }
 }

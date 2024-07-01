@@ -1,8 +1,11 @@
 package spells.traits
 
 import character.players.{AbstractMagicPlayer, Player}
-import character.Character
+import character.{Character, Enemy}
+import controller.GameController
 import exceptions.SpellException
+
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * Represents a spell that can be cast by a magic player.
@@ -26,4 +29,14 @@ trait Spell {
    * @param mage   The magic player casting the spell.
    */
   def activateSpell(target: Character, mage: AbstractMagicPlayer): Unit
+  
+  def getTargets(controller : GameController, character: Character) : ArrayBuffer[Character]
+
+  /**
+   * sends casting on to mages function
+   * @param mage caster
+   * @param target target
+   */
+  def castByOn(mage: Character, target: Character) : Unit
+
 }

@@ -2,8 +2,11 @@ package spells
 
 import character.players.AbstractMagicPlayer
 import spells.traits.DarkSpell
-import character.Character
+import character.{Character, Enemy}
+import controller.GameController
+import effects.BurntEffect
 
+import scala.collection.mutable.ArrayBuffer
 import scala.util.Random
 
 /**
@@ -42,9 +45,29 @@ class Fire extends DarkSpell{
     val res = rand.nextInt(10)
     
     if(res == 0 || res == 1){
-      //add burnt
+      target.addEffect(new BurntEffect(damage))
     }
 
     mage.setMana( - getCost )
   }
+
+  /**
+   * Returns targets for a spell
+   * @param controller controller where the arrays of enemies and players are
+   * @param character character casting spell
+   * @return in this case enemies
+   */
+  override def getTargets(controller: GameController, character: Character): ArrayBuffer[Character] = {
+    controller.getEnemies
+  }
+
+  /**
+   * gets mage instance and casts spell
+   * @param mage caster
+   * @param target target
+   */
+  def castByOn(mage: Character, target: Character) : Unit = {
+    mage.getMage.castFire(target)
+  }
+  
 }

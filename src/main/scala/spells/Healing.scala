@@ -3,6 +3,9 @@ package spells
 import character.players.{AbstractMagicPlayer, Player}
 import spells.traits.LightSpell
 import character.Character
+import controller.GameController
+
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * Represents a Healing spell, which is a type of light spell.
@@ -39,4 +42,26 @@ class Healing extends LightSpell{
     mage.setMana(-getCost)
   }
 
+  /**
+   * Returns targets for a spell
+   *
+   * @param controller controller where the arrays of enemies and players are
+   * @param character character casting spell
+   * @return in this case players except from character
+   */
+  override def getTargets(controller: GameController, character: Character): ArrayBuffer[Character] = {
+    var array = controller.getPlayers
+    array -= character
+    array
+  }
+
+  /**
+   * gets mage instance and casts spell
+   *
+   * @param mage   caster
+   * @param target target
+   */
+  def castByOn(mage: Character, target: Character): Unit = {
+    mage.getMage.castHealing(target)
+  }
 }

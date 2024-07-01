@@ -2,8 +2,11 @@ package spells
 
 import character.players.AbstractMagicPlayer
 import spells.traits.DarkSpell
+import character.{Character, Enemy}
+import controller.GameController
 import character.Character
 
+import scala.collection.mutable.ArrayBuffer
 import scala.util.Random
 
 /**
@@ -44,5 +47,26 @@ class Thunder extends DarkSpell {
     }
 
     mage.setMana(-getCost)
+  }
+
+  /**
+   * Returns targets for a spell
+   *
+   * @param controller controller where the arrays of enemies and players are
+   * @param character  character casting spell
+   * @return in this case enemies
+   */
+  override def getTargets(controller: GameController, character: Character): ArrayBuffer[Character] = {
+    controller.getEnemies
+  }
+  
+  /**
+   * gets mage instance and casts spell
+   *
+   * @param mage   caster
+   * @param target target
+   */
+  def castByOn(mage: Character, target: Character): Unit = {
+    mage.getMage.castThunder(target)
   }
 }
