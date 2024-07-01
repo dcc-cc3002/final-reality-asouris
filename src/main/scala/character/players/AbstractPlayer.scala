@@ -2,6 +2,12 @@ package character.players
 import weapon.Weapon
 import exceptions.{BadBehaviourException, NoneException, WeaponException}
 import character.{AbstractCharacter, Character, Enemy}
+import controller.GameController
+import controller.states.{AttackState, CastState, GameState}
+import spells.traits.Spell
+
+import scala.collection.mutable.ArrayBuffer
+import scala.io.StdIn
 
 
 /**
@@ -124,6 +130,47 @@ abstract class AbstractPlayer(name: String, maxLife: Int, life: Int, defense: In
      */
     def equip(weapon: Weapon): Unit = {
         throw WeaponException(s"$this cannot equip $weapon")
+    }
+
+    /**
+     * returns an array with available actions for the player
+     *
+     * @return array with options
+     */
+    override def getActions: Array[GameState] = {
+        Array(new AttackState)
+    }
+
+    /**
+     * if character is a mage, returns an array with avaible spells
+     * return empty array otherwise
+     *
+     * @param character
+     * @return array with spells
+     */
+    override def getSpells(character: Character): Array[Spell] = {
+        Array()
+    }
+
+    /**
+     * helps with asking for a target to attack
+     * @param controller holds information about possible targets
+     *  @return a characters which is the target
+     */
+    override def chooseAndAttackTarget(controller: GameController): Unit = {
+        val targets = controller.getEnemies
+
+        print("You can choose one of the following targets:")
+        var index = 1
+        targets.foreach(target => {
+            if(!target.isDefeated) {
+                print(target.toString + s" ($index)" + "\n")
+            }
+            index+=1
+        })
+
+        var selected = StdIn.readInt()
+        targets(selected-1).receiveAttack(getWeapon.getAttack)
     }
 
 

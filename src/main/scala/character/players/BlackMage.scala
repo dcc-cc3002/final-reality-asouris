@@ -159,4 +159,15 @@ class BlackMage(
     }
   }
 
+  /**
+   * if character is a mage, returns an array with avaible spells
+   * return empty array otherwise
+   *
+   * @param character
+   * @return array with spells
+   */
+  override def getSpells(character: Character): Array[Spell] = {
+    Array(Thunder(), Fire())
+  }
+
 }

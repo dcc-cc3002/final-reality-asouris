@@ -3,6 +3,7 @@ package character.players
 import spells.traits.Spell
 import exceptions.SpellException
 import character.{Character, Enemy}
+import controller.states.{AttackState, CastState, GameState}
 
 /**
  * An abstract class representing a playable character with magical abilities.
@@ -63,7 +64,7 @@ extends AbstractPlayer(name, maxLife, life, defense, weight){
    * @throws SpellException as Healing cannot be cast on an enemy.
    */
   def castHealing(target: Character): Unit = {
-    throw SpellException("Cannot cast Fire on enemy")
+    throw SpellException("Cannot cast healing on enemy")
   }
 
   /**
@@ -73,7 +74,7 @@ extends AbstractPlayer(name, maxLife, life, defense, weight){
    * @throws SpellException as Paralysis cannot be cast on an ally.
    */
   def castParalysis(target: Character): Unit = {
-    throw SpellException("Cannot cast Fire on ally")
+    throw SpellException("Cannot cast paralysis on ally")
   }
 
   /**
@@ -83,7 +84,7 @@ extends AbstractPlayer(name, maxLife, life, defense, weight){
    * @throws SpellException as Poison cannot be cast on an ally.
    */
   def castPoison(target: Character): Unit = {
-    throw SpellException("Cannot cast Fire on ally")
+    throw SpellException("Cannot cast poison on ally")
   }
 
   /**
@@ -93,8 +94,24 @@ extends AbstractPlayer(name, maxLife, life, defense, weight){
    * @throws SpellException as Thunder cannot be cast on an ally.
    */
   def castThunder(target: Character): Unit = {
-    throw SpellException("Cannot cast Fire on ally")
+    throw SpellException("Cannot cast thunder on ally")
   }
+
+  /**
+   * returns an array with available actions for the player
+   *
+   * @return array with options
+   */
+  override def getActions: Array[GameState] = {
+    Array(new AttackState, new CastState)
+  }
+
+  /**
+   * gets returns the instance as a magic player for casting spells.
+   *
+   * @return instance as magic player
+   */
+  override def getMage: AbstractMagicPlayer = this
   
   
 

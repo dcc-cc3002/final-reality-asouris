@@ -1,7 +1,13 @@
 package character
 
-import character.players.Player
-import exceptions.BadBehaviourException
+import character.players.{AbstractMagicPlayer, Player}
+import controller.GameController
+import controller.states.GameState
+import exceptions.{BadBehaviourException, WeaponException}
+import spells.Fire
+import spells.traits.Spell
+import weapon.Weapon
+import scala.util.Random
 
 /** Represent an enemy.
   *
@@ -88,5 +94,49 @@ class Enemy(name: String, maxLife: Int, life: Int, private var attack: Int, defe
   override def getActionBar: Double = {
     this.getWeight
   }
+
+  /**
+   * This method throws a WeaponException indicating since an enemy cannot have a weapon.
+   * 
+   * @param weapon The weapon to be equipped.
+   * @throws WeaponException Since an enemy cannot have a weapon.
+   */
+  def equip(weapon: Weapon): Unit = {
+    throw WeaponException(s"$this cannot equip a weapon")
+  }
+
+  /**
+   * returns an array with available actions for the player
+   *
+   * @return array with options
+   */
+  def getActions: Array[GameState] = Array()
+
+  /**
+   * if character is a mage, returns an array with avaible spells
+   * return empty array otherwise
+   *
+   * @param character
+   * @return array with spells
+   */
+  override def getSpells(character: Character): Array[Spell] = {
+    Array()
+  }
+
+  override def chooseAndAttackTarget(controller: GameController): Unit = {
+    val targets = controller.getPlayers
+
+    val rand = new Random()
+    var res = rand.nextInt(targets.length)
+    var target = targets(res)
+    //while i keep on getting a defeated target
+    while(target.isDefeated){
+      res = rand.nextInt(targets.length)
+      target = targets(res)
+    }
+    
+    targets(res).receiveAttack(this.attack)
+  }
+
   
 }

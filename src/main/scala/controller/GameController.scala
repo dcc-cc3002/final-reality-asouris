@@ -1,13 +1,17 @@
 package controller
 import character.Character
 import character.Enemy
+import character.players.WhiteMage
 import controller.states.{BeginningTurn, GameState, InitialState, SettingTurns}
 import party.Party
+import spells.traits.Spell
 import turnScheduler.TurnScheduler
+import weapon.Weapon
 
+import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 
-class GameController(private val _party : Party, private val _enemies: ArrayBuffer[Character])  {
+class GameController(private val _party : Party, private val _enemies: ArrayBuffer[Character], private val _weapons : mutable.Map[Character, ArrayBuffer[Weapon]]) {
 
   private var _state: GameState = new InitialState
   private val _scheduler : TurnScheduler = new TurnScheduler
@@ -34,28 +38,27 @@ class GameController(private val _party : Party, private val _enemies: ArrayBuff
       _scheduler.addCharacter(enemy)
     }
   }
+  
+  def getEnemies : ArrayBuffer[Character] = _enemies
+  def getPlayers : ArrayBuffer[Character] = _party.getMembers
+  
+  def getWeapons : mutable.Map[Character, ArrayBuffer[Weapon]] = _weapons
+  
 
   /**
    * Checkea si la partida terminó
    * @return
    */
-  private def checkFinished() : Boolean = {
-    if(win()){
-      true
-    }
-    else if (lose()){
-      true
-    }
-
-    false
+  def checkFinished() : Boolean = {
+    allAlliesDead(_party.getMembers(0)) || allAlliesDead(_enemies(0))
   }
 
   /**
    * if all enemy are defeated return true
    */
-  private def win() : Boolean = {}
+  //private def win() : Boolean = {}
   /** if all allies are defeated returns true */
-  private def lose() : Boolean = {}
+  //private def lose() : Boolean = {}
 
   def update() : Unit = {
     _state.update(this)
@@ -70,7 +73,9 @@ class GameController(private val _party : Party, private val _enemies: ArrayBuff
    * returns true if there is at least one character ready to play
    * @return
    */
-  def areTurns() : Boolean = {}
+  def areTurns() : Boolean = {
+    _scheduler.atLeastOneTurn
+  }
 
   /**
    * updates the variable _state
@@ -107,8 +112,34 @@ class GameController(private val _party : Party, private val _enemies: ArrayBuff
     }
   }
   
-  def allAlliesDead(character : Character): Unit = {
+  def allAlliesDead(character : Character): Boolean = {
     character.getTeam.forall(_.isDefeated)
+  }
+  
+  def resetActionBar(character: Character): Unit = {
+    _scheduler.resetCharacterActionBar(character)
+  }
+  
+  def getSpells(mage : Character): Array[Spell] = {
+    mage.getSpells(mage)
+  }
+  
+  
+  def getSpellTargets(spell : Spell, character : Character) : ArrayBuffer[Character] = {
+    spell.getTargets(this, character)  
+  }
+
+  def displayEndMessage() : Unit = {
+    if(win()){
+      print("The party has won! Congratulations!")
+    }
+    else{
+      print("You have lost.")
+    }
+  }
+
+  def win() : Boolean = {
+    getPlayers.forall(_.isDefeated)
   }
 
 

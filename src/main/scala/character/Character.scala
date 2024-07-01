@@ -1,6 +1,11 @@
 package character
 
-import character.players.Player
+import character.players.{AbstractMagicPlayer, Player}
+import controller.GameController
+import controller.states.GameState
+import effects.Effect
+import spells.traits.Spell
+import weapon.Weapon
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -11,6 +16,8 @@ import scala.collection.mutable.ArrayBuffer
  * @author asouris
  */
 trait Character(){
+    
+    
 
     /**
      * Retrieves the name of the character.
@@ -119,4 +126,55 @@ trait Character(){
      * @return an array with allies
      */
     def getTeam : ArrayBuffer[Character]
+
+    /**
+     * Attempts to equip a weapon to the player.
+     * By default, this method throws a WeaponException indicating that the character cannot equip the weapon.
+     * Subclasses of class Player override this method to implement equipping a valid weapon.
+     *
+     * @param weapon The weapon to be equipped.
+     * @throws WeaponException If the character cannot equip the specified weapon(or a weapon at all.
+     */
+    def equip(weapon: Weapon): Unit
+
+    /**
+     * returns an array with available actions for the player
+     *
+     * @return array with options
+     */
+    def getActions: Array[GameState]
+
+    /**
+     * if character is a mage, returns an array with avaible spells
+     * return empty array otherwise
+     * @param character 
+     * @return array with spells
+     */
+    def getSpells(character: Character) : Array[Spell]
+
+    /**
+     * gets returns the instance as a magic player for casting spells.
+     * @return instance as magic player
+     */
+    def getMage : AbstractMagicPlayer
+
+    /**
+     * sets the value of attribute paralyzed
+     * @param value
+     */
+    def setParalyzed(value:Boolean) : Unit
+    
+    /**
+     * Adds a effect to the list of active effects
+     * @param effect the effect to be added
+     */
+    def addEffect(effect : Effect): Unit
+
+    /**
+     * Chooses a target and attacks it
+     * @param controller holds information about possible targets
+     */
+    def chooseAndAttackTarget(controller : GameController) : Unit
+
+    
 }

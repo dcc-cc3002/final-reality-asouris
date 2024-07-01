@@ -1,6 +1,8 @@
 package character
 
-import exceptions.NoneException
+import character.players.AbstractMagicPlayer
+import effects.Effect
+import exceptions.{BadBehaviourException, NoneException}
 import spells.traits.Spell
 
 import scala.collection.mutable.ArrayBuffer
@@ -21,10 +23,12 @@ abstract class AbstractCharacter(private val name: String, private val maxLife: 
   require(defense >= 0)
   require(weight >= 1)
   require(maxLife >= 1)
+  
+  private var _paralyzed = false
 
   private var _team : Option[ArrayBuffer[Character]] = None
   
-  var spells : ArrayBuffer[Spell] = new ArrayBuffer[Spell]()
+  var effects : ArrayBuffer[Effect] = new ArrayBuffer[Effect]()
 
   /**
    * sets characters team in case of battle
@@ -125,6 +129,55 @@ abstract class AbstractCharacter(private val name: String, private val maxLife: 
       }
     }
   }
-  
+
+  /**
+   * gets returns the instance as a magic player for casting spells.
+   *
+   * @return instance as magic player
+   */
+  override def getMage: AbstractMagicPlayer = throw BadBehaviourException(s"$this cannot cast spells")
+
+  /**
+   *
+   *  @return weather the character has active effects or not
+   */
+  override def hasEffects: Boolean = effects.nonEmpty
+
+  override def applyEffects(): Unit = {
+    val array = ArrayBuffer[Int]()
+    var i = 0
+    effects.foreach(effect => {
+      if(!effect.apply(this)){
+        array += i
+      }
+      i+=1
+    })
+    
+    //removing expired effects
+    array.foreach(index => effects.remove(index))
+    
+    
+  }
+
+  /**
+   * returns true if the character has active a paralyze effect
+   *
+   * @return weather the character has active a paralyze effect
+   */
+  override def isParalyzed: Boolean = _paralyzed
+
+  /**
+   * sets the value of attribute paralyzed
+   *
+   * @param value
+   */
+  override def setParalyzed(value: Boolean): Unit = {
+    _paralyzed = value
+  }
+
+  override def addEffect(effect: Effect): Unit = {
+    effects += effect
+  }
+
   
 }

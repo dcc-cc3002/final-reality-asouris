@@ -19,9 +19,13 @@ import scala.collection.mutable
 class TurnScheduler {
 
   /** A map of players and their current value for their actionBar*/
-  private val characters: mutable.Map[Character, Double] = mutable.Map[Character, Double]()
-  /** A map of players and their respective turn orders. */
+  private var characters: mutable.Map[Character, Double] = mutable.Map[Character, Double]()
+  /** A queue of players and their respective turn orders. */
   private val nextTurns = new mutable.Queue[Character]
+  
+  def atLeastOneTurn : Boolean = {
+    nextTurns.nonEmpty
+  }
 
   /**
    * Gets the map containing players and their action bars
@@ -147,11 +151,19 @@ class TurnScheduler {
    */
   def nextCharacter : Character = {
     if(nextTurns.nonEmpty){
-      nextTurns.front
+      nextTurns.dequeue
     }
     else{
       throw NoneException("Queue is Empty")
     }
+  }
+
+  /**
+   * turns characters action bar to 0
+   * @param character to be affected 
+   */
+  def resetCharacterActionBar(character: Character) : Unit = {
+    characters(character) = 0
   }
 
 }

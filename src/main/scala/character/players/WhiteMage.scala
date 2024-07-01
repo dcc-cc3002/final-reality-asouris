@@ -1,5 +1,5 @@
 package character.players
-import spells.traits.{DarkSpell, LightSpell}
+import spells.traits.{DarkSpell, LightSpell, Spell}
 import character.players.Player
 import weapon.traits.EquippableByWhiteMage
 import character.{Character, Enemy}
@@ -170,5 +170,17 @@ class WhiteMage(
   def castThunder(target: Enemy): Unit = {
     throw SpellException("WhiteMage cannot use dark magic")
   }
+
+  /**
+   * if character is a mage, returns an array with avaible spells
+   * return empty array otherwise
+   *
+   * @param character
+   * @return array with spells
+   */
+  override def getSpells(character: Character): Array[Spell] = {
+    Array(Healing(), Paralysis(), Poison())
+  }
+  
 
 }
