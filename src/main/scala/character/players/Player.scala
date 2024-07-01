@@ -3,6 +3,8 @@ import character.Character
 import exceptions.WeaponException
 import weapon.Weapon
 
+import scala.collection.mutable.ArrayBuffer
+
 /**
  * A trait representing a playable character.
  * Players can have weapons and can attempt to equip weapons.
@@ -24,16 +26,6 @@ trait Player extends Character{
   def hasWeapon : Boolean
 
   /**
-   * Attempts to equip a weapon to the player.
-   * By default, this method throws a WeaponException indicating that the player cannot equip the weapon.
-   * Subclasses of Player override this method to implement equipping a valid weapon.
-   *
-   * @param weapon The weapon to be equipped.
-   * @throws WeaponException If the player cannot equip the specified weapon.
-   */
-  def equip(weapon: Weapon): Unit
-
-  /**
    * Unequipps a weapon by removing the player from being the owner of the weapon, then removing the weapon
    * from the equippedWeapon attribute.
    */
@@ -44,5 +36,6 @@ trait Player extends Character{
    * @return Attack damage of a character
    */
   def getAttack: Int
+  
 
 }
