@@ -8,7 +8,7 @@ import character.players.Player
  *
  * @author asouris
  */
-trait Weapon{
+trait Weapon {
   /**
    * Retrieves the name of the weapon.
    *
@@ -64,4 +64,40 @@ trait Weapon{
    * Sets owner to none
    */
   def removeOwner() : Unit
+
+  /**
+   * returns true if is equippable by a ninja
+   * @return
+   */
+  def isEquippableByNinja : Boolean
+
+  /**
+   * returns true if is equippable by a paladin
+   *
+   * @return
+   */
+  def isEquippableByPaladin: Boolean
+
+  /**
+   * returns true if is equippable by a warrior
+   *
+   * @return
+   */
+  def isEquippableByWarrior: Boolean
+
+  /**
+   * returns true if is equippable by a whiteMage
+   *
+   * @return
+   */
+  def isEquippableByWhiteMage: Boolean
+
+  /**
+   * returns true if is equippable by a blackMage
+   *
+   * @return
+   */
+  def isEquippableByBlackMage: Boolean
+  
+  
 }
