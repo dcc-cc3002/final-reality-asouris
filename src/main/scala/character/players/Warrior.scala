@@ -1,6 +1,7 @@
 package character.players
 
-import weapon.traits.EquippableByWarrior
+import exceptions.WeaponException
+import weapon.Weapon
 
 /** Represents a Warrior.
   *
@@ -49,7 +50,7 @@ class Warrior(
    * @return A string representation containing the warrior's properties.
    */
   override def toString: String = {
-    s"Warrior($name, $maxLife, $life, $defense, $weight)"
+    s"Warrior($name, $maxLife, $getLife, $defense, $weight)"
   }
 
   /**

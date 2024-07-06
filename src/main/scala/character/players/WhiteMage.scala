@@ -60,7 +60,7 @@ class WhiteMage(
    * @return A string representation containing the white mage's properties.
    */
   override def toString: String = {
-    s"WhiteMage($name, $maxLife, $life, $defense, $weight, $mana, $maxMana)"
+    s"WhiteMage($name, $maxLife, $getLife, $defense, $weight, $getMana, $maxMana)"
   }
 
   /**

@@ -1,5 +1,6 @@
 package character.players
-import weapon.traits.EquippableByNinja
+import exceptions.WeaponException
+import weapon.Weapon
 
 /** Represents a Ninja.
   *
@@ -28,6 +29,7 @@ class Ninja(
     defense: Int,
     weight: Int
 ) extends AbstractPlayer(name, maxLife, life, defense, weight){
+  
 
   /**
    * Checks whether this ninja is equal to another object.
@@ -49,7 +51,7 @@ class Ninja(
    * @return A string representation containing the ninja's properties.
    */
   override def toString: String = {
-    s"Ninja($name, $maxLife, $life, $defense, $weight)"
+    s"Ninja($name, $maxLife, $getLife, $defense, $weight)"
   }
 
   /**

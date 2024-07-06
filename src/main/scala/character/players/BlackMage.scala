@@ -2,7 +2,6 @@ package character.players
 
 import spells.traits.{DarkSpell, Spell}
 import character.players.Player
-import weapon.traits.EquippableByBlackMage
 import weapon.Weapon
 import exceptions.{SpellException, WeaponException}
 import character.{Character, Enemy}
@@ -62,7 +61,7 @@ class BlackMage(
    * @return A string representation containing the black mage's properties.
    */
   override def toString: String = {
-    s"BlackMage($name, $maxLife, $life, $defense, $weight, $mana, $maxMana)"
+    s"BlackMage($name, $maxLife, $getLife, $defense, $weight, $getMana, $maxMana)"
   }
 
   /**

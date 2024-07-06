@@ -1,6 +1,7 @@
 package character.players
 
-import weapon.traits.EquippableByPaladin
+import exceptions.WeaponException
+import weapon.Weapon
 
 /** Represents a Paladin.
   *
@@ -50,7 +51,7 @@ class Paladin(name: String,
    * @return A string representation containing the paladin's properties.
    */
   override def toString: String = {
-    s"Paladin($name, $maxLife, $life, $defense, $weight)"
+    s"Paladin($name, $maxLife, $getLife, $defense, $weight)"
   }
 
   /**
