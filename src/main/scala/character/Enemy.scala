@@ -72,7 +72,7 @@ class Enemy(name: String, maxLife: Int, life: Int, private var attack: Int, defe
    * @return A string representation containing the enemy's properties.
    */
   override def toString: String = {
-    s"Enemy($name, $maxLife, $life, $attack, $defense, $weight)"
+    s"Enemy($name, $maxLife, $getLife, $attack, $defense, $weight)"
   }
 
   /**
