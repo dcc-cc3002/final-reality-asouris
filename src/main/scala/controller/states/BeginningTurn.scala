@@ -8,9 +8,23 @@ class BeginningTurn extends GameState{
     val character = controller.nextTurn()
     //reset its action bar back to 0
     controller.resetActionBar(character)
+
+    print(s"Is $character s turn\n")
+
+    if(character.isParalyzed){
+      character.applyEffects()
+      controller.setState(new EndingTurn)
+      return
+    }
+    
+    //if character is dead
+    if(character.isDefeated){
+      controller.setState(new EndingTurn)
+    }
     
     //checks for effects
-    if(character.hasEffects){
+    else if(character.hasEffects){
+      
       character.applyEffects()
 
       //if character died or is paralyzed
@@ -22,7 +36,7 @@ class BeginningTurn extends GameState{
         controller.currentTurn = Some(character)
         controller.setState(new ChoosingWeapon())
       }
-    }//if no effects we go forward
+    }//if no effects and not dead we go forward
     else{
       controller.currentTurn = Some(character)
       controller.setState(new ChoosingWeapon())
