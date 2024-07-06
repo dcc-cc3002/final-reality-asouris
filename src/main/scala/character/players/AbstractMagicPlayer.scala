@@ -53,9 +53,7 @@ extends AbstractPlayer(name, maxLife, life, defense, weight){
    * @param target The character on whom the spell is to be cast.
    * @throws SpellException as Fire cannot be cast on an ally.
    */
-  def castFire(target: Character): Unit = {
-    throw SpellException("Cannot cast Fire on ally")
-  }
+  def castFire(target: Character): Unit 
 
   /**
    * Attempts to cast a Healing spell on the target.
@@ -63,9 +61,7 @@ extends AbstractPlayer(name, maxLife, life, defense, weight){
    * @param target The character on whom the spell is to be cast.
    * @throws SpellException as Healing cannot be cast on an enemy.
    */
-  def castHealing(target: Character): Unit = {
-    throw SpellException("Cannot cast healing on enemy")
-  }
+  def castHealing(target: Character): Unit 
 
   /**
    * Attempts to cast a Paralysis spell on the target.
@@ -73,9 +69,7 @@ extends AbstractPlayer(name, maxLife, life, defense, weight){
    * @param target The character on whom the spell is to be cast.
    * @throws SpellException as Paralysis cannot be cast on an ally.
    */
-  def castParalysis(target: Character): Unit = {
-    throw SpellException("Cannot cast paralysis on ally")
-  }
+  def castParalysis(target: Character): Unit 
 
   /**
    * Attempts to cast a Poison spell on the target.
@@ -83,9 +77,7 @@ extends AbstractPlayer(name, maxLife, life, defense, weight){
    * @param target The character on whom the spell is to be cast.
    * @throws SpellException as Poison cannot be cast on an ally.
    */
-  def castPoison(target: Character): Unit = {
-    throw SpellException("Cannot cast poison on ally")
-  }
+  def castPoison(target: Character): Unit
 
   /**
    * Attempts to cast a Thunder spell on the target.
@@ -93,9 +85,7 @@ extends AbstractPlayer(name, maxLife, life, defense, weight){
    * @param target The character on whom the spell is to be cast.
    * @throws SpellException as Thunder cannot be cast on an ally.
    */
-  def castThunder(target: Character): Unit = {
-    throw SpellException("Cannot cast thunder on ally")
-  }
+  def castThunder(target: Character): Unit
 
   /**
    * returns an array with available actions for the player
