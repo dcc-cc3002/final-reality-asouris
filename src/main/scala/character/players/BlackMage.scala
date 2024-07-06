@@ -86,24 +86,29 @@ class BlackMage(
    * @param target The enemy to cast the spell on.
    * @throws SpellException if the spell cannot be cast due to various reasons (e.g., insufficient mana, no weapon equipped).
    */
-  def castFire(target: Enemy): Unit = {
-    if(this.hasWeapon) {
-      if (!target.isDefeated) {
-        val fire = new Fire()
+  override def castFire(target: Character): Unit = {
+    if(target.takesSpellDamage) {
+      if (this.hasWeapon) {
+        if (!target.isDefeated) {
+          val fire = new Fire()
 
-        if (fire.getCost <= this.getMana) {
-          fire.activateSpell(target, this)
+          if (fire.getCost <= this.getMana) {
+            fire.activateSpell(target, this)
+          }
+          else {
+            throw SpellException("Not enough mana for spell")
+          }
         }
         else {
-          throw SpellException("Not enough mana for spell")
+          throw SpellException("Cannot cast spell on dead character")
         }
       }
       else {
-        throw SpellException("Cannot cast spell on dead character")
+        throw SpellException("Cannot cast spells with no weapon")
       }
     }
     else{
-      throw SpellException("Cannot cast spells with no weapon")
+      throw SpellException("Cannot cast fire on ally")
     }
   }
 
@@ -113,7 +118,7 @@ class BlackMage(
    * @param target The player to cast the spell on.
    * @throws SpellException as BlackMage cannot use light magic.
    */
-  def castHealing(target: Player):Unit = {
+  override def castHealing(target: Character):Unit = {
     throw SpellException("BlackMage cannot use light magic")
   }
 
@@ -123,7 +128,7 @@ class BlackMage(
    * @param target The enemy to cast the spell on.
    * @throws SpellException as BlackMage cannot use light magic.
    */
-  def castParalysis(target: Enemy):Unit = {
+  override def castParalysis(target: Character):Unit = {
     throw SpellException("BlackMage cannot use light magic")
   }
 
@@ -133,7 +138,7 @@ class BlackMage(
    * @param target The enemy to cast the spell on.
    * @throws SpellException as BlackMage cannot use light magic.
    */
-  def castPoison(target: Enemy):Unit = {
+  override def castPoison(target: Character):Unit = {
     throw SpellException("BlackMage cannot use light magic")
   }
 
@@ -143,23 +148,28 @@ class BlackMage(
    * @param target The enemy to cast the spell on.
    * @throws SpellException if the spell cannot be cast due to various reasons (e.g., insufficient mana, no weapon equipped).
    */
-  def castThunder(target: Enemy):Unit = {
-    if(this.hasWeapon) {
-      if (!target.isDefeated) {
-        val thunder = new Thunder()
-        if (thunder.getCost <= this.getMana) {
-          thunder.activateSpell(target, this)
+  override def castThunder(target: Character):Unit = {
+    if(target.takesSpellDamage) {
+      if (this.hasWeapon) {
+        if (!target.isDefeated) {
+          val thunder = new Thunder()
+          if (thunder.getCost <= this.getMana) {
+            thunder.activateSpell(target, this)
+          }
+          else {
+            throw SpellException("Not enough mana for spell")
+          }
         }
         else {
-          throw SpellException("Not enough mana for spell")
+          throw SpellException("Cannot cast spell on dead character")
         }
       }
       else {
-        throw SpellException("Cannot cast spell on dead character")
+        throw SpellException("Cannot cast spells with no weapon")
       }
     }
     else{
-      throw SpellException("Cannot cast spells with no weapon")
+      throw SpellException("Cannot cast thunder on ally")
     }
   }
 

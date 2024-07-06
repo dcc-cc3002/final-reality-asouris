@@ -1,10 +1,10 @@
 package character.players
 import spells.traits.{DarkSpell, LightSpell, Spell}
 import character.players.Player
-import weapon.traits.EquippableByWhiteMage
 import character.{Character, Enemy}
-import exceptions.SpellException
+import exceptions.{SpellException, WeaponException}
 import spells.{Healing, Paralysis, Poison}
+import weapon.Weapon
 
 
 /** Represents a WhiteMage.
@@ -84,7 +84,7 @@ class WhiteMage(
    * @param target The enemy to cast the spell on.
    * @throws SpellException as WhiteMage cannot use dark magic.
    */
-  def castFire(target: Enemy): Unit = {
+  override def castFire(target: Character): Unit = {
     throw SpellException("WhiteMage cannot use dark magic")
   }
 
@@ -94,23 +94,28 @@ class WhiteMage(
    * @param target The player to cast the spell on.
    * @throws SpellException if the spell cannot be cast due to various reasons (e.g., insufficient mana, no weapon equipped).
    */
-  def castHealing(target: Player): Unit = {
-    if(this.hasWeapon) {
-      if (!target.isDefeated) {
-        val healing = new Healing()
-        if (healing.getCost <= this.getMana) {
-          healing.activateSpell(target, this)
+  override def castHealing(target: Character): Unit = {
+    if(!target.takesSpellDamage) {
+      if (this.hasWeapon) {
+        if (!target.isDefeated) {
+          val healing = new Healing()
+          if (healing.getCost <= this.getMana) {
+            healing.activateSpell(target, this)
+          }
+          else {
+            throw SpellException("Not enough mana for spell")
+          }
         }
         else {
-          throw SpellException("Not enough mana for spell")
+          throw SpellException("Cannot cast spell on dead character")
         }
       }
       else {
-        throw SpellException("Cannot cast spell on dead character")
+        throw SpellException("Cannot cast spells with no weapon")
       }
     }
     else{
-      throw SpellException("Cannot cast spells with no weapon")
+      throw SpellException("Cannot cast healing on enemy")
     }
   }
 
@@ -120,23 +125,28 @@ class WhiteMage(
    * @param target The enemy to cast the spell on.
    * @throws SpellException if the spell cannot be cast due to various reasons (e.g., insufficient mana, no weapon equipped).
    */
-  def castParalysis(target: Enemy): Unit = {
-    if(this.hasWeapon) {
-      if (!target.isDefeated) {
-        val paralysis = new Paralysis()
-        if (paralysis.getCost <= this.getMana) {
-          paralysis.activateSpell(target, this)
+  override def castParalysis(target: Character): Unit = {
+    if(target.takesSpellDamage) {
+      if (this.hasWeapon) {
+        if (!target.isDefeated) {
+          val paralysis = new Paralysis()
+          if (paralysis.getCost <= this.getMana) {
+            paralysis.activateSpell(target, this)
+          }
+          else {
+            throw SpellException("Not enough mana for spell")
+          }
         }
         else {
-          throw SpellException("Not enough mana for spell")
+          throw SpellException("Cannot cast spell on dead character")
         }
       }
       else {
-        throw SpellException("Cannot cast spell on dead character")
+        throw SpellException("Cannot cast spells with no weapon")
       }
     }
     else{
-      throw SpellException("Cannot cast spells with no weapon")
+      throw SpellException("Cannot cast paralysis on ally")
     }
   }
 
@@ -146,23 +156,28 @@ class WhiteMage(
    * @param target The enemy to cast the spell on.
    * @throws SpellException if the spell cannot be cast due to various reasons (e.g., insufficient mana, no weapon equipped).
    */
-  def castPoison(target: Enemy): Unit = {
-    if(this.hasWeapon) {
-      if (!target.isDefeated) {
-        val poison = new Poison()
-        if (poison.getCost <= this.getMana) {
-          poison.activateSpell(target, this)
+  override def castPoison(target: Character): Unit = {
+    if(target.takesSpellDamage) {
+      if (this.hasWeapon) {
+        if (!target.isDefeated) {
+          val poison = new Poison()
+          if (poison.getCost <= this.getMana) {
+            poison.activateSpell(target, this)
+          }
+          else {
+            throw SpellException("Not enough mana for spell")
+          }
         }
         else {
-          throw SpellException("Not enough mana for spell")
+          throw SpellException("Cannot cast spell on dead character")
         }
       }
       else {
-        throw SpellException("Cannot cast spell on dead character")
+        throw SpellException("Cannot cast spells with no weapon")
       }
     }
     else{
-      throw SpellException("Cannot cast spells with no weapon")
+      throw SpellException("Cannot cast poison on ally")
     }
   }
 
@@ -172,7 +187,7 @@ class WhiteMage(
    * @param target The enemy to cast the spell on.
    * @throws SpellException as WhiteMage cannot use dark magic.
    */
-  def castThunder(target: Enemy): Unit = {
+  override def castThunder(target: Character): Unit = {
     throw SpellException("WhiteMage cannot use dark magic")
   }
 
