@@ -69,8 +69,13 @@ class WhiteMage(
    *
    * @param newWeapon The weapon to be equipped.
    */
-  def equip(newWeapon: EquippableByWhiteMage): Unit = {
-    super.validEquip(newWeapon.toWeapon)
+  override def equip(newWeapon: Weapon): Unit = {
+    if(newWeapon.isEquippableByWhiteMage) {
+      super.validEquip(newWeapon.toWeapon)
+    }
+    else{
+      throw WeaponException(s"$this cannot equip $newWeapon")
+    }
   }
 
   /**

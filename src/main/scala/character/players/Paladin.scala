@@ -59,7 +59,12 @@ class Paladin(name: String,
    *
    * @param newWeapon The weapon to be equipped.
    */
-  def equip(newWeapon: EquippableByPaladin): Unit = {
-    super.validEquip(newWeapon.toWeapon)
+  override def equip(newWeapon: Weapon): Unit = {
+    if(newWeapon.isEquippableByPaladin) {
+      super.validEquip(newWeapon.toWeapon)
+    }
+    else{
+      throw WeaponException(s"$this cannot equip $newWeapon")
+    }
   }
 }
