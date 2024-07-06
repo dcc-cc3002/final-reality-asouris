@@ -36,6 +36,7 @@ class Paralysis extends LightSpell{
    */
   override def activateSpell(target: Character, mage: AbstractMagicPlayer): Unit = {
     target.addEffect(new ParalyzeEffect(-1))
+    target.setParalyzed(true)
     mage.setMana(-getCost)
   }
 
@@ -58,5 +59,9 @@ class Paralysis extends LightSpell{
    */
   def castByOn(mage: Character, target: Character): Unit = {
     mage.getMage.castParalysis(target)
+  }
+
+  override def toString: String = {
+    "Paralysis"
   }
 }

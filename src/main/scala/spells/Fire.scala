@@ -69,5 +69,9 @@ class Fire extends DarkSpell{
   def castByOn(mage: Character, target: Character) : Unit = {
     mage.getMage.castFire(target)
   }
+
+  override def toString: String = {
+    "Fire"
+  }
   
 }

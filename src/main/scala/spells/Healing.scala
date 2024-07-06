@@ -64,4 +64,8 @@ class Healing extends LightSpell{
   def castByOn(mage: Character, target: Character): Unit = {
     mage.getMage.castHealing(target)
   }
+
+  override def toString: String = {
+    "Healing"
+  }
 }

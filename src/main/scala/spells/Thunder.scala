@@ -69,4 +69,8 @@ class Thunder extends DarkSpell {
   def castByOn(mage: Character, target: Character): Unit = {
     mage.getMage.castThunder(target)
   }
+
+  override def toString: String = {
+    "Thunder"
+  }
 }

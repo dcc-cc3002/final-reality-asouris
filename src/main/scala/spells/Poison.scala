@@ -60,4 +60,8 @@ class Poison extends LightSpell{
   def castByOn(mage: Character, target: Character): Unit = {
     mage.getMage.castPoison(target)
   }
+
+  override def toString: String = {
+    "Poison"
+  }
 }
