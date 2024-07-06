@@ -1,6 +1,4 @@
 package weapon
-import weapon.traits.EquippableByBlackMage
-import weapon.traits.EquippableByWhiteMage
 
 /** Represents a Staff, a type of weapon.
  *
@@ -16,7 +14,7 @@ import weapon.traits.EquippableByWhiteMage
  * @author asouris
  */
 class Staff(name: String, attack: Int, weight: Int, magicAttack: Int)
-  extends AbstractMagicWeapon(name, attack, weight, magicAttack) with EquippableByWhiteMage with EquippableByBlackMage {
+  extends AbstractMagicWeapon(name, attack, weight, magicAttack)  {
 
   /**
    * Checks if this Staff is equal to another object.
@@ -42,4 +40,20 @@ class Staff(name: String, attack: Int, weight: Int, magicAttack: Int)
   override def toString: String = {
     s"Staff($name, $attack, $weight, $magicAttack)"
   }
+
+  /**
+   * returns true if is equippable by a blackMage
+   *
+   * @return
+   */
+  override def isEquippableByBlackMage: Boolean = true
+
+  /**
+   * returns true if is equippable by a whiteMage
+   *
+   * @return
+   */
+  override def isEquippableByWhiteMage: Boolean = true
+
+
 }

@@ -1,8 +1,5 @@
 package weapon
 
-import weapon.traits.EquippableByWarrior
-import weapon.traits.EquippableByNinja
-import weapon.traits.EquippableByWhiteMage
 
 
 /** Represents a Bow, a type of weapon.
@@ -17,7 +14,7 @@ import weapon.traits.EquippableByWhiteMage
  * @author asouris
  */
 class Bow(name: String, attack: Int, weight: Int)
-  extends AbstractWeapon(name, attack, weight) with EquippableByWarrior with EquippableByNinja with EquippableByWhiteMage{
+  extends AbstractWeapon(name, attack, weight) {
   /**
    * Checks if this Bow is equal to another object.
    *
@@ -42,5 +39,27 @@ class Bow(name: String, attack: Int, weight: Int)
   override def toString: String = {
     s"Bow($name, $attack, $weight)"
   }
+
+  /**
+   * returns true if is equippable by a warrior
+   *
+   * @return
+   */
+  override def isEquippableByWarrior: Boolean = true
+
+  /**
+   * returns true if is equippable by a ninja
+   *
+   * @return
+   */
+  override def isEquippableByNinja: Boolean = true
+
+  /**
+   * returns true if is equippable by a whitemage
+   *
+   * @return
+   */
+  override def isEquippableByWhiteMage: Boolean = true
+
 }
 

@@ -1,6 +1,4 @@
 package weapon
-import weapon.traits.EquippableByWarrior
-import weapon.traits.EquippableByPaladin
 
 /**
  * Represents an Axe, a type of weapon.
@@ -16,7 +14,7 @@ import weapon.traits.EquippableByPaladin
  */
 
 class Axe(name: String, attack: Int, weight: Int)
-  extends AbstractWeapon(name, attack, weight) with EquippableByWarrior with EquippableByPaladin{
+  extends AbstractWeapon(name, attack, weight){
   /**
    * Checks if this Axe is equal to another object.
    *
@@ -41,4 +39,20 @@ class Axe(name: String, attack: Int, weight: Int)
   override def toString : String = {
     s"Axe($name, $attack, $weight)"
   }
+
+  /**
+   * returns true if is equippable by a paladin
+   *
+   * @return
+   */
+  override def isEquippableByPaladin: Boolean = true
+
+  /**
+   * returns true if is equippable by a warrior
+   *
+   * @return
+   */
+  override def isEquippableByWarrior: Boolean = true
+  
+
 }

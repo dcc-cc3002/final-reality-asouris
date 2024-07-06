@@ -1,8 +1,4 @@
 package weapon
-import weapon.traits.EquippableByPaladin
-import weapon.traits.EquippableByWarrior
-import weapon.traits.EquippableByNinja
-import weapon.traits.EquippableByBlackMage
 
 /** Represents a Sword, a type of weapon.
  *
@@ -17,7 +13,7 @@ import weapon.traits.EquippableByBlackMage
  */
 
 class Sword(name: String, attack: Int, weight: Int)
-  extends AbstractWeapon(name, attack, weight) with EquippableByPaladin with EquippableByNinja with EquippableByWarrior with EquippableByBlackMage{
+  extends AbstractWeapon(name, attack, weight){
 
   /**
    * Checks if this Sword is equal to another object.
@@ -43,4 +39,34 @@ class Sword(name: String, attack: Int, weight: Int)
   override def toString: String = {
     s"Sword($name, $attack, $weight)"
   }
+
+  /**
+   * returns true if is equippable by a paladin
+   *
+   * @return
+   */
+  override def isEquippableByPaladin: Boolean = true
+
+  /**
+   * returns true if is equippable by a ninja
+   *
+   * @return
+   */
+  override def isEquippableByNinja: Boolean = true
+
+  /**
+   * returns true if is equippable by a warrior
+   *
+   * @return
+   */
+  override def isEquippableByWarrior: Boolean = true
+
+  /**
+   * returns true if is equippable by a blackMage
+   *
+   * @return
+   */
+  override def isEquippableByBlackMage: Boolean = true
+
+
 }

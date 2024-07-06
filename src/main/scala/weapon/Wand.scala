@@ -1,7 +1,4 @@
 package weapon
-import weapon.traits.EquippableByNinja
-import weapon.traits.EquippableByBlackMage
-import weapon.traits.EquippableByWhiteMage
 
 
 /** Represents a Wand, a type of weapon.
@@ -18,7 +15,7 @@ import weapon.traits.EquippableByWhiteMage
  * @author asouris
  */
 class Wand(name: String, attack: Int, weight: Int, magicAttack: Int)
-  extends AbstractMagicWeapon(name, attack, weight, magicAttack) with EquippableByNinja with EquippableByBlackMage with EquippableByWhiteMage{
+  extends AbstractMagicWeapon(name, attack, weight, magicAttack)  {
 
   /**
    * Checks if this Wand is equal to another object.
@@ -45,5 +42,26 @@ class Wand(name: String, attack: Int, weight: Int, magicAttack: Int)
     s"Wand($name, $attack, $weight, $magicAttack)"
   }
 
+  /**
+   * returns true if is equippable by a ninja
+   *
+   * @return
+   */
+  override def isEquippableByNinja: Boolean = true
+
+  /**
+   * returns true if is equippable by a blackMage
+   *
+   * @return
+   */
+  override def isEquippableByBlackMage: Boolean = true
+
+  /**
+   * returns true if is equippable by a whiteMage
+   *
+   * @return
+   */
+  override def isEquippableByWhiteMage: Boolean = true
+  
 }
 
