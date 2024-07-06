@@ -28,7 +28,8 @@ class ChoosingWeapon extends GameState{
           //present options
           var i = 1
           array.foreach(weapon => {
-            print("(" + i + ") " + weapon)
+            print("(" + i + ") " + weapon + "\n")
+            i+=1
           })
           print("Select your choice (1, 2, 3)")
           selected = StdIn.readInt()
@@ -38,6 +39,11 @@ class ChoosingWeapon extends GameState{
           again = StdIn.readInt()
         }
         //equip choice. Keep in mind the array only contains eligible weapons for that character.
+        //val a = array(selected-1).asInstanceOf[Bow]
+        //val b = character.asInstanceOf[Ninja]
+        //b.unequipWeapon()
+        //b.equip(a)
+        character.unequipWeapon()
         character.equip(array(selected-1))
         
         //next state
