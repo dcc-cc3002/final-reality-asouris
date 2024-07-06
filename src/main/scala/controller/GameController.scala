@@ -24,6 +24,7 @@ class GameController(private val _party : Party, private val _enemies: ArrayBuff
    * Inicia una partida
    */
   private def init() : Unit = {
+    print("Controller initiated\n")
     _state = new SettingTurns
     initializeScheduler()
   }
@@ -37,6 +38,8 @@ class GameController(private val _party : Party, private val _enemies: ArrayBuff
       enemy.setTeam(_enemies)
       _scheduler.addCharacter(enemy)
     }
+    
+    print("Scheduler set\n")
   }
   
   def getEnemies : ArrayBuffer[Character] = _enemies
@@ -67,7 +70,10 @@ class GameController(private val _party : Party, private val _enemies: ArrayBuff
   /**
    * increases actionBar in scheduler
    */
-  def increaseActionBar() : Unit = _scheduler.increaseActionBar(_k)
+  def increaseActionBar() : Unit = {
+    print("Increasing action bar\n")
+    _scheduler.increaseActionBar(_k)
+  }
 
   /**
    * returns true if there is at least one character ready to play
@@ -139,7 +145,7 @@ class GameController(private val _party : Party, private val _enemies: ArrayBuff
   }
 
   def win() : Boolean = {
-    getPlayers.forall(_.isDefeated)
+    getEnemies.forall(_.isDefeated)
   }
 
 
