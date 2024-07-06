@@ -16,8 +16,7 @@ import scala.collection.mutable.ArrayBuffer
  * @author asouris
  */
 trait Character(){
-    
-    
+    var effects : ArrayBuffer[Effect]
 
     /**
      * Retrieves the name of the character.
@@ -138,6 +137,12 @@ trait Character(){
     def equip(weapon: Weapon): Unit
 
     /**
+     * Unequipps a weapon by removing the player from being the owner of the weapon, then removing the weapon
+     * from the equippedWeapon attribute.
+     */
+    def unequipWeapon(): Unit
+
+    /**
      * returns an array with available actions for the player
      *
      * @return array with options
@@ -175,6 +180,12 @@ trait Character(){
      * @param controller holds information about possible targets
      */
     def chooseAndAttackTarget(controller : GameController) : Unit
+
+    /**
+     * Returns true if the character can be damage by a spell
+     * @return
+     */
+    def takesSpellDamage : Boolean
 
     
 }
