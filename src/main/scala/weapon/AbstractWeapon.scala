@@ -79,6 +79,41 @@ abstract class AbstractWeapon(private val name: String, private val attack : Int
   override def removeOwner(): Unit = {
     owner = None
   }
+
+  /**
+   * returns true if is equippable by a ninja
+   *
+   * @return
+   */
+  def isEquippableByNinja: Boolean = false
+
+  /**
+   * returns true if is equippable by a paladin
+   *
+   * @return
+   */
+  def isEquippableByPaladin: Boolean = false
+
+  /**
+   * returns true if is equippable by a warrior
+   *
+   * @return
+   */
+  def isEquippableByWarrior: Boolean = false
+
+  /**
+   * returns true if is equippable by a whiteMage
+   *
+   * @return
+   */
+  def isEquippableByWhiteMage: Boolean = false
+
+  /**
+   * returns true if is equippable by a blackMage
+   *
+   * @return
+   */
+  def isEquippableByBlackMage: Boolean = false
   
 }
   
