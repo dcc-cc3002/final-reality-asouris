@@ -96,7 +96,7 @@ class TurnScheduler {
     val readyForTurn = mutable.PriorityQueue[Character]()(Ordering.by(order))
 
     characters.transform((key, value) => {
-      if (!isReady(key)) {
+      if (!isReady(key) && !key.isDefeated) {
         val actionBar = key.getActionBar
         if(value + amount >= actionBar){
           readyForTurn.enqueue(key)
