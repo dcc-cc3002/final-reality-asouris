@@ -118,16 +118,21 @@ abstract class AbstractCharacter(private val name: String, private val maxLife: 
    * @param attackReceived The amount of attack received.
    */
   override def receiveAttack(attackReceived: Int): Unit = {
-    val totalAttack = attackReceived - this.getDefense
-    val current = this.getLife
+    var totalAttack = attackReceived - this.getDefense
+    
+    val current = getLife
     if(totalAttack > 0){
-      if (current < totalAttack) {
-        this.setLife(-current)
-      }
-      else{
-        this.setLife(- totalAttack)
-      }
+      print(s"Damage received: $totalAttack\n")
+      setLife(- totalAttack)
     }
+    else{
+      totalAttack = 0
+      print(s"Damage received: $totalAttack\n")
+      print("Defense too great, attack defended\n")
+    }
+    
+    if(getLife <= 0) print(s"$this died\n")
+    
   }
 
   /**
@@ -144,6 +149,9 @@ abstract class AbstractCharacter(private val name: String, private val maxLife: 
   override def hasEffects: Boolean = effects.nonEmpty
 
   override def applyEffects(): Unit = {
+    print("Character active effects:\n ")
+    effects.foreach(effect => print(s"$effect\n"))
+
     val array = ArrayBuffer[Int]()
     var i = 0
     effects.foreach(effect => {
@@ -152,6 +160,8 @@ abstract class AbstractCharacter(private val name: String, private val maxLife: 
       }
       i+=1
     })
+
+    print(s"Result after effects: $this\n")
     
     //removing expired effects
     array.foreach(index => effects.remove(index))

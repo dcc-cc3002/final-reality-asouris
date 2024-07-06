@@ -106,6 +106,14 @@ class Enemy(name: String, maxLife: Int, life: Int, private var attack: Int, defe
   }
 
   /**
+   * Unequipps a weapon by removing the player from being the owner of the weapon, then removing the weapon
+   * from the equippedWeapon attribute.
+   */
+  def unequipWeapon(): Unit = throw BadBehaviourException(s"$this cannot unequip a weapon")
+
+
+
+  /**
    * returns an array with available actions for the player
    *
    * @return array with options
@@ -124,6 +132,7 @@ class Enemy(name: String, maxLife: Int, life: Int, private var attack: Int, defe
   }
 
   override def chooseAndAttackTarget(controller: GameController): Unit = {
+    print(s"$this choosing target...\n")
     val targets = controller.getPlayers
 
     val rand = new Random()
@@ -135,8 +144,21 @@ class Enemy(name: String, maxLife: Int, life: Int, private var attack: Int, defe
       target = targets(res)
     }
     
+    
+
+    print(s"$target will be attacked by $attack\n")
+    
     targets(res).receiveAttack(this.attack)
+
+    print(s"Attack result: $target\n")
   }
+
+  /**
+   * Returns true if the character can be damage by a spell
+   *
+   * @return
+   */
+  override def takesSpellDamage: Boolean = true
 
   
 }

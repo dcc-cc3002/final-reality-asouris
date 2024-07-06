@@ -24,12 +24,7 @@ trait Player extends Character{
    * @return True if the player has a weapon, false otherwise.
    */
   def hasWeapon : Boolean
-
-  /**
-   * Unequipps a weapon by removing the player from being the owner of the weapon, then removing the weapon
-   * from the equippedWeapon attribute.
-   */
-  def unequipWeapon() : Unit
+  
 
   /**
    * Gets the attack of a character

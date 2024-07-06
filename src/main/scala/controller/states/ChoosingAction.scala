@@ -23,7 +23,7 @@ class ChoosingAction extends GameState{
       controller.setState(actions(selected-1))
     }
     else{
-      print("You must attack an enemy")
+      print("You must attack an enemy\n")
       controller.setState(new AttackState)
     }
 

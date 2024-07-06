@@ -19,7 +19,7 @@ class CastState extends GameState{
 
     val spells = controller.getSpells(character)
 
-    print("You can cast one of the following spells")
+    print("You can cast one of the following spells\n")
     var i = 1
     spells.foreach(spell => {
       print(spell.toString + "("+ i +")\n")
@@ -30,7 +30,7 @@ class CastState extends GameState{
     
     val targets  = controller.getSpellTargets(spell, character)
     
-    print("Choose your target")
+    print("Choose your target\n")
     
     i = 1
     targets.foreach(target => {
@@ -44,7 +44,7 @@ class CastState extends GameState{
     
     spell.castByOn(character, target)
     
-    print(spell.toString + " was casted on to " + target.toString)
+    print(spell.toString + " was casted on to " + target.toString + "\n")
     
     controller.setState(new EndingTurn)
 

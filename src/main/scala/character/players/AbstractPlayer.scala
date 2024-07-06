@@ -120,17 +120,6 @@ abstract class AbstractPlayer(name: String, maxLife: Int, life: Int, defense: In
         }
     }
 
-    /**
-     * Attempts to equip a weapon to the player.
-     * By default, this method throws a WeaponException indicating that the player cannot equip the weapon.
-     * Subclasses of Player override this method to implement equipping a valid weapon.
-     *
-     * @param weapon The weapon to be equipped.
-     * @throws WeaponException If the player cannot equip the specified weapon.
-     */
-    def equip(weapon: Weapon): Unit = {
-        throw WeaponException(s"$this cannot equip $weapon")
-    }
 
     /**
      * returns an array with available actions for the player
@@ -160,7 +149,7 @@ abstract class AbstractPlayer(name: String, maxLife: Int, life: Int, defense: In
     override def chooseAndAttackTarget(controller: GameController): Unit = {
         val targets = controller.getEnemies
 
-        print("You can choose one of the following targets:")
+        print("You can choose one of the following targets:\n")
         var index = 1
         targets.foreach(target => {
             if(!target.isDefeated) {
@@ -169,9 +158,23 @@ abstract class AbstractPlayer(name: String, maxLife: Int, life: Int, defense: In
             index+=1
         })
 
-        var selected = StdIn.readInt()
-        targets(selected-1).receiveAttack(getWeapon.getAttack)
+        val selected = StdIn.readInt()
+        val target = targets(selected-1)
+
+        var damage = getWeapon.getAttack
+        print(s"$target will be attack by $damage\n")
+
+        target.receiveAttack(damage)
+        
+        print(s"Result of attack: $target\n")
     }
+
+    /**
+     * Returns true if the character can be damage by a spell
+     *
+     * @return
+     */
+    override def takesSpellDamage: Boolean = false
 
 
 

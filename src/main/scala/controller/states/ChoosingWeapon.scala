@@ -1,8 +1,9 @@
 package controller.states
 import controller.GameController
 import character.Character
+import character.players.Ninja
 import exceptions.NoneException
-
+import weapon.Bow
 import scala.io.StdIn
 
 class ChoosingWeapon extends GameState{
@@ -20,7 +21,7 @@ class ChoosingWeapon extends GameState{
       //if got, then is player
       case Some(array) =>
         //select option
-        print(character.toString  + " has 3 weapons available:")
+        print(character.toString  + " has 3 weapons available:\n")
         var again = -1
         var selected = -1
         //loop to keep on changing weapon
@@ -31,11 +32,11 @@ class ChoosingWeapon extends GameState{
             print("(" + i + ") " + weapon + "\n")
             i+=1
           })
-          print("Select your choice (1, 2, 3)")
+          print("Select your choice (1, 2, 3, 4)\n")
           selected = StdIn.readInt()
           
           //ask to continue
-          print("Would you like to choose again? (0 or 1)")
+          print("Would you like to choose again? (0 or 1)\n")
           again = StdIn.readInt()
         }
         //equip choice. Keep in mind the array only contains eligible weapons for that character.
@@ -51,6 +52,7 @@ class ChoosingWeapon extends GameState{
         
       //if nothing, character is enemy
       case None =>
+        print("Enemy can only attack\n")
         controller.setState(new AttackState)
     }
   }
