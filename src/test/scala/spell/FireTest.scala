@@ -23,4 +23,23 @@ class FireTest extends munit.FunSuite{
     assert(mage.getMana == manaExpected)
 
   }
+  test("CastByOn test"){
+    val enemy = new Enemy("enemy", 10, 10, 10, 10, 10)
+    val mage = new BlackMage("mage", 10, 10, 10, 10, 22, 22)
+    val wand = new Wand("wand", 5, 5, 5)
+    val fire: Fire = new Fire()
+
+    mage.equip(wand)
+
+    fire.castByOn(mage, enemy)
+
+    val expected = 5
+    
+    assert(enemy.getLife == 5)
+
+  }
+  test("toString test"){
+    val fire = new Fire()
+    assert(fire.toString == "Fire")
+  }
 }

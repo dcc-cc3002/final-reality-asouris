@@ -3,7 +3,7 @@ package character.players
 import character.Enemy
 import exceptions.SpellException
 import spells.traits.Spell
-import spells.{Healing, Poison}
+import spells.{Healing, Poison, Paralysis}
 import weapon.Wand
 
 
@@ -78,6 +78,7 @@ class WhiteMageTest extends munit.FunSuite{
     
 
   }
+
 
   
 
