@@ -2,6 +2,7 @@ package character.players
 
 import character.Enemy
 import exceptions.SpellException
+import spells.traits.Spell
 import spells.{Fire, Thunder}
 import weapon.Wand
 
@@ -52,4 +53,5 @@ class BlackMageTest extends munit.FunSuite{
     }
 
   }
+  
 }
