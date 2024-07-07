@@ -105,18 +105,6 @@ class GameController(private val _party : Party, private val _enemies: ArrayBuff
     _enemies.forall(_.isDefeated)
   }
 
-  /**
-   * handles weather new turns need to be set or not
-   * can be called from beginningTurn or endingTurn
-   */
-  def handlingNewTurn() : Unit = {
-    if(!this.areTurns()){
-      this.setState(new SettingTurns)
-    }
-    else{
-      this.setState(new BeginningTurn)
-    }
-  }
   
   def allAlliesDead(character : Character): Boolean = {
     character.getTeam.forall(_.isDefeated)
@@ -147,6 +135,8 @@ class GameController(private val _party : Party, private val _enemies: ArrayBuff
   def win() : Boolean = {
     getEnemies.forall(_.isDefeated)
   }
+  
+  def getState : GameState = _state
 
 
 
