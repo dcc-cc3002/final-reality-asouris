@@ -21,5 +21,23 @@ class PoisonTest extends munit.FunSuite {
 
   }
 
+  test("CastByOn test") {
+    val mage = new WhiteMage("mage", 20, 20, 20, 20, 40, 40)
+    val enemy = new Enemy("enemy", 10, 10, 10, 10, 10)
+    val wand = new Wand("wand", 10, 10, 10)
+    val poison = new Poison()
+
+    mage.equip(wand)
+
+    poison.castByOn(mage, enemy)
+
+    assert(mage.getMana == 10)
+
+  }
+  test("toString test") {
+    val poison = new Poison()
+    assert(poison.toString == "Poison")
+  }
+
 
 }

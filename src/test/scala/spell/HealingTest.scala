@@ -1,6 +1,6 @@
 package spell
 
-import character.players.{BlackMage, Warrior}
+import character.players.{BlackMage, Warrior, WhiteMage}
 import spells.Healing
 import weapon.Wand
 
@@ -21,5 +21,26 @@ class HealingTest extends munit.FunSuite {
     assert(warrior.getLife == expectedLife)
     assert(mage.getMana == expectedMana)
   }
+
+  test("CastByOn test") {
+    val mage = new WhiteMage("mage", 20, 20, 20, 20, 20, 20)
+    val warrior = new Warrior("warrior", 15, 5, 5, 5)
+    val wand = new Wand("wand", 10, 5, 10)
+    val spell = new Healing()
+
+    mage.equip(wand)
+
+    spell.castByOn(mage, warrior)
+
+    val expectedLife = 5 + (15*0.3).toInt
+
+    assert(warrior.getLife == expectedLife)
+
+  }
+  test("toString test") {
+    val healing = new Healing()
+    assert(healing.toString == "Healing")
+  }
+  
 
 }
