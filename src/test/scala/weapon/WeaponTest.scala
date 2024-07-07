@@ -3,7 +3,7 @@ package weapon
 
 import character.players.Warrior
 import character.players.BlackMage
-import exceptions.BadBehaviourException
+import exceptions.{BadBehaviourException, NoneException}
 
 
 
@@ -11,6 +11,9 @@ class WeaponTest extends munit.FunSuite{
   var sword: Sword = _
   var axe: Axe = _
   var wand: Wand = _
+  var bow : Bow = _
+  var staff : Staff = _
+
   var warrior : Warrior = _
   var mage : BlackMage = _
 
@@ -18,6 +21,8 @@ class WeaponTest extends munit.FunSuite{
     sword = new Sword("destroyer", 5, 10)
     axe = new Axe("supreme", 4, 15)
     wand = new Wand("ElProgcomp", 10, 10, 20)
+    bow = new Bow("Bow", 15, 15)
+    staff = new Staff("staff", 15, 20, 25)
 
     warrior = new Warrior("warrior", 20, 20, 10, 15)
     mage = new BlackMage("mage", 10, 10, 4, 15, 6, 6)
@@ -61,6 +66,25 @@ class WeaponTest extends munit.FunSuite{
     sword.setOwner(warrior)
     intercept[BadBehaviourException]{
       sword.setOwner(mage)
+    }
+  }
+
+  test("Boolean testing"){
+    assert(axe.isEquippableByPaladin && axe.isEquippableByWarrior)
+
+    assert(bow.isEquippableByWarrior && bow.isEquippableByNinja && bow.isEquippableByWhiteMage)
+
+    assert(staff.isEquippableByWhiteMage && staff.isEquippableByBlackMage)
+
+    assert(sword.isEquippableByNinja && sword.isEquippableByWarrior && sword.isEquippableByBlackMage)
+
+    assert(wand.isEquippableByWhiteMage && wand.isEquippableByBlackMage && wand.isEquippableByNinja)
+
+  }
+
+  test("getOwner with no owner"){
+    intercept[NoneException]{
+      sword.getOwner
     }
   }
 
