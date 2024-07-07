@@ -1,7 +1,12 @@
 package character
 
 import character.players.Warrior
-import exceptions.BadBehaviourException
+import controller.states.GameState
+import exceptions.{BadBehaviourException, WeaponException}
+import spells.traits.Spell
+import weapon.Bow
+
+import scala.collection.immutable.Nil.sameElements
 
 
 class EnemyTest extends munit.FunSuite {
@@ -57,6 +62,35 @@ class EnemyTest extends munit.FunSuite {
     intercept[BadBehaviourException]{
       enemy0.attackEnemy(enemy1)
     }
+  }
+  
+  test("Action Bar testing"){
+    val enemy = new Enemy("enemy", 15, 15, 20, 20, 25)
+    
+    val expected = enemy.getWeight
+    
+    assert(enemy.getActionBar == expected)
+  }
+  
+  test("Test equip on enemy"){
+    val enemy = new Enemy("enemy", 15, 15, 20, 20, 25)
+    val weapon = new Bow("bow", 15, 20)
+    intercept[WeaponException]{
+      enemy.equip(weapon)
+    }
+    
+    intercept[BadBehaviourException] {
+      enemy.unequipWeapon()
+    }
+  }
+  
+  test("Testing getActions and Spells"){
+    val enemy = new Enemy("enemy", 15, 15, 20, 20, 25)
+    
+    val expectedA : Array[GameState] = Array()
+    val expectedS : Array[Spell] = Array()
+    
+    assert(enemy.getActions sameElements expectedA)
   }
 
 }

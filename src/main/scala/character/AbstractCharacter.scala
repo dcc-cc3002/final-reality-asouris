@@ -3,7 +3,7 @@ package character
 import character.players.AbstractMagicPlayer
 import effects.Effect
 import exceptions.{BadBehaviourException, NoneException}
-import spells.traits.Spell
+
 
 import scala.collection.mutable.ArrayBuffer
 import scala.util.control.Breaks.{break, breakable}

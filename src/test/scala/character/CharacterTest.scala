@@ -1,5 +1,10 @@
 package character
 import character.players.Warrior
+import effects.PoisonEffect
+import exceptions.{BadBehaviourException, NoneException}
+import spells.Poison
+
+import scala.collection.mutable.ArrayBuffer
 
 class CharacterTest extends munit.FunSuite{
 
@@ -60,6 +65,53 @@ class CharacterTest extends munit.FunSuite{
     assert(character1.getLife == 15)
     character1.receiveAttack(30)
     assert(character1.getLife == 0)
+  }
+
+  test("Team attribute testing"){
+    val enemy = Enemy("warrior", 15, 15, 10, 20, 25)
+
+    val enemies = new ArrayBuffer[Character]()
+    enemies += new Enemy("Darkshade", 130, 110, 50, 45, 70)
+    enemies += new Enemy("Bloofang", 120, 100, 45, 40, 65)
+    enemies += new Enemy("Grimscale", 140, 120, 55, 50, 75)
+    
+    intercept[NoneException]{
+      enemy.getTeam
+    }
+
+    enemy.setTeam(enemies)
+
+    val expected = enemies
+    assert(enemy.getTeam == expected)
+  }
+  
+  test("Effects Testing"){
+    val warrior = new Warrior("warrior", 15, 15, 20, 20)
+    
+    assert(!warrior.hasEffects)
+    
+    warrior.addEffect(new PoisonEffect(18))
+
+    val expectedRes = warrior.getLife - 18/3
+
+    warrior.applyEffects()
+
+    assert(warrior.getLife == expectedRes)
+  }
+  
+  test("Paralyzed test"){
+    val warrior = new Warrior("warrior", 15, 15, 20, 20)
+    assert(!warrior.isParalyzed)
+    
+    warrior.setParalyzed(true)
+    assert(warrior.isParalyzed)
+  }
+  
+  test("getMage test"){
+    val warrior = new Warrior("warrior", 15, 15, 20, 20)
+    intercept[BadBehaviourException]{
+      warrior.getMage
+    }
   }
 
 }

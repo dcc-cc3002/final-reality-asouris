@@ -1,7 +1,9 @@
 package character.players
 
 import character.Enemy
+import controller.states.{AttackState, GameState}
 import exceptions.{BadBehaviourException, NoneException, WeaponException}
+import spells.traits.Spell
 import weapon.{Axe, Bow, Staff, Sword, Wand}
 
 class PlayerTest extends munit.FunSuite {
@@ -52,6 +54,15 @@ class PlayerTest extends munit.FunSuite {
     }
     intercept[WeaponException] {
       mage.equip(axe)
+    }
+    intercept[WeaponException]{
+      paladin.equip(wand)
+    }
+    intercept[WeaponException]{
+      ninja.equip(axe)
+    }
+    intercept[WeaponException]{
+      mageWhite.equip(axe)
     }
   }
 
@@ -132,6 +143,17 @@ class PlayerTest extends munit.FunSuite {
       warrior0.attackPlayer(warrior1)
     }
   }
+  
+  test("Player with no weapon test"){
+    intercept[NoneException]{
+      warrior.getActionBar
+    }
+    intercept[NoneException]{
+      warrior.getAttack
+    }
+  }
+  
+  
 }
 
 
