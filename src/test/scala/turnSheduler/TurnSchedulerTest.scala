@@ -155,4 +155,27 @@ class TurnSchedulerTest extends munit.FunSuite {
     assert(value == expected)
 
   }
+
+  test("Reset character action bar"){
+    val sword1 = Sword("sword1", 5, 10)
+    warrior1.equip(sword1)
+    scheduler.addCharacter(warrior1)
+    scheduler.increaseActionBar(10)
+
+    scheduler.resetCharacterActionBar(warrior1)
+
+    assert(scheduler.getMaximum == 0)
+  }
+
+  test("at least one turn in scheduler test"){
+    val sword1 = Sword("sword1", 5, 10)
+    warrior1.equip(sword1)
+    scheduler.addCharacter(warrior1)
+
+    assert(!scheduler.atLeastOneTurn)
+
+    scheduler.increaseActionBar(200)
+
+    assert(scheduler.atLeastOneTurn)
+  }
 }
