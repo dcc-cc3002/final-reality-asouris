@@ -1,8 +1,11 @@
 package character.players
 
 import character.Enemy
+import controller.states.{AttackState, CastState, GameState}
 import exceptions.SpellException
 import weapon.Wand
+
+import scala.collection.mutable.ArrayBuffer
 
 class MagicPlayerBehaviourTest extends munit.FunSuite{
   
@@ -161,5 +164,7 @@ class MagicPlayerBehaviourTest extends munit.FunSuite{
       white.castPoison(enemy)
     }
   }
+
+ 
 
 }
