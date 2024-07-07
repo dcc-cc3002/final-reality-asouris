@@ -14,11 +14,10 @@ class BeginningTurn extends GameState{
     if(character.isParalyzed){
       character.applyEffects()
       controller.setState(new EndingTurn)
-      return
     }
     
     //if character is dead
-    if(character.isDefeated){
+    else if(character.isDefeated){
       controller.setState(new EndingTurn)
     }
     
@@ -30,6 +29,8 @@ class BeginningTurn extends GameState{
       //if character died or is paralyzed
       //loses their turn
       if(character.isDefeated || character.isParalyzed) {
+        character.setParalyzed(false)
+        
         controller.setState(new EndingTurn)
       }
       else{//character just got healing we go forward
