@@ -76,9 +76,21 @@ We started with the game controller, this is the entity that manages the flow of
 To get a better idea of what to do, we were to make a state diagram of the different states of a battle. I did my diagram but wrong :(, I didnt account for the enemies turns in it, so I started to code the class only for players.
 Later I realized my mistake and fixed it but had to rethink the code.
 This is the final state diagram:
+![First Diagram](./img/firstDiagram.png)
 
 ### Assignment 3: Part 6
 I only added a array to keep all spells actives and then it corresponds to the controller to execute them before each turn.
+
+### Assignment 3: Final
+This was a pain.
+I had to re-do the equiping system an other things that needed to be more generalized. That was just a tiny complicated thing. Programming the states for the controller was the most tedious part. It wasn't a very difficult task just slow and tiresome. 
+
+Also re-did the states diagram. This is the last version after confronting the implementation:
+
+![Second Diagram](./img/secondDiagram.png)
+
+Aditionally, this is a diagram only of the states interaction:
+![simple Diagram](./img/simpleDiagram.png)
 
 
 This project is licensed under the
