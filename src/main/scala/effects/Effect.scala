@@ -2,6 +2,10 @@ package effects
 
 import character.Character
 
+/**
+ * Represents an effect
+ */
+
 trait Effect {
 
   /**

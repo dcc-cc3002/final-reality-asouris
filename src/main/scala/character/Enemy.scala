@@ -131,6 +131,10 @@ class Enemy(name: String, maxLife: Int, life: Int, private var attack: Int, defe
     Array()
   }
 
+  /**
+   * Provides interface with the user to choose a target and attack
+   * @param controller holds information about possible targets
+   */
   override def chooseAndAttackTarget(controller: GameController): Unit = {
     print(s"$this choosing target...\n")
     val targets = controller.getPlayers

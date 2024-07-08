@@ -65,6 +65,7 @@ class Healing extends LightSpell{
     mage.getMage.castHealing(target)
   }
 
+  /** Overrides toString */
   override def toString: String = {
     "Healing"
   }

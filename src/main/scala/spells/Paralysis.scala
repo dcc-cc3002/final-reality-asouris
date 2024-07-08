@@ -61,6 +61,7 @@ class Paralysis extends LightSpell{
     mage.getMage.castParalysis(target)
   }
 
+  /** Overrides toString */
   override def toString: String = {
     "Paralysis"
   }

@@ -6,8 +6,15 @@ import exceptions.NoneException
 import weapon.Bow
 import scala.io.StdIn
 
+/**
+ * Represents a state where a character can choose its weapon
+ */
 class ChoosingWeapon extends GameState{
-
+  /**
+   * Runs an update in the choosignWeapon state
+   *
+   * @param controller
+   */
   override def update(controller: GameController): Unit = {
     //if we got here, we have a character for playing in controller.currentTurn
     var character : Character = null

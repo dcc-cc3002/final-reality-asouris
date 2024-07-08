@@ -18,7 +18,11 @@ class Party (){
 
   /** Members of the Party */
   private val members: ArrayBuffer[Character] = new ArrayBuffer[Character]()
-  
+
+  /**
+   * Returns an array with the members of the party
+   * @return the members of the party
+   */
   def getMembers : ArrayBuffer[Character] = {
     this.members  
   }

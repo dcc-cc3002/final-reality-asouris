@@ -17,6 +17,7 @@ abstract class AbstractWeapon(private val name: String, private val attack : Int
   require(attack >= 1)
   require(weight >= 1)
 
+  /** Holds a possible owner of the weapon, which is a player */
   private var owner: Option[Player] = None
 
   /**

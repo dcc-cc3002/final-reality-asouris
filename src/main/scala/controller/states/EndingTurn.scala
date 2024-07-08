@@ -1,9 +1,14 @@
 package controller.states
 import controller.GameController
 
+/**
+ * Represents a state where a character is ending its turn
+ */
 class EndingTurn extends GameState{
-  //if we got here that means that the game hasn't finished
-  //we only need to figure if we need more turns or not
+  /**
+   * Runs an update in the endingTurn state
+   * @param controller
+   */
   override def update(controller: GameController): Unit = {
     
     //if there is at least a turn 

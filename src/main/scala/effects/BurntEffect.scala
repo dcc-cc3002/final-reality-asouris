@@ -2,9 +2,19 @@ package effects
 
 import character.Character
 
+/**
+ * Represents the burnt effect
+ * @param damage damage that depends on the caster
+ */
 class BurntEffect(val damage : Int) extends Effect {
+  /** Duration of the effect in turns */
   var duration = 3
 
+  /**
+   * Applies the effect to a character
+   * @param character victim
+   *  @return true if applied, false otherwise
+   */
   override def apply(character: Character): Boolean = {
     print("Applying Fire...\n")
 
@@ -20,6 +30,7 @@ class BurntEffect(val damage : Int) extends Effect {
     }
   }
   
+  /** Overrides toString */
   override def toString : String = {
     s"Burnt($duration)"
   }

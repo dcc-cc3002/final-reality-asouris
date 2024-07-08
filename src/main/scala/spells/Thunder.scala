@@ -70,6 +70,7 @@ class Thunder extends DarkSpell {
     mage.getMage.castThunder(target)
   }
 
+  /** Overrides toString */
   override def toString: String = {
     "Thunder"
   }

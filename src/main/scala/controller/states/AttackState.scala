@@ -3,8 +3,15 @@ import controller.GameController
 import exceptions.NoneException
 import character.Character
 
+/**
+ * Represents a state where a character is attacking
+ */
 class AttackState extends GameState{
-
+  /**
+   * Runs an update in the asttackState state
+   *
+   * @param controller
+   */
   override def update(controller: GameController): Unit = {
 
     var character : Character = null//duplicated code

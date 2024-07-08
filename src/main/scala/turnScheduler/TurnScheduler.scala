@@ -22,7 +22,11 @@ class TurnScheduler {
   private var characters: mutable.Map[Character, Double] = mutable.Map[Character, Double]()
   /** A queue of players and their respective turn orders. */
   private val nextTurns = new mutable.Queue[Character]
-  
+
+  /**
+   * Tells whether is at least 1 turn left in the scheduler
+   * @return true if is at least a turn, false otherwise
+   */
   def atLeastOneTurn : Boolean = {
     nextTurns.nonEmpty
   }

@@ -7,6 +7,11 @@ import weapon.{Axe, Bow, Staff, Sword, Wand, Weapon}
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 
+/**
+ * Main program
+ * defines and runs a test game
+ */
+
 @main def main(): Unit = {
   val c1 = new Paladin("Sir Valiant", 150, 120, 50, 80)
   val c2 = new Ninja("Shadowblade", 120, 100, 40, 60)

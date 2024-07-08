@@ -23,11 +23,20 @@ abstract class AbstractCharacter(private val name: String, private val maxLife: 
   require(defense >= 0)
   require(weight >= 1)
   require(maxLife >= 1)
-  
+
+  /**
+   * Determines if the character is paralyzed
+   */
   private var _paralyzed = false
 
+  /**
+   * Holds the team of a character in a battle
+   */
   private var _team : Option[ArrayBuffer[Character]] = None
-  
+
+  /**
+   * Holds the possible effects the character could have
+   */
   var effects : ArrayBuffer[Effect] = new ArrayBuffer[Effect]()
 
   /**
@@ -148,6 +157,9 @@ abstract class AbstractCharacter(private val name: String, private val maxLife: 
    */
   override def hasEffects: Boolean = effects.nonEmpty
 
+  /**
+   * Iterates through the effects array and applies them
+   */
   override def applyEffects(): Unit = {
     print("Character active effects:\n ")
     effects.foreach(effect => print(s"$effect\n"))
@@ -185,6 +197,10 @@ abstract class AbstractCharacter(private val name: String, private val maxLife: 
     _paralyzed = value
   }
 
+  /**
+   * Adds a effect to the list of effects
+   * @param effect the effect to be added
+   */
   override def addEffect(effect: Effect): Unit = {
     effects += effect
   }

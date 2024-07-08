@@ -29,7 +29,14 @@ trait Spell {
    * @param mage   The magic player casting the spell.
    */
   def activateSpell(target: Character, mage: AbstractMagicPlayer): Unit
-  
+
+  /**
+   * Returns targets for a spell
+   *
+   * @param controller controller where the arrays of enemies and players are
+   * @param character  character casting spell
+   * @return array with targets
+   */
   def getTargets(controller : GameController, character: Character) : ArrayBuffer[Character]
 
   /**

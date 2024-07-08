@@ -1,8 +1,16 @@
 package controller.states
 import controller.GameController
 
+/**
+ * Represents a state where a character starts its turn 
+ */
 class BeginningTurn extends GameState{
 
+  /**
+   * Runs an update in the biginningTurn state
+   *
+   * @param controller
+   */
   override def update(controller: GameController): Unit = {
     //gets next character
     val character = controller.nextTurn()

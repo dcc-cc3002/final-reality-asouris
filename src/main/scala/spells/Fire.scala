@@ -70,6 +70,7 @@ class Fire extends DarkSpell{
     mage.getMage.castFire(target)
   }
 
+  /** Overrides toString */
   override def toString: String = {
     "Fire"
   }

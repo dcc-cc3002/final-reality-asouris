@@ -61,6 +61,7 @@ class Poison extends LightSpell{
     mage.getMage.castPoison(target)
   }
 
+  /** Overrides toString */
   override def toString: String = {
     "Poison"
   }

@@ -4,10 +4,16 @@ import exceptions.NoneException
 
 import scala.io.StdIn
 
+/**
+ * Represents a state where a characters can choose its action
+ */
 class ChoosingAction extends GameState{
 
-  //some player choose a weapon a now we need to decide on attack or spell
-  //only magical players can do a spell
+  /**
+   * Runs an update in the choosingAction state
+   *
+   * @param controller
+   */
   override def update(controller: GameController): Unit = {
     
     var actions : Array[GameState] = null

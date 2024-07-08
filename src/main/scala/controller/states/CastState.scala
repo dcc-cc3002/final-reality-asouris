@@ -6,8 +6,15 @@ import exceptions.NoneException
 
 import scala.io.StdIn
 
+/**
+ * Represents a state where a character can cast a spell
+ */
 class CastState extends GameState{
-
+  /**
+   * Runs an update in the castState
+   *
+   * @param controller
+   */
   override def update(controller: GameController): Unit = {
     //choose a spell and target
     var character : Character = null
